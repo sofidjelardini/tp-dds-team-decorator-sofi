@@ -111,6 +111,12 @@ export default function Login() {
                         </div>
                     </form>
                 </Form>
+                <div className='mt-4 text-center text-sm'>
+                    ¿No tienes una cuenta?{' '}
+                    <Link href='/auth/registro' className='underline'>
+                        Crea una
+                    </Link>
+                </div>
             </div>
         </div>
     );
