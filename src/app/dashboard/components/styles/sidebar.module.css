@@ -1,0 +1,51 @@
+.sidebar-custom {
+    display: flex; /* Oculto por defecto */
+    flex-direction: column;
+    gap: 10px;
+    padding: 2rem;
+    height: 100vh; /* Altura completa de la pantalla */
+    flex: none; /* No crecerá ni se encogerá */
+    border-right: 1px solid; /* Borde derecho */
+    background-color: #ffffff; /* Color de fondo del sidebar */
+    transition: width 0.5s; /* Transición para el ancho */
+    top: 0; /* Alineación superior */
+}
+
+@media (min-width: 768px) {
+    .sidebar-custom {
+        display: flex; /* Mostrar en pantallas medianas y grandes */
+        padding: 1rem;
+    }
+}
+
+.sidebar-expanded {
+    position: absolute;
+}
+
+.sidebar-collapsed {
+    width: 72px; /* Ancho cuando está colapsado */
+}
+
+.toggle-button {
+    position: absolute;
+    right: -0.75rem; /* Ajustado para -right-3 */
+    top: 2.5rem; /* Ajustado para top-10 */
+    z-index: 50; /* Z-index elevado */
+    cursor: pointer; /* Cambia el cursor al pasar por encima */
+    border-radius: 9999px; /* Bordes redondeados completos */
+    border: 1px solid #e0e0e0; /* Color del borde */
+    background-color: #f8f9fa; /* Color de fondo */
+    color: #333333; /* Color del texto */
+    font-size: 1.875rem; /* Tamaño del texto (text-3xl) */
+    transition: transform 0.3s; /* Transición para la rotación */
+}
+
+.toggle-button.rotate {
+    transform: rotate(180deg); /* Rotación para el estado minimizado */
+}
+
+.navigation-list { 
+    height: 100%;
+    position: inherit;
+    z-index: 999;
+}

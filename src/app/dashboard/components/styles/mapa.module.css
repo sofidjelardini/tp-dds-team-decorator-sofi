@@ -1,0 +1,7 @@
+/* mapa.module.css */
+.mapContainer {
+    height: 500px; /* Altura del mapa */
+    width: 100%; /* Ancho del mapa */
+    border-radius: 8px; /* Bordes redondeados */
+    overflow: hidden; /* Oculta cualquier desbordamiento */
+}

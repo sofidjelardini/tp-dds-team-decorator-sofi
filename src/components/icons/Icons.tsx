@@ -1,9 +1,28 @@
-import { SquareEqual, LucideIcon, LucideProps } from 'lucide-react';
+import {
+    SquareEqual,
+    LucideProps,
+    DollarSign,
+    User,
+    Package,
+    Truck,
+    Wrench,
+    Edit
+} from 'lucide-react';
 
-export type Icon = LucideIcon;
+export type Icon = (props: LucideProps) => JSX.Element | null;
 
-export const Icons = {
+interface IconsType {
+    [key: string]: Icon; // Permite claves de tipo string con valores de tipo IconType
+}
+
+export const Icons: IconsType = {
     heladera: SquareEqual,
+    donaciones: DollarSign,
+    persona: User,
+    vianda: Package,
+    camion: Truck,
+    tecnico: Wrench,
+    editarPerfil: Edit,
     gitHub: ({ ...props }: LucideProps) => (
         <svg
             aria-hidden='true'
