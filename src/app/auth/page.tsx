@@ -18,17 +18,6 @@ import { useState } from 'react';
 import { LoginForm } from '@/lib/types/auth.types';
 import { LoginFormSchema } from '@/lib/form-schemas/auth.schemas';
 import { useRouter } from 'next/navigation';
-// import { LoginSchema } from '@/lib/schemas/auth.schema';
-// import { useState } from 'react';
-// import { setCookie } from 'cookies-next';
-// import { useAuthStore } from '@/providers/authStoreProvider';
-// import { StatusCodes } from 'http-status-codes';
-// import { toast } from 'sonner';
-
-function isTokenOnly(response: any) {
-    const keys = Object.keys(response);
-    return keys.length === 1 && keys[0] === 'jwt';
-}
 
 export default function Login() {
     const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -44,8 +33,9 @@ export default function Login() {
 
     const onSubmit = () => {
         //TODO: Lógica para el login en el backend
-        const idUser = 1;
-        router.push(`/dashboard/${idUser}`);
+        const userId = 1;
+        localStorage.setItem('userId', `${userId}`);
+        router.push(`/dashboard`);
     };
 
     return (

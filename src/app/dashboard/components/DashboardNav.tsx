@@ -1,8 +1,6 @@
-//@ts-nocheck
 'use client';
 
 import { Icons } from '@/components/icons/Icons';
-import { Button } from '@/components/ui/button';
 import {
     Tooltip,
     TooltipContent,
@@ -12,26 +10,71 @@ import {
 import { cn } from '@/lib/utils';
 import { useDashboard } from '@/store/dashboardStore';
 import { LogOut } from 'lucide-react';
-import Link from 'next/link';
-import { useParams, usePathname, useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 
 interface DashboardNavProps {
     setOpen?: React.Dispatch<React.SetStateAction<boolean>>;
+    userId?: string;
     isMobileNav?: boolean;
 }
 
-const DashboardNav = ({ setOpen, isMobileNav = false }: DashboardNavProps) => {
+const DashboardNav = ({
+    setOpen,
+    userId,
+    isMobileNav = false
+}: DashboardNavProps) => {
     const path = usePathname();
-
     const { isMinimized } = useDashboard();
     const router = useRouter();
-    const { idUser } = useParams();
 
-    async function handleLogout(evt) {
+    const items = [
+        {
+            title: 'Heladeras',
+            href: `/dashboard/${userId}/heladeras`,
+            icon: 'heladera'
+        },
+        {
+            title: 'Registro Personas en Situación Vulnerable',
+            href: `/dashboard/${userId}/registro-personas`,
+            icon: 'persona'
+        },
+        {
+            title: 'Carga de Viandas',
+            href: `/dashboard/${userId}/viandas`,
+            icon: 'vianda'
+        },
+        {
+            title: 'Donaciones',
+            href: `/dashboard/${userId}/donaciones`,
+            icon: 'donaciones'
+        },
+        {
+            title: 'Distribución Viandas',
+            href: `/dashboard/${userId}/distribucion`,
+            icon: 'camion'
+        },
+        {
+            title: 'Registro Técnicos',
+            href: `/dashboard/${userId}/registro-tecnicos`,
+            icon: 'tecnico'
+        },
+        {
+            title: 'Editar Perfil',
+            href: `/dashboard/${userId}/editar-perfil`,
+            icon: 'editarPerfil'
+        },
+        {
+            title: 'Administradores',
+            href: `/dashboard/${userId}/administradores`,
+            icon: 'administrador'
+        }
+    ];
+
+    async function handleLogout(evt: React.MouseEvent<HTMLButtonElement>) {
         evt.preventDefault();
         try {
             await fetch('/api/auth/logout', { method: 'POST' });
-            router.push('/auth/business/');
+            router.push('/auth');
         } catch (error) {
             console.error(
                 'Ocurrió un error. Contacte con el administrador',
@@ -40,56 +83,64 @@ const DashboardNav = ({ setOpen, isMobileNav = false }: DashboardNavProps) => {
         }
     }
 
-    const items = [
-        {
-            title: 'Heladeras',
-            href: `/dashboard/${idUser}/heladeras`,
-            icon: 'heladera',
-            label: 'Heladeras'
+    // Función para manejar la navegación
+    const handleNavClick = (href: string) => {
+        if (!isMinimized) {
+            router.push(href);
+        } else {
+            // Si está minimizado, simplemente navegamos sin expandir el menú
+            router.push(href);
         }
-    ];
+    };
 
     return (
-        <nav className='grid items-start gap-2 h-full'>
-            <TooltipProvider className=''>
-                <div>
+        <nav className='flex flex-col h-full'>
+            <TooltipProvider>
+                <div
+                    className={`flex flex-col ${
+                        isMinimized
+                            ? 'items-center justify-center'
+                            : 'items-start justify-start'
+                    }`}
+                >
                     {items.map((item, index) => {
                         const Icon = Icons[item.icon || 'arrowRight'];
                         return (
                             item.href && (
                                 <Tooltip key={index}>
                                     <TooltipTrigger asChild>
-                                        <Link
+                                        <a
                                             href={item.href}
+                                            onClick={e => {
+                                                // Si está minimizado, prevenimos la expansión del menú
+                                                if (isMinimized) {
+                                                    e.preventDefault();
+                                                    handleNavClick(item.href); // Solo navega sin expandir
+                                                } else {
+                                                    handleNavClick(item.href); // Navega normalmente
+                                                }
+                                            }}
                                             className={cn(
-                                                'flex items-center gap-2 overflow-hidden rounded-md py-2 mb-1 text-sm font-medium hover:bg-primary hover:text-primary-foreground',
-                                                path === item.href
-                                                    ? 'bg-primary text-primary-foreground'
-                                                    : 'transparent'
+                                                `flex items-center gap-2 rounded-md py-2 mb-1 text-sm font-medium hover:bg-primary hover:text-primary-foreground w-full ${
+                                                    isMinimized
+                                                        ? 'items-center justify-center'
+                                                        : 'items-start justify-start'
+                                                }`
                                             )}
                                         >
-                                            <Icon
-                                                className={`ml-3 size-5 flex-none`}
-                                            />
+                                            <Icon />
                                             {isMobileNav ||
                                             (!isMinimized && !isMobileNav) ? (
                                                 <span className='mr-2 truncate'>
                                                     {item.title}
                                                 </span>
-                                            ) : (
-                                                ''
-                                            )}
-                                        </Link>
+                                            ) : null}
+                                        </a>
                                     </TooltipTrigger>
                                     <TooltipContent
                                         align='center'
                                         side='right'
                                         sideOffset={8}
-                                        className={
-                                            !isMinimized
-                                                ? 'hidden'
-                                                : 'inline-block'
-                                        }
                                     >
                                         {item.title}
                                     </TooltipContent>
@@ -98,16 +149,20 @@ const DashboardNav = ({ setOpen, isMobileNav = false }: DashboardNavProps) => {
                         );
                     })}
                 </div>
-                <li className=' flex items-end mt-auto w-full'>
-                    <Tooltip className=''>
+                <div className='mt-auto'>
+                    <Tooltip>
                         <TooltipTrigger asChild>
                             <button
                                 onClick={handleLogout}
-                                variant='link'
-                                className='flex items-center gap-2 overflow-hidden rounded-md  text-sm font-medium hover:bg-primary hover:text-primary-foreground w-full justify-start py-2'
+                                className={cn(
+                                    `flex items-center gap-2 rounded-md py-2 mb-1 text-sm font-medium hover:bg-primary hover:text-primary-foreground w-full ${
+                                        isMinimized
+                                            ? 'items-center justify-center'
+                                            : 'items-start justify-start'
+                                    }`
+                                )}
                             >
-                                <LogOut className={`ml-3 size-5 flex-none`} />
-
+                                <LogOut className={`ml-1 size-5 flex-none`} />
                                 {isMobileNav ||
                                 (!isMinimized && !isMobileNav) ? (
                                     <span className='mr-2 truncate'>
@@ -127,7 +182,7 @@ const DashboardNav = ({ setOpen, isMobileNav = false }: DashboardNavProps) => {
                             Cerrar sesión
                         </TooltipContent>
                     </Tooltip>
-                </li>
+                </div>
             </TooltipProvider>
         </nav>
     );

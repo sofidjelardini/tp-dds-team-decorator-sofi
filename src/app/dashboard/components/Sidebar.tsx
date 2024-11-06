@@ -2,17 +2,16 @@
 
 import { cn } from '@/lib/utils';
 import { ChevronLeft } from 'lucide-react';
-import Link from 'next/link';
-
 import { useDashboard } from '@/store/dashboardStore';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import DashboardNav from './DashboardNav';
+import styles from './styles/sidebar.module.css';
 
 type SidebarProps = {
-    className?: string;
+    userId?: string;
 };
 
-export default function Sidebar({ className }: SidebarProps) {
+export default function Sidebar({ userId }: SidebarProps) {
     const { isMinimized, toggle } = useDashboard();
 
     const handleToggle = () => {
@@ -22,47 +21,23 @@ export default function Sidebar({ className }: SidebarProps) {
     return (
         <aside
             className={cn(
-                `relative  hidden h-screen flex-none border-r bg-card transition-[width] duration-500 md:block top:0 `,
-                !isMinimized ? 'w-72' : 'w-[72px]',
-                className
+                `fixed hidden h-screen flex-none border-r bg-card transition-[width] duration-500 md:block top:0 bottom:0 p-4`,
+                !isMinimized
+                    ? styles['sidebar-expanded']
+                    : styles['sidebar-collapsed'],
+                styles['sidebar-custom']
             )}
         >
-            {/* <div className='hidden p-5 pt-10 lg:block'>
-                <Link
-                    href={
-                        'https://github.com/Kiranism/next-shadcn-dashboard-starter'
-                    }
-                    target='_blank'
-                >
-                    <img
-                        src='https://logopond.com/avatar/257420/logopond.png'
-                        alt='logo del negocio'
-                        className='size-8 mr-2'
-                    />
-                    <svg
-                        xmlns='http://www.w3.org/2000/svg'
-                        viewBox='0 0 24 24'
-                        fill='none'
-                        stroke='currentColor'
-                        strokeWidth='2'
-                        strokeLinecap='round'
-                        strokeLinejoin='round'
-                        className='mr-2 h-8 w-8'
-                    >
-                        <path d='M15 6v12a3 3 0 1 0 3-3H6a3 3 0 1 0 3 3V6a3 3 0 1 0-3 3h12a3 3 0 1 0-3-3' />
-                    </svg>
-                </Link>
-            </div> */}
-            {/* <div className='hidden p-5 pt-10 lg:block'>
+            <div className='avatar'>
                 <Avatar
                     className={`mr-2 ${
                         isMinimized ? 'size-8' : 'size-12'
                     } transition transform`}
                 >
-                    <AvatarImage src={logoURL} alt='logo del negocio' />
-                    <AvatarFallback>HS</AvatarFallback>
+                    <AvatarImage src={''} alt='logo del negocio' />
+                    <AvatarFallback>NN</AvatarFallback>
                 </Avatar>
-            </div> */}
+            </div>
 
             <ChevronLeft
                 className={cn(
@@ -71,12 +46,8 @@ export default function Sidebar({ className }: SidebarProps) {
                 )}
                 onClick={handleToggle}
             />
-            <div className='space-y-4 py-4 h-[85%]'>
-                <div className='px-3 py-2 h-full'>
-                    <div className='mt-3 space-y-1 h-full'>
-                        <DashboardNav />
-                    </div>
-                </div>
+            <div className='navigation-list'>
+                <DashboardNav userId={userId} />
             </div>
         </aside>
     );
