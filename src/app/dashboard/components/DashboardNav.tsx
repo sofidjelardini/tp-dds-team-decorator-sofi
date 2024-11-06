@@ -62,11 +62,14 @@ const DashboardNav = ({
             title: 'Editar Perfil',
             href: `/dashboard/${userId}/editar-perfil`,
             icon: 'editarPerfil'
+<<<<<<< HEAD
         },
         {
             title: 'Administradores',
             href: `/dashboard/${userId}/administradores`,
             icon: 'administrador'
+=======
+>>>>>>> 36b2e9dc86277dea2cb2dd693226cb40d9e111de
         }
     ];
 
