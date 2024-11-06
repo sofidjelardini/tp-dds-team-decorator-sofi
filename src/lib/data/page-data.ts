@@ -92,7 +92,6 @@ export const getPageData = (
                     link: `/${idUser}/editar-perfil`
                 }
             ]
-<<<<<<< HEAD
         },
         administradores: {
             title: 'Administradores',
@@ -104,8 +103,6 @@ export const getPageData = (
                     link: `/${idUser}/administradores`
                 }
             ]
-=======
->>>>>>> 36b2e9dc86277dea2cb2dd693226cb40d9e111de
         }
     };
 
