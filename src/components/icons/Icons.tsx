@@ -6,10 +6,7 @@ import {
     Package,
     Truck,
     Wrench,
-<<<<<<< HEAD
     UserCheck,
-=======
->>>>>>> 36b2e9dc86277dea2cb2dd693226cb40d9e111de
     Edit
 } from 'lucide-react';
 
@@ -27,10 +24,7 @@ export const Icons: IconsType = {
     camion: Truck,
     tecnico: Wrench,
     editarPerfil: Edit,
-<<<<<<< HEAD
     administrador: UserCheck,
-=======
->>>>>>> 36b2e9dc86277dea2cb2dd693226cb40d9e111de
     gitHub: ({ ...props }: LucideProps) => (
         <svg
             aria-hidden='true'
