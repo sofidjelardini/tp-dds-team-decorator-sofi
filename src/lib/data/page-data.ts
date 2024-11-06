@@ -95,12 +95,23 @@ export const getPageData = (
         },
         administradores: {
             title: 'Administradores',
-            description: 'Edita información del los adminitradores',
+            description: 'Edita información del los administradores',
             breadcrumbs: [
                 { title: 'Inicio', link: '/' },
                 {
                     title: 'Administradores',
                     link: `/${idUser}/administradores`
+                }
+            ]
+        },
+        'cargar-colaboraciones': {
+            title: 'Carga Masiva Colaboraciones',
+            description: 'Carga varias colaboraciones juntas.',
+            breadcrumbs: [
+                { title: 'Inicio', link: '/' },
+                {
+                    title: 'Cargar Colaboraciones',
+                    link: `/${idUser}/cargar-colaboraciones`
                 }
             ]
         }

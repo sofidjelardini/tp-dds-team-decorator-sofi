@@ -1,5 +1,4 @@
 'use client';
-
 import { Icons } from '@/components/icons/Icons';
 import {
     Tooltip,
@@ -10,20 +9,14 @@ import {
 import { cn } from '@/lib/utils';
 import { useDashboard } from '@/store/dashboardStore';
 import { LogOut } from 'lucide-react';
-import { usePathname, useRouter } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 
 interface DashboardNavProps {
-    setOpen?: React.Dispatch<React.SetStateAction<boolean>>;
     userId?: string;
     isMobileNav?: boolean;
 }
 
-const DashboardNav = ({
-    setOpen,
-    userId,
-    isMobileNav = false
-}: DashboardNavProps) => {
-    const path = usePathname();
+const DashboardNav = ({ userId, isMobileNav = false }: DashboardNavProps) => {
     const { isMinimized } = useDashboard();
     const router = useRouter();
 
@@ -74,6 +67,7 @@ const DashboardNav = ({
         evt.preventDefault();
         try {
             await fetch('/api/auth/logout', { method: 'POST' });
+            localStorage.clear();
             router.push('/auth');
         } catch (error) {
             console.error(
@@ -83,7 +77,6 @@ const DashboardNav = ({
         }
     }
 
-    // Función para manejar la navegación
     const handleNavClick = (href: string) => {
         if (!isMinimized) {
             router.push(href);
@@ -112,12 +105,11 @@ const DashboardNav = ({
                                         <a
                                             href={item.href}
                                             onClick={e => {
-                                                // Si está minimizado, prevenimos la expansión del menú
                                                 if (isMinimized) {
                                                     e.preventDefault();
-                                                    handleNavClick(item.href); // Solo navega sin expandir
+                                                    handleNavClick(item.href);
                                                 } else {
-                                                    handleNavClick(item.href); // Navega normalmente
+                                                    handleNavClick(item.href);
                                                 }
                                             }}
                                             className={cn(

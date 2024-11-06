@@ -8,7 +8,6 @@ import Modal from '@/components/modal/Modal';
 import MapaHeladeras from '@/app/dashboard/components/MapaHeladeras';
 
 const HeladerasSection = () => {
-    const { idUser } = useParams();
     const [isOpenModalHeladera, setIsOpenModalHeladera] =
         useState<boolean>(false);
 
@@ -29,15 +28,7 @@ const HeladerasSection = () => {
             >
                 Nueva heladera
             </Button>
-            <Modal
-                title='Nuevo empleado'
-                description=''
-                isOpen={isOpenModalHeladera}
-                onClose={() => setIsOpenModalHeladera(false)}
-            >
-                <div>hola mundo</div>
-            </Modal>
-            {/* <DataTableEmployee idUser={idUser.toString()} /> */}
+            <div>RECOMENDACIÓN DE UBICACIÓN DE NUEVA HELADERA</div>
         </div>
     );
 };
