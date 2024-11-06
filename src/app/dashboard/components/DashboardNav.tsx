@@ -47,8 +47,8 @@ const DashboardNav = ({ userId, isMobileNav = false }: DashboardNavProps) => {
             icon: 'camion'
         },
         {
-            title: 'Registro Técnicos',
-            href: `/dashboard/${userId}/registro-tecnicos`,
+            title: 'Gestión Técnicos',
+            href: `/dashboard/${userId}/tecnicos`,
             icon: 'tecnico'
         },
         {

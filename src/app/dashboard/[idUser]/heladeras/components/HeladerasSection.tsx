@@ -1,10 +1,6 @@
 'use client';
-
-import { useParams } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { useState } from 'react';
-
-import Modal from '@/components/modal/Modal';
 import MapaHeladeras from '@/app/dashboard/components/MapaHeladeras';
 
 const HeladerasSection = () => {
@@ -29,6 +25,7 @@ const HeladerasSection = () => {
                 Nueva heladera
             </Button>
             <div>RECOMENDACIÓN DE UBICACIÓN DE NUEVA HELADERA</div>
+            <div>ALTA BAJA Y MODIFICACIÓN DE HELADERAS</div>
         </div>
     );
 };

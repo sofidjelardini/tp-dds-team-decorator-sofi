@@ -70,15 +70,15 @@ export const getPageData = (
                 }
             ]
         },
-        'registro-tecnicos': {
-            title: 'Registro Técnicos de Heladeras',
+        tecnicos: {
+            title: 'Manejo Técnicos de Heladeras',
             description:
-                'Gestiona el alta y baja de técnicos para el mantenimiento de las heladeras.',
+                'Gestiona el alta, baja y modificación de información de técnicos para el mantenimiento de las heladeras.',
             breadcrumbs: [
                 { title: 'Inicio', link: '/' },
                 {
-                    title: 'Registro Técnicos',
-                    link: `/${idUser}/registro-tecnicos`
+                    title: 'Manejo Técnicos',
+                    link: `/${idUser}/tecnicos`
                 }
             ]
         },
