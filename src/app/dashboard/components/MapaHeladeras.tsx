@@ -14,7 +14,7 @@ const MapaHeladeras: React.FC<{
 
     useEffect(() => {
         const initializeMap = async () => {
-            const L = await loadLeaflet(); // Carga Leaflet dinámicamente
+            const L = await loadLeaflet();
 
             if (!mapRef.current) {
                 mapRef.current = L.map('map').setView(
@@ -44,7 +44,7 @@ const MapaHeladeras: React.FC<{
                     L.marker([ubicacion.lat, ubicacion.lng], {
                         icon: markerIcon
                     })
-                        .addTo(mapRef.current)
+                        .addTo(mapRef?.current)
                         .bindPopup(ubicacion.nombre);
                 });
             }

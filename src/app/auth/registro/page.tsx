@@ -4,9 +4,7 @@ import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { Button } from '@/components/ui/button';
-
 import { Input } from '@/components/ui/input';
-
 import {
     Form,
     FormControl,
@@ -16,10 +14,10 @@ import {
     FormLabel,
     FormMessage
 } from '@/components/ui/form';
-
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { Checkbox } from '@/components/ui/checkbox';
+import { useDataForm } from '../../context/DataFormContext';
 
 const formSchema = z
     .object({
@@ -33,6 +31,7 @@ const formSchema = z
                 message: 'La contraseña debe tener menos de 64 caracteres'
             }),
         password2: z.string(),
+        personaJuridica: z.boolean().default(false).optional(),
         ayudarPersonas: z.boolean().default(false).optional()
     })
     .refine(data => data.password === data.password2, {
@@ -43,6 +42,7 @@ const formSchema = z
 export default function RegistroPage() {
     const [isLoading, setIsLoading] = useState(false);
     const router = useRouter();
+    const { setDataForm } = useDataForm();
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -50,14 +50,17 @@ export default function RegistroPage() {
             usuario: '',
             password: '',
             password2: '',
+            personaJuridica: false,
             ayudarPersonas: false
         }
     });
 
     async function onSubmit(dataForm: z.infer<typeof formSchema>) {
+        console.log('dataForm: ', dataForm);
+        setDataForm(dataForm);
         const userId = 1;
         localStorage.setItem('userId', `${userId}`);
-        router.push(`/dashboard`);
+        router.push(`/dashboard/${userId}/formulario-usuario`);
     }
 
     return (
@@ -165,10 +168,40 @@ export default function RegistroPage() {
                                     )}
                                 />
                             </div>
+                            <div className='grid gap-2'>
+                                <FormField
+                                    control={form.control}
+                                    name='personaJuridica'
+                                    render={({ field }) => (
+                                        <FormItem className='flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4'>
+                                            <FormControl>
+                                                <Checkbox
+                                                    checked={field.value}
+                                                    onCheckedChange={
+                                                        field.onChange
+                                                    }
+                                                />
+                                            </FormControl>
+                                            <div className='space-y-1 leading-none'>
+                                                <FormLabel>
+                                                    Es usted una persona
+                                                    jurídica?
+                                                </FormLabel>
+                                                <FormDescription>
+                                                    Marque esta opción si está
+                                                    registrando una persona
+                                                    jurídica (Gubernamental,
+                                                    ONG, Empresa o Institución)
+                                                </FormDescription>
+                                            </div>
+                                        </FormItem>
+                                    )}
+                                />
+                            </div>
                             <Button
                                 type='submit'
                                 className='w-full'
-                                disabled={false}
+                                disabled={isLoading}
                             >
                                 Crear cuenta
                             </Button>

@@ -13,7 +13,7 @@ import {
 export type Icon = (props: LucideProps) => JSX.Element | null;
 
 interface IconsType {
-    [key: string]: Icon; // Permite claves de tipo string con valores de tipo IconType
+    [key: string]: Icon;
 }
 
 export const Icons: IconsType = {

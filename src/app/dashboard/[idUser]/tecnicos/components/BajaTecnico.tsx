@@ -1,4 +1,3 @@
-// components/BajaTecnico.tsx
 'use client';
 import React, { useState } from 'react';
 
@@ -9,7 +8,6 @@ const BajaTecnico: React.FC = () => {
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         console.log({ dni, email });
-        // Aquí puedes manejar el envío de los datos a una API o realizar alguna acción
     };
 
     return (

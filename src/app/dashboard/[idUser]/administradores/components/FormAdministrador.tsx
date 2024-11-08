@@ -3,8 +3,6 @@
 import { z } from 'zod';
 import Papa from 'papaparse';
 import { Button } from '@/components/ui/button';
-import { Separator } from '@/components/ui/separator';
-//import IconGoogle from '@/components/icons/IconGoogle';
 import { Input } from '@/components/ui/input';
 import {
     Form,
@@ -59,16 +57,13 @@ const FormAdministrador = () => {
     };
 
     useEffect(() => {
-        // Cargar y procesar el archivo CSV
         const fetchCSV = async () => {
             const response = await fetch('/common-passwords.csv');
             const csvText = await response.text();
 
-            // Usar PapaParse para analizar el CSV
             Papa.parse(csvText, {
                 header: true,
                 complete: (results: any) => {
-                    // Crear un conjunto con las contraseñas comunes
                     const passwordsSet = new Set(
                         results.data
                             .map((row: any) => row.password.trim())

@@ -33,7 +33,6 @@ export function validarColaboraciones(colaboraciones: any[]) {
                 cantidad
             } = colab;
 
-            // Validar Tipo Doc
             if (!tiposDocPermitidos.includes(tipoDoc)) {
                 errores.push(
                     `Error en la colaboración ${
@@ -44,7 +43,6 @@ export function validarColaboraciones(colaboraciones: any[]) {
                 );
             }
 
-            // Validar Documento
             if (!/^\d{10}$/.test(documento)) {
                 errores.push(
                     `Error en la colaboración ${
@@ -53,7 +51,6 @@ export function validarColaboraciones(colaboraciones: any[]) {
                 );
             }
 
-            // Validar Nombre
             if (typeof nombre !== 'string' || nombre.length > 50) {
                 errores.push(
                     `Error en la colaboración ${
@@ -62,7 +59,6 @@ export function validarColaboraciones(colaboraciones: any[]) {
                 );
             }
 
-            // Validar Apellido
             if (typeof apellido !== 'string' || apellido.length > 50) {
                 errores.push(
                     `Error en la colaboración ${
@@ -71,7 +67,6 @@ export function validarColaboraciones(colaboraciones: any[]) {
                 );
             }
 
-            // Validar Mail
             if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(mail) || mail.length > 50) {
                 errores.push(
                     `Error en la colaboración ${
@@ -80,7 +75,6 @@ export function validarColaboraciones(colaboraciones: any[]) {
                 );
             }
 
-            // Validar Fecha de Colaboración
             if (!/^\d{2}\/\d{2}\/\d{4}$/.test(fechaColaboracion)) {
                 errores.push(
                     `Error en la colaboración ${
@@ -89,7 +83,6 @@ export function validarColaboraciones(colaboraciones: any[]) {
                 );
             }
 
-            // Validar Forma de Colaboración
             if (!formasColaboracionPermitidas.includes(formaColaboracion)) {
                 errores.push(
                     `Error en la colaboración ${
@@ -100,7 +93,6 @@ export function validarColaboraciones(colaboraciones: any[]) {
                 );
             }
 
-            // Validar Cantidad
             if (!/^\d{1,7}$/.test(cantidad)) {
                 errores.push(
                     `Error en la colaboración ${

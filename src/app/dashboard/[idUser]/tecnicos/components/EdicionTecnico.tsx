@@ -1,8 +1,7 @@
-// components/EdicionTecnico.tsx
 'use client';
 
 import React, { useState } from 'react';
-import { Button } from '@/components/ui/button'; // Asegúrate de que esta ruta sea correcta
+import { Button } from '@/components/ui/button';
 
 const EdicionTecnico: React.FC = () => {
     const [nombre, setNombre] = useState<string>('');
@@ -24,7 +23,6 @@ const EdicionTecnico: React.FC = () => {
             medioContacto,
             areaCobertura
         });
-        // Aquí puedes manejar el envío de la actualización a una API o realizar alguna acción
     };
 
     return (

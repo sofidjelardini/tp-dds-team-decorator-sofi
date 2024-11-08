@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Button } from '@/components/ui/button'; // Manteniendo el botón personalizado
+import { Button } from '@/components/ui/button';
 
 const EditarPerfil: React.FC = () => {
     const [nombre, setNombre] = useState<string>('');
@@ -19,7 +19,6 @@ const EditarPerfil: React.FC = () => {
             telefono,
             direccion
         });
-        // Aquí puedes agregar la lógica para enviar los datos al servidor
     };
 
     return (

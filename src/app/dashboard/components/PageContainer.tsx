@@ -19,15 +19,15 @@ interface PageContainerProps {
 }
 
 const getThirdSegment = (path: string): string => {
-    const segments = path.split('/').filter(Boolean); // Divide la ruta y elimina segmentos vacíos
-    return segments.length >= 3 ? segments[2] : null; // Devuelve la tercera posición o null si no existe
+    const segments = path.split('/').filter(Boolean);
+    return segments.length >= 3 ? segments[2] : null;
 };
 
 export const PageContainer = ({
     children,
     scrollable = false
 }: PageContainerProps) => {
-    const pathname = usePathname(); // Obtiene el path actual
+    const pathname = usePathname();
     const { idUser } = useParams();
     const path = getThirdSegment(pathname);
 

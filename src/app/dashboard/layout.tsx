@@ -1,16 +1,8 @@
-// import Header from '@/components/layout/header';
-// import { ScrollArea } from '@/components/ui/scroll-area';
 'use client';
-import type { Metadata } from 'next';
 import Sidebar from './components/Sidebar';
 import Header from './components/Header';
 import { redirect } from 'next/navigation';
 import { useState, useEffect } from 'react';
-
-// export const metadata: Metadata = {
-//     title: 'Next Shadcn Dashboard Starter',
-//     description: 'Basic dashboard with Next.js and Shadcn'
-// };
 
 export default function DashboardLayout({
     children,

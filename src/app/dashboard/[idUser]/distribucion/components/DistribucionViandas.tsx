@@ -9,7 +9,6 @@ const DistribucionViandasForm: React.FC = () => {
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        // Aquí puedes manejar el envío del formulario, como enviar datos a una API o realizar alguna acción
         console.log({
             heladeraOrigen,
             heladeraDestino,

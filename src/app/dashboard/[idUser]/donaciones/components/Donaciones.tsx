@@ -7,9 +7,7 @@ const DonacionesForm: React.FC = () => {
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        // Aquí puedes manejar el envío de datos, como enviar a una API o actualizar el estado global
         console.log({ fecha, monto, frecuencia });
-        // Reiniciar el formulario
         setFecha('');
         setMonto('');
         setFrecuencia('una vez');

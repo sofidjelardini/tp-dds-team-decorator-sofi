@@ -81,7 +81,6 @@ const DashboardNav = ({ userId, isMobileNav = false }: DashboardNavProps) => {
         if (!isMinimized) {
             router.push(href);
         } else {
-            // Si está minimizado, simplemente navegamos sin expandir el menú
             router.push(href);
         }
     };

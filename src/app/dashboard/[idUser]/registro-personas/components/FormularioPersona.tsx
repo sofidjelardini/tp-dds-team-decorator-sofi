@@ -1,6 +1,6 @@
 'use client';
 import React, { useState } from 'react';
-import { Button } from '@/components/ui/button'; // Manteniendo el botón personalizado
+import { Button } from '@/components/ui/button';
 
 const FormularioPersonas: React.FC = () => {
     const [nombre, setNombre] = useState<string>('');
