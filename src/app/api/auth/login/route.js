@@ -9,7 +9,7 @@ async function getUsers() {
     return JSON.parse(fileContents);
 }
 
-export async function POST(request: any) {
+export async function POST(request) {
     const data = await request.json();
     const { documento, password } = data;
 
@@ -22,9 +22,7 @@ export async function POST(request: any) {
 
     const users = await getUsers();
 
-    const user = users.find(
-        (user: { documento: any }) => user.documento === documento
-    );
+    const user = users.find(user => user.documento === documento);
     if (!user) {
         return NextResponse.json(
             { error: 'Usuario no encontrado' },
