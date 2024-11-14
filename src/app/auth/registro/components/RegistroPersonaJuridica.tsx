@@ -1,10 +1,12 @@
 'use client';
-
+import Checkbox from '@mui/material/Checkbox';
+import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
-import { useDataForm } from '../../../../context/DataFormContext';
+import { useDataForm } from '../../../context/DataFormContext';
 
-const RegistroPersonaJuridica: React.FC = () => {
+export default function RegistroPersonaJuridica() {
     const { dataForm } = useDataForm();
+    const router = useRouter();
 
     const [razonSocial, setRazonSocial] = useState<string>('');
     const [tipo, setTipo] = useState<string>(''); // Gubernamental, ONG, Empresa, Institución
@@ -12,41 +14,46 @@ const RegistroPersonaJuridica: React.FC = () => {
     const [email, setEmail] = useState<string>('');
     const [telefono, setTelefono] = useState<string>('');
     const [direccion, setDireccion] = useState<string>('');
+    const [codigoPostal, setCodigoPostal] = useState<string>('');
+    const [hacerseCargoHeladera, setHacerseCargoHeladera] =
+        useState<boolean>(false);
 
-    const handleSubmit = async (e: React.FormEvent) => {
+    console.log('Data del usuario:', dataForm);
+
+    const handleSubmit = async (e: { preventDefault: () => void }) => {
         e.preventDefault();
 
-        const personaJuridica = {
+        const usuario = {
+            ...dataForm,
+            personaJuridica: true,
             razonSocial,
+            // dataForm.documento,
+            // medioContacto,
+            // dataForm.password,
             tipo,
             rubro,
-            email,
-            telefono,
             direccion
         };
 
-        // Acá tenemos que guardar la data en la base de datos
-        console.log('Data del usuario:', dataForm);
-        console.log('Datos de Persona Jurídica:', personaJuridica);
+        try {
+            const response = await fetch('/api/auth/register', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(usuario)
+            });
 
-        // try {
-        //     const response = await fetch('/api/registrar-usuario', {
-        //         method: 'POST',
-        //         headers: {
-        //             'Content-Type': 'application/json'
-        //         },
-        //         body: JSON.stringify(personaJuridica)
-        //     });
-
-        //     if (!response.ok) {
-        //         throw new Error('Error al guardar los datos');
-        //     }
-
-        //     const result = await response.json();
-        //     console.log('Respuesta del servidor:', result);
-        // } catch (error) {
-        //     console.error('Error al enviar los datos:', error);
-        // }
+            const data = await response.json();
+            if (response.ok) {
+                alert('Registro exitoso');
+            } else {
+                alert(`Error: ${data.error}`);
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            alert('Error al registrar el usuario');
+        }
     };
 
     return (
@@ -79,7 +86,7 @@ const RegistroPersonaJuridica: React.FC = () => {
                             htmlFor='tipo'
                             className='block text-sm font-medium'
                         >
-                            Tipo (Gubernamental, ONG, Empresa, Institución):
+                            Tipo:
                         </label>
                         <select
                             id='tipo'
@@ -152,7 +159,7 @@ const RegistroPersonaJuridica: React.FC = () => {
                             htmlFor='direccion'
                             className='block text-sm font-medium'
                         >
-                            Dirección (opcional):
+                            Dirección{!hacerseCargoHeladera && ' (opcional)'}:
                         </label>
                         <input
                             type='text'
@@ -160,7 +167,43 @@ const RegistroPersonaJuridica: React.FC = () => {
                             className='mt-1 p-2 border rounded-md w-full'
                             value={direccion}
                             onChange={e => setDireccion(e.target.value)}
+                            required={hacerseCargoHeladera}
                         />
+                    </div>
+
+                    <div>
+                        <label
+                            htmlFor='codigo-postal'
+                            className='block text-sm font-medium'
+                        >
+                            Código Postal
+                            {!hacerseCargoHeladera && ' (opcional)'}:
+                        </label>
+                        <input
+                            type='text'
+                            id='codigo-postal'
+                            className='mt-1 p-2 border rounded-md w-full'
+                            value={codigoPostal}
+                            onChange={e => setCodigoPostal(e.target.value)}
+                            required={direccion != ''}
+                        />
+                    </div>
+
+                    <div className='flex'>
+                        <Checkbox
+                            id='hacerseCargoHeladera'
+                            checked={hacerseCargoHeladera}
+                            onChange={() =>
+                                setHacerseCargoHeladera(!hacerseCargoHeladera)
+                            }
+                        />
+                        <label htmlFor='hacerseCargoHeladera'>
+                            ¿Desea hacerse cargo de una heladera?
+                            <p className='ml-2 text-sm'>
+                                Marque esta opción si usted decide colocar una
+                                heladera en la puerta de su local.
+                            </p>
+                        </label>
                     </div>
 
                     <button
@@ -173,6 +216,4 @@ const RegistroPersonaJuridica: React.FC = () => {
             </div>
         </div>
     );
-};
-
-export default RegistroPersonaJuridica;
+}

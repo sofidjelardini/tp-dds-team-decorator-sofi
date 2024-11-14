@@ -1,8 +1,16 @@
 'use client';
 import React, { createContext, useContext, useEffect, useState } from 'react';
 
+export interface DataForm {
+    documento: string;
+    password: string;
+    password2: string;
+    personaJuridica: boolean;
+    ayudarPersonas: boolean;
+}
+
 type DataFormContextType = {
-    dataForm: any;
+    dataForm: DataForm;
     setDataForm: React.Dispatch<React.SetStateAction<any>>;
 };
 
@@ -16,8 +24,8 @@ export const DataFormProvider: React.FC<{ children: React.ReactNode }> = ({
     const [dataForm, setDataForm] = useState<any>(null);
 
     useEffect(() => {
-        console.log('dataFormContext: ', dataForm)
-    },[dataForm])
+        console.log('dataFormContext: ', dataForm);
+    }, [dataForm]);
 
     return (
         <DataFormContext.Provider value={{ dataForm, setDataForm }}>
@@ -28,7 +36,7 @@ export const DataFormProvider: React.FC<{ children: React.ReactNode }> = ({
 
 export const useDataForm = () => {
     const context = useContext(DataFormContext);
-    console.log('context: ', context)
+    console.log('context: ', context);
     if (!context) {
         throw new Error('useDataForm must be used within a DataFormProvider');
     }

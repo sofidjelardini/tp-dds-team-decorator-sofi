@@ -1,25 +1,43 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
 
-const EdicionTecnico: React.FC = () => {
-    const [nombre, setNombre] = useState<string>('');
-    const [apellido, setApellido] = useState<string>('');
-    const [tipoDocumento, setTipoDocumento] = useState<string>('');
-    const [numeroDocumento, setNumeroDocumento] = useState<string>('');
-    const [cuil, setCuil] = useState<string>('');
-    const [medioContacto, setMedioContacto] = useState<string>('');
-    const [areaCobertura, setAreaCobertura] = useState<string>('');
+interface EdicionTecnicoProps {
+    onUpdate: (tecnico: Partial<Tecnico>) => Promise<void>;
+    dataTecnico: Tecnico;
+}
 
-    const handleSubmit = (e: React.FormEvent) => {
+interface Tecnico {
+    numeroDocumento: string; // Cambié 'dni' a 'numeroDocumento'
+    nombre: string;
+    apellido: string;
+    habilitado: boolean;
+    medioContacto: string;
+    areaCobertura: string;
+}
+
+const EdicionTecnico: React.FC<EdicionTecnicoProps> = ({
+    onUpdate,
+    dataTecnico
+}) => {
+    const [medioContacto, setMedioContacto] = useState<string>(
+        dataTecnico.medioContacto
+    );
+    const [areaCobertura, setAreaCobertura] = useState<string>(
+        dataTecnico.areaCobertura
+    );
+
+    useEffect(() => {
+        // Cuando dataTecnico cambia, actualizar los estados
+        setMedioContacto(dataTecnico.medioContacto);
+        setAreaCobertura(dataTecnico.areaCobertura);
+    }, [dataTecnico]);
+
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        console.log({
-            nombre,
-            apellido,
-            tipoDocumento,
-            numeroDocumento,
-            cuil,
+        await onUpdate({
+            ...dataTecnico, // Mantener los datos existentes del técnico
             medioContacto,
             areaCobertura
         });
@@ -36,93 +54,6 @@ const EdicionTecnico: React.FC = () => {
                         <h2 className='text-lg font-semibold'>
                             Formulario de Edición de Técnicos
                         </h2>
-
-                        <div>
-                            <label
-                                htmlFor='nombre'
-                                className='block text-sm font-medium'
-                            >
-                                Nombre:
-                            </label>
-                            <input
-                                type='text'
-                                id='nombre'
-                                className='mt-1 p-2 border rounded-md w-full'
-                                value={nombre}
-                                onChange={e => setNombre(e.target.value)}
-                                required
-                            />
-                        </div>
-
-                        <div>
-                            <label
-                                htmlFor='apellido'
-                                className='block text-sm font-medium'
-                            >
-                                Apellido:
-                            </label>
-                            <input
-                                type='text'
-                                id='apellido'
-                                className='mt-1 p-2 border rounded-md w-full'
-                                value={apellido}
-                                onChange={e => setApellido(e.target.value)}
-                                required
-                            />
-                        </div>
-
-                        <div>
-                            <label
-                                htmlFor='tipoDocumento'
-                                className='block text-sm font-medium'
-                            >
-                                Tipo de Documento:
-                            </label>
-                            <input
-                                type='text'
-                                id='tipoDocumento'
-                                className='mt-1 p-2 border rounded-md w-full'
-                                value={tipoDocumento}
-                                onChange={e => setTipoDocumento(e.target.value)}
-                                required
-                            />
-                        </div>
-
-                        <div>
-                            <label
-                                htmlFor='numeroDocumento'
-                                className='block text-sm font-medium'
-                            >
-                                Número de Documento:
-                            </label>
-                            <input
-                                type='text'
-                                id='numeroDocumento'
-                                className='mt-1 p-2 border rounded-md w-full'
-                                value={numeroDocumento}
-                                onChange={e =>
-                                    setNumeroDocumento(e.target.value)
-                                }
-                                required
-                            />
-                        </div>
-
-                        <div>
-                            <label
-                                htmlFor='cuil'
-                                className='block text-sm font-medium'
-                            >
-                                CUIL:
-                            </label>
-                            <input
-                                type='text'
-                                id='cuil'
-                                className='mt-1 p-2 border rounded-md w-full'
-                                value={cuil}
-                                onChange={e => setCuil(e.target.value)}
-                                required
-                            />
-                        </div>
 
                         <div>
                             <label

@@ -3,7 +3,20 @@
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button'; // Manteniendo el botón personalizado
 
-const RegistroTecnico: React.FC = () => {
+interface RegistroTecnicoProps {
+    onAdd: (newTechnician: {
+        nombre: string;
+        apellido: string;
+        tipoDocumento: string;
+        numeroDocumento: string;
+        cuil: string;
+        medioContacto: string;
+        areaCobertura: string;
+        habilitado: boolean;
+    }) => Promise<void>;
+}
+
+const RegistroTecnico: React.FC<RegistroTecnicoProps> = ({ onAdd }) => {
     const [nombre, setNombre] = useState<string>('');
     const [apellido, setApellido] = useState<string>('');
     const [tipoDocumento, setTipoDocumento] = useState<string>('');
@@ -11,24 +24,43 @@ const RegistroTecnico: React.FC = () => {
     const [cuil, setCuil] = useState<string>('');
     const [medioContacto, setMedioContacto] = useState<string>('');
     const [areaCobertura, setAreaCobertura] = useState<string>('');
+    const [error, setError] = useState<string | null>(null);
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        console.log({
-            nombre,
-            apellido,
-            tipoDocumento,
-            numeroDocumento,
-            cuil,
-            medioContacto,
-            areaCobertura
-        });
+        try {
+            await onAdd({
+                nombre,
+                apellido,
+                tipoDocumento,
+                numeroDocumento,
+                cuil,
+                medioContacto,
+                areaCobertura,
+                habilitado: true
+            });
+            // Resetear campos después de agregar
+            setNombre('');
+            setApellido('');
+            setTipoDocumento('');
+            setNumeroDocumento('');
+            setCuil('');
+            setMedioContacto('');
+            setAreaCobertura('');
+            setError(null); // Limpiar errores al registrar exitosamente
+        } catch (err) {
+            setError(
+                'Error al registrar el técnico. Por favor, intente nuevamente.'
+            ); // Manejo de errores
+        }
     };
 
     return (
         <div className='flex justify-center mt-6'>
             <div className='w-3/4 bg-white shadow-lg rounded-lg p-6'>
                 <div className='p-4'>
+                    {error && <div className='text-red-500'>{error}</div>}{' '}
+                    {/* Mensaje de error */}
                     <form
                         onSubmit={handleSubmit}
                         className='flex flex-col gap-4'

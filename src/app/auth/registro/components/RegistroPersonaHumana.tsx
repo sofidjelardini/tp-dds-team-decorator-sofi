@@ -1,27 +1,58 @@
 'use client';
 
+import { useDataForm } from '@/app/context/DataFormContext';
+import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 
 const RegistroPersonaHumana: React.FC = () => {
+    const router = useRouter();
     const [nombre, setNombre] = useState<string>('');
     const [apellido, setApellido] = useState<string>('');
     const [email, setEmail] = useState<string>('');
     const [telefono, setTelefono] = useState<string>('');
     const [direccion, setDireccion] = useState<string>('');
     const [fechaNacimiento, setFechaNacimiento] = useState<string>('');
-    const [formaColaboracion, setFormaColaboracion] = useState<string>('');
+    const [codigoPostal, setCodigoPostal] = useState<string>('');
+    const { dataForm } = useDataForm();
 
-    const handleSubmit = (e: React.FormEvent) => {
+    console.log('dataForm: ', dataForm);
+    const handleSubmit = async (e: { preventDefault: () => void }) => {
         e.preventDefault();
-        console.log({
+
+        const usuario = {
+            ...dataForm,
             nombre,
             apellido,
             email,
             telefono,
-            direccion,
             fechaNacimiento,
-            formaColaboracion
-        });
+            direccion,
+            codigoPostal
+        };
+
+        try {
+            const response = await fetch('/api/auth/register', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(usuario)
+            });
+
+            const data = await response.json();
+            if (response.ok) {
+                alert('Registro exitoso');
+                localStorage.setItem('userId', data.user.documento);
+                router.push('/');
+            } else {
+                alert(`Error: ${data.error}`);
+                localStorage.setItem('userId', data.user.documento);
+                router.push('/');
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            alert('Error al registrar el usuario');
+        }
     };
 
     return (
@@ -105,7 +136,7 @@ const RegistroPersonaHumana: React.FC = () => {
                             htmlFor='direccion'
                             className='block text-sm font-medium'
                         >
-                            Dirección (opcional):
+                            Dirección:
                         </label>
                         <input
                             type='text'
@@ -113,6 +144,22 @@ const RegistroPersonaHumana: React.FC = () => {
                             className='mt-1 p-2 border rounded-md w-full'
                             value={direccion}
                             onChange={e => setDireccion(e.target.value)}
+                        />
+                    </div>
+
+                    <div>
+                        <label
+                            htmlFor='codigo-postal'
+                            className='block text-sm font-medium'
+                        >
+                            Código Postal:
+                        </label>
+                        <input
+                            type='text'
+                            id='codigo-postal'
+                            className='mt-1 p-2 border rounded-md w-full'
+                            value={codigoPostal}
+                            onChange={e => setCodigoPostal(e.target.value)}
                         />
                     </div>
 
@@ -130,33 +177,6 @@ const RegistroPersonaHumana: React.FC = () => {
                             value={fechaNacimiento}
                             onChange={e => setFechaNacimiento(e.target.value)}
                         />
-                    </div>
-
-                    <div>
-                        <label
-                            htmlFor='formaColaboracion'
-                            className='block text-sm font-medium'
-                        >
-                            Forma de Colaboración:
-                        </label>
-                        <select
-                            id='formaColaboracion'
-                            className='mt-1 p-2 border rounded-md w-full'
-                            value={formaColaboracion}
-                            onChange={e => setFormaColaboracion(e.target.value)}
-                            required
-                        >
-                            <option value=''>Seleccione una opción</option>
-                            <option value='donacion dinero'>
-                                Donación de Dinero
-                            </option>
-                            <option value='donacion vianda'>
-                                Donación de Vianda
-                            </option>
-                            <option value='distribucion viandas'>
-                                Distribución de Viandas
-                            </option>
-                        </select>
                     </div>
 
                     <button
