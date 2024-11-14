@@ -1,5 +1,5 @@
 'use client';
-import { redirect } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import React from 'react';
 import MapaHeladeras from './MapaHeladeras';
 import styles from './styles/homePage.module.css';
@@ -9,6 +9,7 @@ interface HomePageProps {
 }
 
 const HomePage: React.FC<HomePageProps> = ({ userId }) => {
+    const router = useRouter();
     const ubicacionesHeladeras = [
         { lat: -34.6037, lng: -58.3816, nombre: 'Heladera 1' },
         { lat: -34.6157, lng: -58.3839, nombre: 'Heladera 2' },
@@ -41,7 +42,9 @@ const HomePage: React.FC<HomePageProps> = ({ userId }) => {
                     </li>
                     <button
                         className={styles.button}
-                        onClick={() => redirect(`${userId}/donaciones`)}
+                        onClick={() =>
+                            router.push(`dashboard/${userId}/donaciones`)
+                        }
                     >
                         Donar Dinero
                     </button>
@@ -62,7 +65,9 @@ const HomePage: React.FC<HomePageProps> = ({ userId }) => {
                     </li>
                     <button
                         className={styles.button}
-                        onClick={() => redirect(`${userId}/viandas`)}
+                        onClick={() =>
+                            router.push(`dashboard/${userId}/viandas`)
+                        }
                     >
                         Cargar Viandas
                     </button>
@@ -80,7 +85,9 @@ const HomePage: React.FC<HomePageProps> = ({ userId }) => {
                         </p>
                         <button
                             className={styles.button}
-                            onClick={() => redirect(`${userId}/distribucion`)}
+                            onClick={() =>
+                                router.push(`dashboard/${userId}/distribucion`)
+                            }
                         >
                             Distribuir Viandas
                         </button>
@@ -104,7 +111,9 @@ const HomePage: React.FC<HomePageProps> = ({ userId }) => {
                     </li>
                     <button
                         className={styles.button}
-                        onClick={() => redirect(`${userId}/donaciones`)}
+                        onClick={() =>
+                            router.push(`dashboard/${userId}/donaciones`)
+                        }
                     >
                         Donar Dinero
                     </button>
@@ -121,7 +130,7 @@ const HomePage: React.FC<HomePageProps> = ({ userId }) => {
 
                 <button
                     className={styles.button}
-                    onClick={() => redirect(`${userId}/heladeras`)}
+                    onClick={() => router.push(`dashboard/${userId}/heladeras`)}
                 >
                     Gestionar Heladeras
                 </button>
@@ -141,7 +150,7 @@ const HomePage: React.FC<HomePageProps> = ({ userId }) => {
                 </p>
                 <button
                     className={styles.button}
-                    onClick={() => redirect(`${userId}/personas`)}
+                    onClick={() => router.push(`dashboard/${userId}/personas`)}
                 >
                     Registrar Persona Vulnerable
                 </button>
@@ -154,7 +163,7 @@ const HomePage: React.FC<HomePageProps> = ({ userId }) => {
                 <MapaHeladeras ubicaciones={ubicacionesHeladeras} />
                 <button
                     className={styles.button}
-                    onClick={() => redirect(`${userId}/mapa`)}
+                    onClick={() => router.push(`dashboard/${userId}/mapa`)}
                 >
                     Ver Mapa de Heladeras
                 </button>

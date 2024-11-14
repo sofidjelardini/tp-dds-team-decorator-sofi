@@ -71,5 +71,18 @@
     "fechaNacimiento": "",
     "direccion": "0 Barrio Septiembre",
     "codigoPostal": "1625"
+  },
+  {
+    "documento": "11223344",
+    "password": "$2b$10$.EWYfGmYMLjMVKpFg1waWOfQFbcejkrWYN.WZT4wv/ABaJQ4TnTWq",
+    "personaJuridica": false,
+    "ayudarPersonas": false,
+    "nombre": "Sofia",
+    "apellido": "Djelardini",
+    "email": "sdjelardini@gmail.com",
+    "telefono": "01144051200",
+    "fechaNacimiento": "",
+    "direccion": "sofi1234",
+    "codigoPostal": "1625"
   }
 ]

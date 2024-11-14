@@ -20,7 +20,7 @@ interface PageContainerProps {
 
 const getThirdSegment = (path: string): string => {
     const segments = path.split('/').filter(Boolean);
-    return segments.length >= 3 ? segments[2] : null;
+    return segments.length >= 3 ? segments[2] : segments[1];
 };
 
 export const PageContainer = ({
@@ -28,12 +28,12 @@ export const PageContainer = ({
     scrollable = false
 }: PageContainerProps) => {
     const pathname = usePathname();
-    const { idUser } = useParams();
+    const { userId } = useParams();
     const path = getThirdSegment(pathname);
 
     const { title, description, breadcrumbs } = getPageData(
         path,
-        idUser.toString()
+        userId.toString()
     );
     return (
         <>

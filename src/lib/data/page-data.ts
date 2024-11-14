@@ -11,7 +11,7 @@ export interface PageData {
 
 export const getPageData = (
     pageName: string,
-    idUser: string | number
+    userId: string | number
 ): PageData => {
     const data: Record<string, PageData> = {
         heladeras: {
@@ -21,7 +21,7 @@ export const getPageData = (
                 { title: 'Inicio', link: '/' },
                 {
                     title: 'Heladeras',
-                    link: `/${idUser}/heladeras`
+                    link: `/${userId}/heladeras`
                 }
             ]
         },
@@ -33,7 +33,7 @@ export const getPageData = (
                 { title: 'Inicio', link: '/' },
                 {
                     title: 'Registro Personas',
-                    link: `/${idUser}/registro-personas`
+                    link: `/${userId}/registro-personas`
                 }
             ]
         },
@@ -44,7 +44,7 @@ export const getPageData = (
                 { title: 'Inicio', link: '/' },
                 {
                     title: 'Viandas',
-                    link: `/${idUser}/viandas`
+                    link: `/${userId}/viandas`
                 }
             ]
         },
@@ -55,7 +55,7 @@ export const getPageData = (
                 { title: 'Inicio', link: '/' },
                 {
                     title: 'Donaciones',
-                    link: `/${idUser}/donaciones`
+                    link: `/${userId}/donaciones`
                 }
             ]
         },
@@ -66,7 +66,7 @@ export const getPageData = (
                 { title: 'Inicio', link: '/' },
                 {
                     title: 'Distribución de Viandas',
-                    link: `/${idUser}/distribucion`
+                    link: `/${userId}/distribucion`
                 }
             ]
         },
@@ -78,7 +78,7 @@ export const getPageData = (
                 { title: 'Inicio', link: '/' },
                 {
                     title: 'Manejo Técnicos',
-                    link: `/${idUser}/tecnicos`
+                    link: `/${userId}/tecnicos`
                 }
             ]
         },
@@ -89,7 +89,7 @@ export const getPageData = (
                 { title: 'Inicio', link: '/' },
                 {
                     title: 'Editar Perfil',
-                    link: `/${idUser}/editar-perfil`
+                    link: `/${userId}/editar-perfil`
                 }
             ]
         },
@@ -100,7 +100,7 @@ export const getPageData = (
                 { title: 'Inicio', link: '/' },
                 {
                     title: 'Administradores',
-                    link: `/${idUser}/administradores`
+                    link: `/${userId}/administradores`
                 }
             ]
         },
@@ -111,7 +111,7 @@ export const getPageData = (
                 { title: 'Inicio', link: '/' },
                 {
                     title: 'Cargar Colaboraciones',
-                    link: `/${idUser}/cargar-colaboraciones`
+                    link: `/${userId}/cargar-colaboraciones`
                 }
             ]
         }
