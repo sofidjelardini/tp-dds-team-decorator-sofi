@@ -26,7 +26,7 @@ export const getPageData = (
             ]
         },
         'registro-personas': {
-            title: 'Registro Personas en Situación Vulnerable',
+            title: 'Personas en Situación Vulnerable',
             description:
                 'Gestiona el alta y baja de personas en situación vulnerable',
             breadcrumbs: [

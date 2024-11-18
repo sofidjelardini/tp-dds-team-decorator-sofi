@@ -168,7 +168,6 @@ const formSchema = z
 export default function RegistroPage() {
     const [isLoading, setIsLoading] = useState(false);
     const router = useRouter();
-    const { setDataForm } = useDataForm();
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -181,15 +180,7 @@ export default function RegistroPage() {
         }
     });
 
-    async function onSubmit(dataForm: z.infer<typeof formSchema>) {
-        console.log('dataForm: ', dataForm);
-        setIsLoading(true);
-        setDataForm(dataForm);
-
-        const userId = 1;
-        localStorage.setItem('userId', `${userId}`);
-        router.push(`/dashboard/${userId}/formulario-usuario`);
-    }
+    async function onSubmit(dataForm: z.infer<typeof formSchema>) {}
 
     return (
         <div className='mx-auto grid w-[400px] gap-6'>
