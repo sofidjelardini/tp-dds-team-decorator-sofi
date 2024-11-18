@@ -22,6 +22,11 @@ const DashboardNav = ({ userId, isMobileNav = false }: DashboardNavProps) => {
 
     const items = [
         {
+            title: 'Puntos y canjes',
+            href: `/dashboard/${userId}/puntos-y-canjes`,
+            icon: 'carrito'
+        },
+        {
             title: 'Heladeras',
             href: `/dashboard/${userId}/heladeras`,
             icon: 'heladera'

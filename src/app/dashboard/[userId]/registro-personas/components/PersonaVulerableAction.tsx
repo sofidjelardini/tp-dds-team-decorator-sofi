@@ -12,7 +12,7 @@ import {
 } from '@/components/ui/dropdown-menu';
 // import client from '@/lib/api/client';
 // import { Service } from '@/lib/types/service.types';
-import { Edit, MoreHorizontal, Trash } from 'lucide-react';
+import { Edit, Eye, MoreHorizontal, Trash } from 'lucide-react';
 import { useParams, useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 import DetalleTarjeta from './DetalleTarjeta';
@@ -101,7 +101,7 @@ export const PersonaVulnerableAction = ({ data }: { data: any }) => {
                     <DropdownMenuItem
                         onClick={() => setIsOpenDetalleTarjeta(true)}
                     >
-                        <Edit className='mr-2 h-4 w-4' /> Ver detalle tarjeta
+                        <Eye className='mr-2 h-4 w-4' /> Ver detalle tarjeta
                     </DropdownMenuItem>
                     <DropdownMenuItem onClick={() => setOpen(true)}>
                         <Trash className='mr-2 h-4 w-4' /> Eliminar

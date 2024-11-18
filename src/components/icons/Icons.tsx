@@ -7,7 +7,8 @@ import {
     Truck,
     Wrench,
     UserCheck,
-    Edit
+    Edit,
+    ShoppingCart
 } from 'lucide-react';
 
 export type Icon = (props: LucideProps) => JSX.Element | null;
@@ -17,6 +18,7 @@ interface IconsType {
 }
 
 export const Icons: IconsType = {
+    carrito: ShoppingCart,
     heladera: SquareEqual,
     donaciones: DollarSign,
     persona: User,

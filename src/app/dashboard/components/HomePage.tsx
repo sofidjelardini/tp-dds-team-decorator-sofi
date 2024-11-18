@@ -1,5 +1,5 @@
 'use client';
-import { redirect } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import React from 'react';
 import MapaHeladeras from './MapaHeladeras';
 import styles from './styles/homePage.module.css';
@@ -9,6 +9,7 @@ interface HomePageProps {
 }
 
 const HomePage: React.FC<HomePageProps> = ({ userId }) => {
+    const router = useRouter();
     const ubicacionesHeladeras = [
         { lat: -34.6037, lng: -58.3816, nombre: 'Heladera 1' },
         { lat: -34.6157, lng: -58.3839, nombre: 'Heladera 2' },
@@ -25,21 +26,31 @@ const HomePage: React.FC<HomePageProps> = ({ userId }) => {
             <section className={styles.section}>
                 <h2 className={styles.title}>Formas de Contribuir</h2>
 
-                <h3 className={styles.subtitle}>Personas Humanas</h3>
+                <h3 className={styles.subtitle}>
+                    Si es una persona humana, puede contribuir:
+                </h3>
                 <ul className={styles.list}>
                     <li className={styles.listItem}>
                         <strong className={styles.strong}>
-                            Donaciones de dinero
+                            Donando dinero
                         </strong>
                         <p>
                             Se deberá indicar la fecha de la donación, un monto
                             y una frecuencia (en caso de que se opte por donar
-                            de forma periódica)
+                            de forma periódica).
                         </p>
                     </li>
+                    <button
+                        className={styles.button}
+                        onClick={() =>
+                            router.push(`dashboard/${userId}/donaciones`)
+                        }
+                    >
+                        Donar Dinero
+                    </button>
                     <li className={styles.listItem}>
                         <strong className={styles.strong}>
-                            Donación de vianda
+                            Donando viandas
                         </strong>
                         <p>
                             Se solicitará los datos de cada vianda. Cuando un
@@ -52,9 +63,17 @@ const HomePage: React.FC<HomePageProps> = ({ userId }) => {
                             encuentra; es decir, si la misma fue entregada o no.
                         </p>
                     </li>
+                    <button
+                        className={styles.button}
+                        onClick={() =>
+                            router.push(`dashboard/${userId}/viandas`)
+                        }
+                    >
+                        Cargar Viandas
+                    </button>
                     <li className={styles.listItem}>
                         <strong className={styles.strong}>
-                            Distribución de viandas
+                            Distribuyendo viandas
                         </strong>
                         <p>
                             Se deberá indicar la heladera origen, la heladera
@@ -64,63 +83,56 @@ const HomePage: React.FC<HomePageProps> = ({ userId }) => {
                             heladera destino) y la fecha en que se realizó la
                             distribución.
                         </p>
+                        <button
+                            className={styles.button}
+                            onClick={() =>
+                                router.push(`dashboard/${userId}/distribucion`)
+                            }
+                        >
+                            Distribuir Viandas
+                        </button>
                     </li>
                 </ul>
 
                 <h3 className={styles.subtitle}>Personas Jurídicas</h3>
                 <p className={styles.text}>
-                    Si es una persona jurídica deberá indicar razón social, su
-                    tipo (Gubernamental, ONG, Empresa, Institución), rubro y al
-                    menos un medio de contacto. En caso de poseer, puede indicar
-                    una dirección.
+                    Si es una persona jurídica, puede contribuir:
                 </p>
                 <ul className={styles.list}>
                     <li className={styles.listItem}>
                         <strong className={styles.strong}>
-                            Donación de dinero
+                            Donando dinero
                         </strong>
                         <p>
-                            Se deberá indicar la fecha de la donación, un monto
-                            y una frecuencia (en caso de que se opte por donar
-                            de forma periódica)
+                            Deberá indicar la fecha de la donación, un monto y
+                            una frecuencia (en caso de que se opte por donar de
+                            forma periódica).
                         </p>
                     </li>
+                    <button
+                        className={styles.button}
+                        onClick={() =>
+                            router.push(`dashboard/${userId}/donaciones`)
+                        }
+                    >
+                        Donar Dinero
+                    </button>
                     <li className={styles.listItem}>
                         <strong className={styles.strong}>
-                            Hacerse cargo de una heladera
+                            Haciéndose cargo de una heladera
                         </strong>
                         <p>
-                            En muchos casos hay empresas como kioscos,
-                            restaurantes, estaciones de servicio, etc. que
-                            deciden colocar una heladera en la puerta de sus
-                            locales.
+                            Si usted decide hacerse cargo de una heladera,
+                            deberá proveer su dirección.
                         </p>
                     </li>
                 </ul>
 
                 <button
                     className={styles.button}
-                    onClick={() => redirect(`${userId}/viandas`)}
-                >
-                    Cargar Viandas
-                </button>
-                <button
-                    className={styles.button}
-                    onClick={() => redirect(`${userId}/personas`)}
-                >
-                    Registrar Persona Vulnerable
-                </button>
-                <button
-                    className={styles.button}
-                    onClick={() => redirect(`${userId}/heladeras`)}
+                    onClick={() => router.push(`dashboard/${userId}/heladeras`)}
                 >
                     Gestionar Heladeras
-                </button>
-                <button
-                    className={styles.button}
-                    onClick={() => redirect(`${userId}/mapa`)}
-                >
-                    Ver Mapa de Heladeras
                 </button>
             </section>
 
@@ -136,6 +148,12 @@ const HomePage: React.FC<HomePageProps> = ({ userId }) => {
                     documento (si posee). También se debe cargar si posee
                     menores a cargo, y en caso afirmativo, la cantidad.
                 </p>
+                <button
+                    className={styles.button}
+                    onClick={() => router.push(`dashboard/${userId}/personas`)}
+                >
+                    Registrar Persona Vulnerable
+                </button>
             </section>
 
             <section className={styles.section}>
@@ -143,6 +161,12 @@ const HomePage: React.FC<HomePageProps> = ({ userId }) => {
                     Ubicación de las heladeras disponibles
                 </h2>
                 <MapaHeladeras ubicaciones={ubicacionesHeladeras} />
+                <button
+                    className={styles.button}
+                    onClick={() => router.push(`dashboard/${userId}/mapa`)}
+                >
+                    Ver Mapa de Heladeras
+                </button>
             </section>
         </div>
     );

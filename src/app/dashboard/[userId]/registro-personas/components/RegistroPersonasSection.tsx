@@ -10,7 +10,7 @@ import { DataTablePersonasVulnerables } from './DataTablePersonasVulnerables';
 // implort { DataTableCategory } from './DataTableCategory';
 
 const RegistroPersonasSection = () => {
-    const { idUser } = useParams();
+    const { userId: idUser } = useParams();
     const [isOpenModalRegistroPersona, setIsOpenModalRegistroPersona] =
         useState<boolean>(false);
 

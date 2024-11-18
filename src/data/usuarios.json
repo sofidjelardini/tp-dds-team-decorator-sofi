@@ -1,0 +1,88 @@
+[
+  {
+    "documento": "12345678",
+    "medioContacto": "correo1@example.com",
+    "tipoPersona": "humana",
+    "nombre": "Juan",
+    "apellido": "Pérez",
+    "password": "$2b$10$EjZ9k0Jq5ESu1Wb5D1Jw1O8d6.3L5kFe5ZzX1q0GQhDkF3AdFQ2R6",
+    "fechaNacimiento": "1990-01-01",
+    "direccion": "Calle Ejemplo 123",
+    "formaColaborar": "Donaciones"
+  },
+  {
+    "documento": "87654321",
+    "medioContacto": "contacto@empresa.com",
+    "tipoPersona": "juridica",
+    "razonSocial": "Empresa Ejemplo S.A.",
+    "tipo": "Empresa",
+    "rubro": "Tecnología",
+    "direccion": "Avenida Ejemplo 456",
+    "password": "$2b$10$H9Y5m0K0gQ1pL1H1B1aUOeG1b7P5H1Y1K7g1fZ9a5g8eN1jF1H2qC"
+  },
+  {
+    "documento": "2121212121",
+    "password": "$2b$10$JyT1lrcgAe.vwNzlgH/AxOToFb7cLkgtBfCfzoieEm1Ym8dV6J3ya",
+    "personaJuridica": false,
+    "ayudarPersonas": false,
+    "nombre": "Sofia",
+    "apellido": "Djelardini",
+    "email": "sdjelardini@gmail.com",
+    "telefono": "01144051200",
+    "fechaNacimiento": "",
+    "direccion": "0 Barrio Septiembre",
+    "codigoPostal": "1625"
+  },
+  {
+    "documento": "02020202",
+    "password": "$2b$10$ZvkeexHpSZkyXSE9GCVkf.As71LsKC4HqDtAyswLMh6pPrM/cE78W",
+    "personaJuridica": false,
+    "ayudarPersonas": true,
+    "nombre": "Sofia",
+    "apellido": "Djelardini",
+    "email": "sdjelardini@gmail.com",
+    "telefono": "01144051200",
+    "fechaNacimiento": "",
+    "direccion": "0 Barrio Septiembre",
+    "codigoPostal": "1625"
+  },
+  {
+    "documento": "90909090",
+    "password": "$2b$10$DwXm.xTRwoYF/GcEdXTdn.ffPm/GqKh5KBt4dPXwKJBy5Oyru.wEG",
+    "personaJuridica": false,
+    "ayudarPersonas": false,
+    "nombre": "Sofía",
+    "apellido": "Djelardini",
+    "email": "sdjelardini@frba.utn.edu.ar",
+    "telefono": "44051200",
+    "fechaNacimiento": "",
+    "direccion": "Barrio Septiembre en Maschwitz, lote 166",
+    "codigoPostal": "1625"
+  },
+  {
+    "documento": "33003300",
+    "password": "$2b$10$NINi/TL/LZIIHLBTcfDqwOso3dFNE0S.qJ7/FrfY8mQqDnZ3Gl88W",
+    "personaJuridica": false,
+    "ayudarPersonas": true,
+    "nombre": "Sofia",
+    "apellido": "Djelardini",
+    "email": "sdjelardini@gmail.com",
+    "telefono": "01144051200",
+    "fechaNacimiento": "",
+    "direccion": "0 Barrio Septiembre",
+    "codigoPostal": "1625"
+  },
+  {
+    "documento": "11223344",
+    "password": "$2b$10$.EWYfGmYMLjMVKpFg1waWOfQFbcejkrWYN.WZT4wv/ABaJQ4TnTWq",
+    "personaJuridica": false,
+    "ayudarPersonas": false,
+    "nombre": "Sofia",
+    "apellido": "Djelardini",
+    "email": "sdjelardini@gmail.com",
+    "telefono": "01144051200",
+    "fechaNacimiento": "",
+    "direccion": "sofi1234",
+    "codigoPostal": "1625"
+  }
+]
