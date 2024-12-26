@@ -9,17 +9,46 @@ const EdicionHeladera: React.FC = () => {
     const [nombre, setNombre] = useState<string>('');
     const [capacidad, setCapacidad] = useState<number | string>('');
     const [fechaFuncionamiento, setFechaFuncionamiento] = useState<string>('');
+    const [mensaje, setMensaje] = useState<string>('');
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        console.log({
+
+        const heladeraData = {
             direccion,
-            longitud,
-            latitud,
+            lng: Number(longitud),
+            lat: Number(latitud),
             nombre,
             capacidad,
             fechaFuncionamiento
-        });
+        };
+
+        try {
+            const response = await fetch('/api/heladeras', {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(heladeraData)
+            });
+
+            const result = await response.json();
+
+            if (response.ok) {
+                setMensaje(result.mensaje);
+                setDireccion('');
+                setLongitud('');
+                setLatitud('');
+                setNombre('');
+                setCapacidad('');
+                setFechaFuncionamiento('');
+            } else {
+                setMensaje(result.mensaje || 'Error al editar la heladera');
+            }
+        } catch (error) {
+            console.error('Error al editar la heladera:', error);
+            setMensaje('Error al editar la heladera');
+        }
     };
 
     return (
@@ -27,7 +56,9 @@ const EdicionHeladera: React.FC = () => {
             <div className='w-3/4 bg-white shadow-lg rounded-lg p-6'>
                 <form onSubmit={handleSubmit} className='flex flex-col gap-4'>
                     <h2 className='text-lg font-semibold'>Editar Heladera</h2>
-
+                    {mensaje && (
+                        <div className='text-green-600'>{mensaje}</div>
+                    )}{' '}
                     <div>
                         <label
                             htmlFor='nombre'
@@ -44,7 +75,6 @@ const EdicionHeladera: React.FC = () => {
                             required
                         />
                     </div>
-
                     <div>
                         <label
                             htmlFor='direccion'
@@ -61,7 +91,6 @@ const EdicionHeladera: React.FC = () => {
                             required
                         />
                     </div>
-
                     <div>
                         <label
                             htmlFor='longitud'
@@ -79,7 +108,6 @@ const EdicionHeladera: React.FC = () => {
                             required
                         />
                     </div>
-
                     <div>
                         <label
                             htmlFor='latitud'
@@ -97,7 +125,6 @@ const EdicionHeladera: React.FC = () => {
                             required
                         />
                     </div>
-
                     <div>
                         <label
                             htmlFor='capacidad'
@@ -114,7 +141,6 @@ const EdicionHeladera: React.FC = () => {
                             required
                         />
                     </div>
-
                     <div>
                         <label
                             htmlFor='fechaFuncionamiento'
@@ -133,7 +159,6 @@ const EdicionHeladera: React.FC = () => {
                             required
                         />
                     </div>
-
                     <button
                         className='mt-4 bg-blue-600 text-white py-2 rounded-md hover:bg-blue-500 transition'
                         type='submit'

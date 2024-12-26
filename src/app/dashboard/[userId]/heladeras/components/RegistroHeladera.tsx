@@ -1,5 +1,4 @@
 'use client';
-
 import React, { useState } from 'react';
 
 const RegistroHeladeras: React.FC = () => {
@@ -9,17 +8,46 @@ const RegistroHeladeras: React.FC = () => {
     const [nombre, setNombre] = useState<string>('');
     const [capacidad, setCapacidad] = useState<number | string>('');
     const [fechaFuncionamiento, setFechaFuncionamiento] = useState<string>('');
+    const [mensaje, setMensaje] = useState<string>('');
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        console.log({
+
+        const heladeraData = {
             direccion,
-            longitud,
-            latitud,
+            lng: Number(longitud),
+            lat: Number(latitud),
             nombre,
             capacidad,
             fechaFuncionamiento
-        });
+        };
+
+        try {
+            const response = await fetch('/api/heladeras', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(heladeraData)
+            });
+
+            const result = await response.json();
+
+            if (response.ok) {
+                setMensaje(result.mensaje);
+                setDireccion('');
+                setLongitud('');
+                setLatitud('');
+                setNombre('');
+                setCapacidad('');
+                setFechaFuncionamiento('');
+            } else {
+                setMensaje(result.mensaje || 'Error al registrar la heladera');
+            }
+        } catch (error) {
+            console.error('Error al registrar la heladera:', error);
+            setMensaje('Error al registrar la heladera');
+        }
     };
 
     return (
@@ -29,7 +57,7 @@ const RegistroHeladeras: React.FC = () => {
                     <h2 className='text-lg font-semibold'>
                         Registrar Heladera
                     </h2>
-
+                    {mensaje && <div className='text-green-600'>{mensaje}</div>}{' '}
                     <div>
                         <label
                             htmlFor='nombre'
@@ -46,7 +74,6 @@ const RegistroHeladeras: React.FC = () => {
                             required
                         />
                     </div>
-
                     <div>
                         <label
                             htmlFor='direccion'
@@ -63,7 +90,6 @@ const RegistroHeladeras: React.FC = () => {
                             required
                         />
                     </div>
-
                     <div>
                         <label
                             htmlFor='longitud'
@@ -81,7 +107,6 @@ const RegistroHeladeras: React.FC = () => {
                             required
                         />
                     </div>
-
                     <div>
                         <label
                             htmlFor='latitud'
@@ -99,7 +124,6 @@ const RegistroHeladeras: React.FC = () => {
                             required
                         />
                     </div>
-
                     <div>
                         <label
                             htmlFor='capacidad'
@@ -116,7 +140,6 @@ const RegistroHeladeras: React.FC = () => {
                             required
                         />
                     </div>
-
                     <div>
                         <label
                             htmlFor='fechaFuncionamiento'
@@ -135,7 +158,6 @@ const RegistroHeladeras: React.FC = () => {
                             required
                         />
                     </div>
-
                     <button
                         className='mt-4 bg-blue-600 text-white py-2 rounded-md hover:bg-blue-500 transition'
                         type='submit'

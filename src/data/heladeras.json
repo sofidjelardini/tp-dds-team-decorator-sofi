@@ -1,5 +1,23 @@
 [
-    { "lat": -34.6037, "lng": -58.3816, "nombre": "Heladera 1" },
-    { "lat": -34.6157, "lng": -58.3839, "nombre": "Heladera 2" },
-    { "lat": -34.6295, "lng": -58.4278, "nombre": "Heladera 3" }
+  {
+    "direccion": "av cordoba 502",
+    "lng": -58.3839,
+    "lat": -34.6157,
+    "nombre": "Heladera 2",
+    "capacidad": "54",
+    "fechaFuncionamiento": "2024-12-26"
+  },
+  {
+    "lat": -34.6295,
+    "lng": -58.4278,
+    "nombre": "Heladera 3"
+  },
+  {
+    "direccion": "bolivar 23",
+    "lng": -58.4025,
+    "lat": -34.6295,
+    "nombre": "Heladera 4",
+    "capacidad": "15",
+    "fechaFuncionamiento": "2024-12-26"
+  }
 ]

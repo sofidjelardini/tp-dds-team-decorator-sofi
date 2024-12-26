@@ -1,0 +1,12 @@
+[
+  {
+    "comida": "pollo con arroz",
+    "fechaCaducidad": "2024-12-30",
+    "fechaDonacion": "2024-12-26",
+    "colaborador": "11223344",
+    "heladera": "1",
+    "calorias": 500,
+    "peso": 450,
+    "estado": "Entregada"
+  }
+]

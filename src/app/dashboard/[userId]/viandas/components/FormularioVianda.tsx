@@ -9,7 +9,8 @@ const FormularioVianda: React.FC = () => {
     const [heladera, setHeladera] = useState<string>('');
     const [calorias, setCalorias] = useState<number | ''>('');
     const [peso, setPeso] = useState<number | ''>('');
-    const [estado, setEstado] = useState<string>('No Entregada');
+    const [estado, setEstado] = useState<string>('');
+    const [mensaje, setMensaje] = useState<string>('');
 
     const isFormValid = () => {
         return (
@@ -19,13 +20,15 @@ const FormularioVianda: React.FC = () => {
             colaborador !== '' &&
             heladera !== '' &&
             calorias !== '' &&
-            peso !== ''
+            peso !== '' &&
+            estado !== ''
         );
     };
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        console.log({
+
+        const viandaData = {
             comida,
             fechaCaducidad,
             fechaDonacion,
@@ -34,13 +37,42 @@ const FormularioVianda: React.FC = () => {
             calorias,
             peso,
             estado
-        });
+        };
+
+        try {
+            const response = await fetch('/api/viandas', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(viandaData)
+            });
+
+            const result = await response.json();
+
+            if (response.ok) {
+                setMensaje(result.mensaje);
+                setComida('');
+                setFechaCaducidad('');
+                setFechaDonacion('');
+                setColaborador('');
+                setHeladera('');
+                setCalorias('');
+                setPeso('');
+                setEstado('');
+            } else {
+                setMensaje(result.mensaje || 'Error al enviar la vianda');
+            }
+        } catch (error) {
+            console.error('Error al enviar la vianda:', error);
+            setMensaje('Error al enviar la vianda');
+        }
     };
 
     return (
         <form onSubmit={handleSubmit} className='flex flex-col gap-4'>
             <h2 className='text-lg font-semibold'>Formulario de Viandas</h2>
-
+            {mensaje && <div className='text-green-600'>{mensaje}</div>}{' '}
             <div>
                 <label htmlFor='comida' className='block text-sm font-medium'>
                     Comida:
@@ -54,7 +86,6 @@ const FormularioVianda: React.FC = () => {
                     required
                 />
             </div>
-
             <div>
                 <label
                     htmlFor='fechaCaducidad'
@@ -71,7 +102,6 @@ const FormularioVianda: React.FC = () => {
                     required
                 />
             </div>
-
             <div>
                 <label
                     htmlFor='fechaDonacion'
@@ -88,7 +118,6 @@ const FormularioVianda: React.FC = () => {
                     required
                 />
             </div>
-
             <div>
                 <label
                     htmlFor='colaborador'
@@ -105,7 +134,6 @@ const FormularioVianda: React.FC = () => {
                     required
                 />
             </div>
-
             <div>
                 <label htmlFor='heladera' className='block text-sm font-medium'>
                     Heladera:
@@ -119,7 +147,6 @@ const FormularioVianda: React.FC = () => {
                     required
                 />
             </div>
-
             <div>
                 <label htmlFor='calorias' className='block text-sm font-medium'>
                     Calorías:
@@ -132,7 +159,6 @@ const FormularioVianda: React.FC = () => {
                     onChange={e => setCalorias(Number(e.target.value))}
                 />
             </div>
-
             <div>
                 <label htmlFor='peso' className='block text-sm font-medium'>
                     Peso:
@@ -145,7 +171,6 @@ const FormularioVianda: React.FC = () => {
                     onChange={e => setPeso(Number(e.target.value))}
                 />
             </div>
-
             <div>
                 <label htmlFor='estado' className='block text-sm font-medium'>
                     Estado:
@@ -160,7 +185,6 @@ const FormularioVianda: React.FC = () => {
                     <option value='Entregada'>Entregada</option>
                 </select>
             </div>
-
             <button
                 className='mt-4 bg-primary text-white py-2 rounded-md hover:bg-primary-dark'
                 type='submit'
