@@ -65,6 +65,11 @@ const DashboardNav = ({ userId, isMobileNav = false }: DashboardNavProps) => {
             title: 'Administradores',
             href: `/dashboard/${userId}/administradores`,
             icon: 'administrador'
+        },
+        {
+            title: 'Carga de Colaboradores',
+            href: `/dashboard/${userId}/cargar-colaboraciones`,
+            icon: 'cargaColaboraciones'
         }
     ];
 

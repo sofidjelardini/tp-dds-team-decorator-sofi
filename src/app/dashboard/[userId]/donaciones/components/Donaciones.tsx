@@ -1,77 +1,135 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const DonacionesForm: React.FC = () => {
     const [fecha, setFecha] = useState<string>('');
     const [monto, setMonto] = useState<number | ''>('');
-    const [frecuencia, setFrecuencia] = useState<string>('una vez');
+    const [frecuencia, setFrecuencia] = useState<string>('');
+    const [modalVisible, setModalVisible] = useState<boolean>(false);
+    const userId = localStorage.getItem('userId');
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        console.log({ fecha, monto, frecuencia });
-        setFecha('');
-        setMonto('');
-        setFrecuencia('una vez');
+
+        const donacion = {
+            fecha,
+            monto,
+            frecuencia,
+            userId
+        };
+
+        try {
+            const response = await fetch('/api/donaciones-dinero', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify([donacion])
+            });
+
+            if (response.ok) {
+                setFecha('');
+                setMonto('');
+                setFrecuencia('');
+                setModalVisible(true);
+            } else {
+                const errorData = await response.json();
+                console.error('Errores:', errorData.errores);
+            }
+        } catch (error) {
+            console.error('Error en la conexión:', error);
+        }
     };
 
+    useEffect(() => {
+        if (modalVisible) {
+            const timer = setTimeout(() => {
+                setModalVisible(false);
+            }, 5000);
+
+            return () => clearTimeout(timer);
+        }
+    }, [modalVisible]);
+
     return (
-        <form onSubmit={handleSubmit} className='flex flex-col gap-4'>
-            <h2 className='text-lg font-semibold'>Formulario de Donaciones</h2>
+        <div>
+            <form onSubmit={handleSubmit} className='flex flex-col gap-4'>
+                <h2 className='text-lg font-semibold'>
+                    Formulario de Donaciones
+                </h2>
 
-            <div>
-                <label htmlFor='fecha' className='block text-sm font-medium'>
-                    Fecha de la donación:
-                </label>
-                <input
-                    type='date'
-                    id='fecha'
-                    className='mt-1 p-2 border rounded-md w-full'
-                    value={fecha}
-                    onChange={e => setFecha(e.target.value)}
-                    required
-                />
-            </div>
+                <div>
+                    <label
+                        htmlFor='fecha'
+                        className='block text-sm font-medium'
+                    >
+                        Fecha de la donación:
+                    </label>
+                    <input
+                        type='date'
+                        id='fecha'
+                        className='mt-1 p-2 border rounded-md w-full'
+                        value={fecha}
+                        onChange={e => setFecha(e.target.value)}
+                        required
+                    />
+                </div>
 
-            <div>
-                <label htmlFor='monto' className='block text-sm font-medium'>
-                    Monto de la donación:
-                </label>
-                <input
-                    type='number'
-                    id='monto'
-                    className='mt-1 p-2 border rounded-md w-full'
-                    value={monto}
-                    onChange={e => setMonto(Number(e.target.value))}
-                    required
-                />
-            </div>
+                <div>
+                    <label
+                        htmlFor='monto'
+                        className='block text-sm font-medium'
+                    >
+                        Monto de la donación:
+                    </label>
+                    <input
+                        type='number'
+                        id='monto'
+                        className='mt-1 p-2 border rounded-md w-full'
+                        value={monto}
+                        onChange={e => setMonto(Number(e.target.value))}
+                        required
+                    />
+                </div>
 
-            <div>
-                <label
-                    htmlFor='frecuencia'
-                    className='block text-sm font-medium'
+                <div>
+                    <label
+                        htmlFor='frecuencia'
+                        className='block text-sm font-medium'
+                    >
+                        Frecuencia:
+                    </label>
+                    <select
+                        id='frecuencia'
+                        className='mt-1 p-2 border rounded-md w-full'
+                        value={frecuencia}
+                        onChange={e => setFrecuencia(e.target.value)}
+                    >
+                        <option value='una vez'>Una vez</option>
+                        <option value='semanal'>Semanal</option>
+                        <option value='mensual'>Mensual</option>
+                        <option value='anual'>Anual</option>
+                    </select>
+                </div>
+
+                <button
+                    type='submit'
+                    className='mt-4 bg-primary text-white py-2 rounded-md hover:bg-primary-dark'
                 >
-                    Frecuencia:
-                </label>
-                <select
-                    id='frecuencia'
-                    className='mt-1 p-2 border rounded-md w-full'
-                    value={frecuencia}
-                    onChange={e => setFrecuencia(e.target.value)}
-                >
-                    <option value='una vez'>Una vez</option>
-                    <option value='semanal'>Semanal</option>
-                    <option value='mensual'>Mensual</option>
-                    <option value='anual'>Anual</option>
-                </select>
-            </div>
+                    Enviar Donación
+                </button>
+            </form>
 
-            <button
-                type='submit'
-                className='mt-4 bg-primary text-white py-2 rounded-md hover:bg-primary-dark'
-            >
-                Enviar Donación
-            </button>
-        </form>
+            {modalVisible && (
+                <div className='fixed top-0 left-0 right-0 bottom-0 flex items-center justify-center bg-black bg-opacity-50'>
+                    <div className='bg-white p-4 rounded-md shadow-md'>
+                        <h3 className='text-lg font-semibold'>
+                            ¡Donación guardada!
+                        </h3>
+                        <p>Gracias! La donación se ha guardado exitosamente.</p>
+                    </div>
+                </div>
+            )}
+        </div>
     );
 };
 

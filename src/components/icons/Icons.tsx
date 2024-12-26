@@ -8,7 +8,8 @@ import {
     Wrench,
     UserCheck,
     Edit,
-    ShoppingCart
+    ShoppingCart,
+    FilePlus
 } from 'lucide-react';
 
 export type Icon = (props: LucideProps) => JSX.Element | null;
@@ -27,6 +28,7 @@ export const Icons: IconsType = {
     tecnico: Wrench,
     editarPerfil: Edit,
     administrador: UserCheck,
+    cargaColaboraciones: FilePlus,
     gitHub: ({ ...props }: LucideProps) => (
         <svg
             aria-hidden='true'

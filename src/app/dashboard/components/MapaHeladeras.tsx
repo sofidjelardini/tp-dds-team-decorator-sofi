@@ -7,9 +7,10 @@ const loadLeaflet = async () => {
     return L;
 };
 
-const MapaHeladeras: React.FC<{
+const Mapa: React.FC<{
     ubicaciones: { lat: number; lng: number; nombre: string }[];
-}> = ({ ubicaciones }) => {
+    mapId: string;
+}> = ({ ubicaciones, mapId }) => {
     const mapRef = useRef<L.Map | null>(null);
 
     useEffect(() => {
@@ -17,7 +18,7 @@ const MapaHeladeras: React.FC<{
             const L = await loadLeaflet();
 
             if (!mapRef.current) {
-                mapRef.current = L.map('map').setView(
+                mapRef.current = L.map(mapId).setView(
                     [ubicaciones[0]?.lat || 0, ubicaciones[0]?.lng || 0],
                     12
                 );
@@ -41,11 +42,16 @@ const MapaHeladeras: React.FC<{
                 });
 
                 ubicaciones.forEach(ubicacion => {
-                    L.marker([ubicacion.lat, ubicacion.lng], {
-                        icon: markerIcon
-                    })
-                        .addTo(mapRef?.current)
-                        .bindPopup(ubicacion.nombre);
+                    if (
+                        ubicacion.lat !== undefined &&
+                        ubicacion.lng !== undefined
+                    ) {
+                        L.marker([ubicacion.lat, ubicacion.lng], {
+                            icon: markerIcon
+                        })
+                            .addTo(mapRef?.current)
+                            .bindPopup(ubicacion.nombre);
+                    }
                 });
             }
         };
@@ -60,9 +66,9 @@ const MapaHeladeras: React.FC<{
                 mapRef.current = null;
             }
         };
-    }, [ubicaciones]);
+    }, [ubicaciones, mapId]);
 
-    return <div id='map' className={styles.mapContainer}></div>;
+    return <div id={mapId} className={styles.mapContainer}></div>;
 };
 
-export default MapaHeladeras;
+export default Mapa;

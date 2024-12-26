@@ -160,7 +160,10 @@ const HomePage: React.FC<HomePageProps> = ({ userId }) => {
                 <h2 className={styles.title}>
                     Ubicación de las heladeras disponibles
                 </h2>
-                <MapaHeladeras ubicaciones={ubicacionesHeladeras} />
+                <MapaHeladeras
+                    ubicaciones={ubicacionesHeladeras}
+                    mapId='heladeras'
+                />
                 <button
                     className={styles.button}
                     onClick={() => router.push(`dashboard/${userId}/mapa`)}
