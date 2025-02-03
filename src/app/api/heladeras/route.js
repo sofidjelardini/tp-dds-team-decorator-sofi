@@ -25,6 +25,19 @@ const verificarDuplicados = (nuevaHeladera, heladerasExistentes) => {
     );
 };
 
+export async function GET(req) {
+    try {
+        const heladeras = readHeladeras();
+        return new Response(JSON.stringify(heladeras), { status: 200 });
+    } catch (error) {
+        console.error('Error procesando la solicitud de obtención:', error);
+        return new Response(
+            JSON.stringify({ errores: ['Error al procesar la solicitud.'] }),
+            { status: 500 }
+        );
+    }
+}
+
 export async function POST(req) {
     try {
         const nuevaHeladera = await req.json();
@@ -59,7 +72,7 @@ export async function PUT(req) {
         const heladerasExistentes = readHeladeras();
 
         const index = heladerasExistentes.findIndex(
-            heladera => heladera.nombre === heladeraModificada.nombre
+            heladera => heladera.id === heladeraModificada.id
         );
 
         if (index === -1) {
@@ -87,11 +100,11 @@ export async function PUT(req) {
 
 export async function DELETE(req) {
     try {
-        const { nombre } = await req.json();
+        const { heladeraAEliminar } = await req.json();
         const heladerasExistentes = readHeladeras();
 
         const index = heladerasExistentes.findIndex(
-            heladera => heladera.nombre === nombre
+            heladera => heladera.id == heladeraAEliminar
         );
 
         if (index === -1) {

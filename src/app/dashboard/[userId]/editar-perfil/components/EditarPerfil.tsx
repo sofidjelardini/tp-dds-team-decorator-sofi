@@ -1,9 +1,11 @@
 'use client';
 
 import React, { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 
 const EditarPerfil: React.FC = () => {
+    const router = useRouter();
     const userId = localStorage.getItem('userId');
     const [nombre, setNombre] = useState<string>('');
     const [apellido, setApellido] = useState<string>('');
@@ -12,6 +14,7 @@ const EditarPerfil: React.FC = () => {
     const [direccion, setDireccion] = useState<string>('');
     const [resultado, setResultado] = useState<any>(null);
     const [error, setError] = useState<boolean>(false);
+    const [modalVisible, setModalVisible] = useState<boolean>(false);
 
     const limpiarForm = () => {
         setNombre('');
@@ -55,6 +58,34 @@ const EditarPerfil: React.FC = () => {
             setError(true);
         } finally {
             limpiarForm();
+        }
+    };
+
+    const handleDeleteAccount = async () => {
+        try {
+            const response = await fetch(`/api/editar-perfil`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ userId })
+            });
+
+            if (response.ok) {
+                setResultado('Cuenta eliminada con éxito.');
+                localStorage.clear();
+                router.push('/');
+            } else {
+                setResultado(
+                    'Error al eliminar la cuenta, por favor intentá de nuevo.'
+                );
+                setError(true);
+            }
+        } catch (error) {
+            setResultado(
+                'Error al eliminar la cuenta, por favor intentá de nuevo.'
+            );
+            setError(true);
         }
     };
 
@@ -170,7 +201,44 @@ const EditarPerfil: React.FC = () => {
                 >
                     Guardar Cambios
                 </Button>
+
+                <Button
+                    className='mt-2 bg-red-600 text-white py-2 rounded-md hover:bg-red-700'
+                    onClick={() => setModalVisible(true)}
+                >
+                    Eliminar Cuenta
+                </Button>
             </form>
+            {modalVisible && (
+                <div className='fixed top-0 left-0 right-0 bottom-0 flex items-center justify-center bg-black bg-opacity-50'>
+                    <div className='bg-white p-4 rounded-md shadow-md'>
+                        <h3 className='text-lg font-semibold'>
+                            ¿Estás seguro de que deseas eliminar tu cuenta? Esta
+                            acción no se puede deshacer.
+                        </h3>
+                        <div className='mt-5 flex flex-row gap-4 w-50 items-center justify-center'>
+                            <Button
+                                className='bg-red-600 text-white py-2 rounded-md hover:bg-red-700'
+                                onClick={() => {
+                                    handleDeleteAccount();
+                                    setModalVisible(false);
+                                }}
+                            >
+                                Eliminar Cuenta
+                            </Button>
+                            <Button
+                                className='bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700'
+                                onClick={() => {
+                                    handleDeleteAccount();
+                                    setModalVisible(false);
+                                }}
+                            >
+                                Cancelar
+                            </Button>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     );
 };

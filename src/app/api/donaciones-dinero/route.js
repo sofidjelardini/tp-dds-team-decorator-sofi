@@ -1,4 +1,4 @@
-import { validarDonaciones } from '@/app/helpers/donaciones'; // Asegúrate de tener esta función de validación
+import { validarDonaciones } from '@/app/helpers/donaciones';
 import fs from 'fs';
 import path from 'path';
 
@@ -17,7 +17,6 @@ function verificarDuplicados(nuevasDonaciones, donacionesExistentes) {
 export async function POST(req) {
     try {
         const donaciones = await req.json();
-        console.log('donaciones: ', donaciones);
         const errores = validarDonaciones(donaciones);
         if (errores.length > 0) {
             return new Response(JSON.stringify({ errores }), { status: 400 });

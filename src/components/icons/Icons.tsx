@@ -9,7 +9,11 @@ import {
     UserCheck,
     Edit,
     ShoppingCart,
-    FilePlus
+    FilePlus,
+    HomeIcon,
+    CreditCard,
+    AlertCircle,
+    FileText
 } from 'lucide-react';
 
 export type Icon = (props: LucideProps) => JSX.Element | null;
@@ -19,6 +23,7 @@ interface IconsType {
 }
 
 export const Icons: IconsType = {
+    homepage: HomeIcon,
     carrito: ShoppingCart,
     heladera: SquareEqual,
     donaciones: DollarSign,
@@ -29,6 +34,9 @@ export const Icons: IconsType = {
     editarPerfil: Edit,
     administrador: UserCheck,
     cargaColaboraciones: FilePlus,
+    tarjetas: CreditCard,
+    incidentes: AlertCircle,
+    reportes: FileText,
     gitHub: ({ ...props }: LucideProps) => (
         <svg
             aria-hidden='true'

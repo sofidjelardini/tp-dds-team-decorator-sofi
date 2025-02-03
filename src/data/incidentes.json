@@ -1,0 +1,187 @@
+[
+  {
+    "id": 330496,
+    "tipo": "fallaTecnica",
+    "heladeraId": "12031413",
+    "fechaHora": "2025-01-23T15:36:45.841Z",
+    "colaboradorId": "41917951",
+    "descripcion": "falló ",
+    "visitas": [],
+    "solucionado": true
+  },
+  {
+    "id": 898302,
+    "tipo": "fallaTecnica",
+    "heladeraId": "91270",
+    "fechaHora": "2025-01-23T15:38:33.547Z",
+    "colaboradorId": "41917951",
+    "descripcion": "falluta",
+    "foto": "blob:http://localhost:3000/d897a2f5-a0cb-496c-b32f-25eff81b3c8c",
+    "visitas": [],
+    "solucionado": true
+  },
+  {
+    "id": 411240,
+    "tipo": "alerta",
+    "subtipo": "temperatura",
+    "heladeraId": "12031413",
+    "fechaHora": "2025-01-23T16:18:46.202Z",
+    "colaboradorId": "41917951",
+    "visitas": [],
+    "solucionado": true
+  },
+  {
+    "id": 105727,
+    "tipo": "alerta",
+    "subtipo": "falla en conexión",
+    "heladeraId": "7326496",
+    "fechaHora": "2025-01-23T16:20:08.692Z",
+    "colaboradorId": "41917951",
+    "visitas": [],
+    "solucionado": true
+  },
+  {
+    "id": 313943,
+    "tipo": "alerta",
+    "subtipo": "temperatura alta",
+    "heladeraId": 91270,
+    "fechaHora": "2025-01-23T17:49:31.962Z",
+    "solucionado": false
+  },
+  {
+    "id": 268274,
+    "tipo": "alerta",
+    "subtipo": "temperatura alta",
+    "heladeraId": 7326496,
+    "fechaHora": "2025-01-23T17:50:05.841Z",
+    "solucionado": false
+  },
+  {
+    "id": 428533,
+    "tipo": "alerta",
+    "subtipo": "temperatura alta",
+    "heladeraId": 7326496,
+    "fechaHora": "2025-01-23T17:51:44.649Z",
+    "solucionado": false
+  },
+  {
+    "id": 667504,
+    "tipo": "alerta",
+    "subtipo": "temperatura alta",
+    "heladeraId": 7326496,
+    "fechaHora": "2025-01-23T17:51:50.292Z",
+    "solucionado": false
+  },
+  {
+    "id": 10270,
+    "tipo": "alerta",
+    "subtipo": "temperatura baja",
+    "heladeraId": 7326496,
+    "fechaHora": "2025-01-23T17:53:42.764Z",
+    "solucionado": false
+  },
+  {
+    "id": 481249,
+    "tipo": "alerta",
+    "subtipo": "temperatura baja",
+    "heladeraId": 852310,
+    "fechaHora": "2025-01-23T17:54:03.637Z",
+    "solucionado": false
+  },
+  {
+    "id": 683699,
+    "tipo": "alerta",
+    "subtipo": "temperatura alta",
+    "heladeraId": 12031413,
+    "fechaHora": "2025-01-23T17:54:56.156Z",
+    "solucionado": true
+  },
+  {
+    "id": 156736,
+    "tipo": "alerta",
+    "subtipo": "temperatura alta",
+    "heladeraId": 91270,
+    "fechaHora": "2025-01-23T17:55:26.722Z",
+    "solucionado": true
+  },
+  {
+    "id": 469623,
+    "tipo": "alerta",
+    "subtipo": "temperatura alta",
+    "heladeraId": 7326496,
+    "fechaHora": "2025-01-23T17:57:03.520Z",
+    "solucionado": true
+  },
+  {
+    "id": 634505,
+    "tipo": "alerta",
+    "subtipo": "temperatura baja",
+    "heladeraId": 7326496,
+    "fechaHora": "2025-01-27T14:02:54.956Z",
+    "solucionado": false
+  },
+  {
+    "id": 733637,
+    "tipo": "alerta",
+    "subtipo": "temperatura baja",
+    "heladeraId": 91270,
+    "fechaHora": "2025-01-27T14:08:21.874Z",
+    "solucionado": false
+  },
+  {
+    "id": 126830,
+    "tipo": "alerta",
+    "subtipo": "temperatura alta",
+    "heladeraId": 7326496,
+    "fechaHora": "2025-01-27T14:10:35.282Z",
+    "solucionado": false
+  },
+  {
+    "id": 533512,
+    "tipo": "alerta",
+    "subtipo": "temperatura alta",
+    "heladeraId": 852310,
+    "fechaHora": "2025-01-27T14:11:57.527Z",
+    "solucionado": false
+  },
+  {
+    "id": 173508,
+    "tipo": "alerta",
+    "subtipo": "temperatura alta",
+    "heladeraId": 91270,
+    "fechaHora": "2025-01-27T14:18:59.885Z",
+    "solucionado": false
+  },
+  {
+    "id": 738635,
+    "tipo": "alerta",
+    "subtipo": "temperatura alta",
+    "heladeraId": 91270,
+    "fechaHora": "2025-01-27T14:19:54.964Z",
+    "solucionado": false
+  },
+  {
+    "id": 226560,
+    "tipo": "alerta",
+    "subtipo": "temperatura alta",
+    "heladeraId": 12031413,
+    "fechaHora": "2025-01-27T14:20:17.342Z",
+    "solucionado": false
+  },
+  {
+    "id": 261233,
+    "tipo": "alerta",
+    "subtipo": "temperatura alta",
+    "heladeraId": 91270,
+    "fechaHora": "2025-01-27T14:21:08.192Z",
+    "solucionado": false
+  },
+  {
+    "id": 748241,
+    "tipo": "alerta",
+    "subtipo": "temperatura alta",
+    "heladeraId": 91270,
+    "fechaHora": "2025-01-27T14:24:04.564Z",
+    "solucionado": false
+  }
+]

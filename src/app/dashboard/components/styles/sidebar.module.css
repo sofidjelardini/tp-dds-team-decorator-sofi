@@ -9,6 +9,7 @@
     background-color: #ffffff; /* Color de fondo del sidebar */
     transition: width 0.5s; /* Transición para el ancho */
     top: 0; /* Alineación superior */
+    z-index: 999;
 }
 
 @media (min-width: 768px) {

@@ -1,0 +1,53 @@
+[
+  {
+    "nombre": "Franco Colapinto",
+    "fechaNacimiento": "1995-10-03",
+    "situacion": "calle",
+    "direccion": "",
+    "tipoDoc": "DNI",
+    "numDoc": "3939292929",
+    "tieneMenores": false,
+    "cantMenores": 0,
+    "colaborador": "23232424",
+    "fechaRegistro": "2025-01-15T14:10:40.101Z"
+  },
+  {
+    "nombre": "Sofía",
+    "fechaNacimiento": "1999-06-22",
+    "situacion": "calle",
+    "direccion": "",
+    "tipoDoc": "DNI",
+    "numDoc": "3292801213",
+    "tieneMenores": false,
+    "cantMenores": 0,
+    "colaborador": "41917951",
+    "fechaRegistro": "2025-01-15T15:54:14.230Z",
+    "tarjetaAsignada": "G6H7I8J9K0L"
+  },
+  {
+    "nombre": "Juan Pedro Suarez",
+    "fechaNacimiento": "1976-05-23",
+    "situacion": "calle",
+    "direccion": "",
+    "tipoDoc": "DNI",
+    "numDoc": "230295820",
+    "tieneMenores": false,
+    "cantMenores": 0,
+    "colaborador": "41917951",
+    "fechaRegistro": "2025-01-20T17:01:19.669Z",
+    "tarjetaAsignada": "M1N2O3P4Q5R"
+  },
+  {
+    "nombre": "Juan Pedrito",
+    "fechaNacimiento": "2025-01-20",
+    "situacion": "calle",
+    "direccion": "",
+    "tipoDoc": "DNI",
+    "numDoc": "99999999",
+    "tieneMenores": false,
+    "cantMenores": 0,
+    "colaborador": "41917951",
+    "fechaRegistro": "2025-01-20T17:02:19.111Z",
+    "tarjetaAsignada": "M1N2O3P4Q5R"
+  }
+]

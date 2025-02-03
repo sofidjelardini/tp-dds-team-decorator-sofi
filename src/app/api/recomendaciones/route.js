@@ -37,11 +37,16 @@ function obtenerRecomendaciones(latitud, longitud, radio) {
         densidadDemografica,
         radio
     );
-    recomendaciones.push({
-        latitud: nuevaUbicacionDensidad.lat,
-        longitud: nuevaUbicacionDensidad.lng,
-        razon: `Recomendación basada en la densidad demográfica: ${densidadDemografica}`
-    });
+
+    console.log('nuevaUbicacionDensidad: ', nuevaUbicacionDensidad);
+
+    if (nuevaUbicacionDensidad) {
+        recomendaciones.push({
+            latitud: nuevaUbicacionDensidad.lat,
+            longitud: nuevaUbicacionDensidad.lng,
+            razon: `Recomendación basada en la densidad demográfica: ${densidadDemografica}`
+        });
+    }
 
     const movimientosCirculatorios = calcularMovimientosCirculatorios(
         latitud,
@@ -53,22 +58,28 @@ function obtenerRecomendaciones(latitud, longitud, radio) {
         movimientosCirculatorios,
         radio
     );
-    recomendaciones.push({
-        latitud: nuevaUbicacionMovimientos.lat,
-        longitud: nuevaUbicacionMovimientos.lng,
-        razon: `Recomendación basada en movimientos circulatorios: ${movimientosCirculatorios}`
-    });
+
+    if (nuevaUbicacionMovimientos) {
+        recomendaciones.push({
+            latitud: nuevaUbicacionMovimientos.lat,
+            longitud: nuevaUbicacionMovimientos.lng,
+            razon: `Recomendación basada en movimientos circulatorios: ${movimientosCirculatorios}`
+        });
+    }
 
     const nuevaUbicacionHeladeras = encontrarNuevaUbicacionPorHeladeras(
         latitud,
         longitud,
         radio
     );
-    recomendaciones.push({
-        latitud: nuevaUbicacionHeladeras.lat,
-        longitud: nuevaUbicacionHeladeras.lng,
-        razon: `Recomendación basada en heladeras existentes`
-    });
+
+    if (nuevaUbicacionHeladeras) {
+        recomendaciones.push({
+            latitud: nuevaUbicacionHeladeras.lat,
+            longitud: nuevaUbicacionHeladeras.lng,
+            razon: `Recomendación basada en heladeras existentes`
+        });
+    }
 
     return recomendaciones;
 }
@@ -120,13 +131,13 @@ function encontrarNuevaUbicacion(latitud, longitud, radio) {
                 (radio / (111320 * Math.cos((latitud * Math.PI) / 180)));
 
         const esValida = heladerasExistentes.every(heladera => {
-            const distancia = calcularDistancia(
+            const distancia = getDistanciaMetros(
                 nuevaLat,
                 nuevaLng,
                 heladera.lat,
                 heladera.lng
             );
-            return distancia >= 500;
+            return distancia <= radio * 1000;
         });
 
         if (esValida) {
@@ -155,16 +166,21 @@ function calcularMovimientosCirculatorios(latitud, longitud) {
     return Math.floor(Math.random() * 500);
 }
 
-function calcularDistancia(lat1, lng1, lat2, lng2) {
-    const R = 6371;
-    const dLat = ((lat2 - lat1) * Math.PI) / 180;
-    const dLng = ((lng2 - lng1) * Math.PI) / 180;
-    const a =
+function getDistanciaMetros(lat1, lon1, lat2, lon2) {
+    const rad = function (x) {
+        return (x * Math.PI) / 180;
+    };
+    let R = 6378.137;
+    let dLat = rad(lat2 - lat1);
+    let dLong = rad(lon2 - lon1);
+    let a =
         Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-        Math.cos((lat1 * Math.PI) / 180) *
-            Math.cos((lat2 * Math.PI) / 180) *
-            Math.sin(dLng / 2) *
-            Math.sin(dLng / 2);
-    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-    return R * c * 1000;
+        Math.cos(rad(lat1)) *
+            Math.cos(rad(lat2)) *
+            Math.sin(dLong / 2) *
+            Math.sin(dLong / 2);
+    let c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+
+    let d = R * c * 1000;
+    return d;
 }

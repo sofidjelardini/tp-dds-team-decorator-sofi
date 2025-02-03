@@ -1,11 +1,16 @@
 import React, { useState, useEffect } from 'react';
+import dataUsuarios from '@/data/usuarios.json';
 
 const DonacionesForm: React.FC = () => {
     const [fecha, setFecha] = useState<string>('');
-    const [monto, setMonto] = useState<number | ''>('');
-    const [frecuencia, setFrecuencia] = useState<string>('');
+    const [monto, setMonto] = useState<number>(0);
+    const [colaborador, setColaborador] = useState<any>();
+    const [frecuencia, setFrecuencia] = useState<string>('una vez');
     const [modalVisible, setModalVisible] = useState<boolean>(false);
-    const userId = localStorage.getItem('userId');
+
+    useEffect(() => {
+        setColaborador(localStorage.getItem('userId'));
+    }, []);
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -14,7 +19,7 @@ const DonacionesForm: React.FC = () => {
             fecha,
             monto,
             frecuencia,
-            userId
+            colaborador
         };
 
         try {
@@ -28,9 +33,10 @@ const DonacionesForm: React.FC = () => {
 
             if (response.ok) {
                 setFecha('');
-                setMonto('');
-                setFrecuencia('');
+                setMonto(0);
+                setFrecuencia('una vez');
                 setModalVisible(true);
+                await actualizarUsuario(donacion.monto);
             } else {
                 const errorData = await response.json();
                 console.error('Errores:', errorData.errores);
@@ -38,6 +44,25 @@ const DonacionesForm: React.FC = () => {
         } catch (error) {
             console.error('Error en la conexión:', error);
         }
+    };
+
+    const actualizarUsuario = async (montoDonacion: number) => {
+        const usuario = dataUsuarios.find(
+            usuario => usuario.documento === `${colaborador}`
+        );
+        const userData = {
+            pesosDonados: usuario.pesosDonados + montoDonacion
+        };
+
+        console.log('userData: ', userData);
+
+        await fetch(`/api/editar-perfil`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ ...userData, userId: colaborador })
+        });
     };
 
     useEffect(() => {

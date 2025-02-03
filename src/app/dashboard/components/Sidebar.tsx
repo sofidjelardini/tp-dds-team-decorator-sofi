@@ -3,7 +3,6 @@
 import { cn } from '@/lib/utils';
 import { ChevronLeft } from 'lucide-react';
 import { useDashboard } from '@/store/dashboardStore';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import DashboardNav from './DashboardNav';
 import styles from './styles/sidebar.module.css';
 
@@ -13,7 +12,6 @@ type SidebarProps = {
 
 export default function Sidebar({ userId }: SidebarProps) {
     const { isMinimized, toggle } = useDashboard();
-
     const handleToggle = () => {
         toggle();
     };
@@ -28,17 +26,6 @@ export default function Sidebar({ userId }: SidebarProps) {
                 styles['sidebar-custom']
             )}
         >
-            <div className='avatar'>
-                <Avatar
-                    className={`mr-2 ${
-                        isMinimized ? 'size-8' : 'size-12'
-                    } transition transform`}
-                >
-                    <AvatarImage src={''} alt='logo del negocio' />
-                    <AvatarFallback>NN</AvatarFallback>
-                </Avatar>
-            </div>
-
             <ChevronLeft
                 className={cn(
                     'absolute -right-3 top-10 z-50  cursor-pointer rounded-full border bg-background text-3xl text-foreground',

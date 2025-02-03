@@ -6,7 +6,8 @@ import BajaHeladera from './components/BajaHeladera';
 import EdicionHeladera from './components/EdicionHeladera';
 import { PageContainer } from '../../components/PageContainer';
 import HeladerasSection from './components/HeladerasSection';
-import RecomendacionesHeladeras from '@/app/dashboard/components/RecomendacionesHeladeras';
+import RecomendacionesHeladeras from './components/RecomendacionesHeladeras';
+import ListadoHeladeras from './components/ListadoHeladeras';
 
 interface HeladerasProps {
     userId: string | null;
@@ -22,7 +23,11 @@ const Heladeras: React.FC<HeladerasProps> = ({ userId }) => {
             <div className='flex flex-col gap-4'>
                 <h1 className='text-2xl font-bold'>Gestión de Heladeras</h1>
                 <HeladerasSection />
-                <h1 className='text-2xl font-bold'>Recomendación de puntos para nuevas Heladeras</h1>
+                <h1 className='text-2xl font-bold'>Estado Heladeras</h1>
+                <ListadoHeladeras />
+                <h1 className='text-2xl font-bold'>
+                    Recomendación de puntos para nuevas Heladeras
+                </h1>
                 <RecomendacionesHeladeras />
                 <section>
                     <h2 className='text-lg font-semibold'>

@@ -5,7 +5,7 @@ import { MenuIcon } from 'lucide-react';
 import { useState } from 'react';
 import DashboardNav from './DashboardNav';
 
-const MobileSidebar = () => {
+const MobileSidebar = (userId: string) => {
     const [open, setOpen] = useState(false);
     return (
         <>
@@ -23,7 +23,10 @@ const MobileSidebar = () => {
                                 Menú
                             </h2>
                             <div className='space-y-1'>
-                                <DashboardNav isMobileNav={true} />
+                                <DashboardNav
+                                    isMobileNav={true}
+                                    userId={userId}
+                                />
                             </div>
                         </div>
                     </div>

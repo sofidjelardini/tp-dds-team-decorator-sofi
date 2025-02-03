@@ -15,7 +15,6 @@ export default function DashboardLayout({
 
     useEffect(() => {
         const storedUserId = localStorage.getItem('userId');
-        console.log('storedUserId: ', storedUserId);
         if (storedUserId) {
             setUserId(storedUserId);
         } else {

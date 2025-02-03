@@ -1,13 +1,13 @@
 [
   {
-    "numeroDocumento": "12345678",
+    "numeroDocumento": "12352251",
     "nombre": "Juan",
     "apellido": "Pérez",
     "tipoDocumento": "DNI",
     "cuil": "20-12345678-9",
-    "habilitado": false,
+    "habilitado": true,
     "medioContacto": "juan.perez@gmail.com",
-    "areaCobertura": "Zona Norte"
+    "areaCobertura": "Zona Sur"
   },
   {
     "numeroDocumento": "23456789",
@@ -67,6 +67,16 @@
     "cuil": "1234",
     "medioContacto": "sdjelardini@gmail.com",
     "areaCobertura": "Zona sur",
+    "habilitado": true
+  },
+  {
+    "nombre": "Pepito",
+    "apellido": "Pistolero",
+    "tipoDocumento": "DNI",
+    "numeroDocumento": "12352251",
+    "cuil": "20-33424231-9",
+    "medioContacto": "pepitopistolero@gmail.com",
+    "areaCobertura": "CABA",
     "habilitado": true
   }
 ]

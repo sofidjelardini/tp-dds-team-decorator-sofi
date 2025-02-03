@@ -63,7 +63,8 @@ export async function POST(request) {
             message: 'Usuario registrado exitosamente',
             user: {
                 documento: userData.documento,
-                personaJuridica: userData.personaJuridica
+                personaJuridica: userData.personaJuridica,
+                ayudarPersonas: userData.ayudarPersonas
             }
         },
         { status: 200 }

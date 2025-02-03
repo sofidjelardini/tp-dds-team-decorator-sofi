@@ -18,7 +18,6 @@ async function updateUser(userId, updatedData) {
     }
 
     const user = users[userIndex];
-
     const updatedUser = { ...user };
 
     for (const key in updatedData) {
@@ -32,6 +31,22 @@ async function updateUser(userId, updatedData) {
     await fs.promises.writeFile(filePath, JSON.stringify(users, null, 2));
 
     return updatedUser;
+}
+
+async function deleteUser(userId) {
+    const filePath = path.join(process.cwd(), 'src', 'data', 'usuarios.json');
+    const users = await getUsers();
+
+    const userIndex = users.findIndex(user => user.documento === userId);
+    if (userIndex === -1) {
+        return null;
+    }
+
+    users.splice(userIndex, 1);
+
+    await fs.promises.writeFile(filePath, JSON.stringify(users, null, 2));
+
+    return true;
 }
 
 export async function PUT(request) {
@@ -58,6 +73,31 @@ export async function PUT(request) {
             message: 'Usuario actualizado exitosamente',
             user: updatedUser
         },
+        { status: 200 }
+    );
+}
+
+export async function DELETE(request) {
+    const { userId } = await request.json();
+
+    if (!userId) {
+        return NextResponse.json(
+            { error: 'No se recibió un ID de usuario para eliminar' },
+            { status: 400 }
+        );
+    }
+
+    const userDeleted = await deleteUser(userId);
+
+    if (!userDeleted) {
+        return NextResponse.json(
+            { error: 'Usuario no encontrado' },
+            { status: 404 }
+        );
+    }
+
+    return NextResponse.json(
+        { message: 'Usuario eliminado exitosamente' },
         { status: 200 }
     );
 }

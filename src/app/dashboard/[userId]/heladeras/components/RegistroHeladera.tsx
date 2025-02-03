@@ -19,7 +19,10 @@ const RegistroHeladeras: React.FC = () => {
             lat: Number(latitud),
             nombre,
             capacidad,
-            fechaFuncionamiento
+            fechaFuncionamiento,
+            id: Math.floor(Math.random() * 999999),
+            estado: 'Activa',
+            colaboradoresSuscriptos: []
         };
 
         try {

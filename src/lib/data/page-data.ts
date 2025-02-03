@@ -126,6 +126,39 @@ export const getPageData = (
                     link: `/${userId}/cargar-colaboraciones`
                 }
             ]
+        },
+        tarjetas: {
+            title: 'Gestión de Tarjetas',
+            description: 'Gestioná las tarjetas que tenés disponibles.',
+            breadcrumbs: [
+                { title: 'Inicio', link: '/' },
+                {
+                    title: 'Gestión de Tarjetas',
+                    link: `/${userId}/tarjetas`
+                }
+            ]
+        },
+        incidentes: {
+            title: 'Incidentes en Heladeras',
+            description: 'Si alguna heladera tiene un incidente, completá el formulario.',
+            breadcrumbs: [
+                { title: 'Inicio', link: '/' },
+                {
+                    title: 'Incidentes',
+                    link: `/${userId}/incidentes`
+                }
+            ]
+        },
+        reportes: {
+            title: 'Reportes',
+            description: '',
+            breadcrumbs: [
+                { title: 'Inicio', link: '/' },
+                {
+                    title: 'Reportes',
+                    link: `/${userId}/reportes`
+                }
+            ]
         }
     };
 

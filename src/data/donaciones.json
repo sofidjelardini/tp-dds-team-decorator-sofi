@@ -1,8 +1,80 @@
 [
-    {
-        "fecha": "2024-12-26",
-        "monto": 1212,
-        "frecuencia": "semanal",
-        "userId": "11223344"
-    }
+  {
+    "fecha": "2024-12-26",
+    "monto": 1212,
+    "frecuencia": "semanal",
+    "userId": "11223344"
+  },
+  {
+    "fecha": "2025-01-14",
+    "monto": 500,
+    "frecuencia": "una vez",
+    "userId": "90909090"
+  },
+  {
+    "fecha": "2025-01-14",
+    "monto": 1000,
+    "frecuencia": "mensual",
+    "userId": "90909090"
+  },
+  {
+    "fecha": "2025-01-20",
+    "monto": 300,
+    "frecuencia": "una vez",
+    "colaborador": "41917951"
+  },
+  {
+    "fecha": "2025-01-20",
+    "monto": 500,
+    "frecuencia": "semanal",
+    "colaborador": "41917951"
+  },
+  {
+    "fecha": "2025-01-20",
+    "monto": 200,
+    "frecuencia": "una vez",
+    "colaborador": "41917951"
+  },
+  {
+    "fecha": "2025-01-20",
+    "monto": 600,
+    "frecuencia": "una vez",
+    "colaborador": "41917951"
+  },
+  {
+    "fecha": "2025-01-08",
+    "monto": 300,
+    "frecuencia": "una vez",
+    "colaborador": "41917951"
+  },
+  {
+    "fecha": "2025-01-20",
+    "monto": 500,
+    "frecuencia": "una vez",
+    "colaborador": "41917951"
+  },
+  {
+    "fecha": "2025-01-20",
+    "monto": 900,
+    "frecuencia": "una vez",
+    "colaborador": "41917951"
+  },
+  {
+    "fecha": "2025-01-20",
+    "monto": 2000,
+    "frecuencia": "una vez",
+    "colaborador": "41917951"
+  },
+  {
+    "fecha": "2025-01-20",
+    "monto": 400,
+    "frecuencia": "una vez",
+    "colaborador": "41917951"
+  },
+  {
+    "fecha": "2025-01-20",
+    "monto": 800,
+    "frecuencia": "una vez",
+    "colaborador": "41917951"
+  }
 ]

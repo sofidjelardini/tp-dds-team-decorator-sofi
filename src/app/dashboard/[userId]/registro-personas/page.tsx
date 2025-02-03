@@ -1,8 +1,6 @@
 import Head from 'next/head';
 import { PageContainer } from '../../components/PageContainer';
-import FormularioPersona from './components/FormularioPersona';
-import FormPersona from './components/FormPersona';
-import RegistroPersonasSection from './components/RegistroPersonasSection';
+import RegistroPersonasVulnerables from './components/RegistroPersonasVulnerables';
 
 export default function RegistroPersonasPage() {
     return (
@@ -11,9 +9,7 @@ export default function RegistroPersonasPage() {
                 <title>Registrar Persona Vulnerable</title>
             </Head>
             <main>
-                {/* <FormularioPersona /> */}
-                {/* <FormPersona /> */}
-                <RegistroPersonasSection />
+                <RegistroPersonasVulnerables />
             </main>
         </PageContainer>
     );

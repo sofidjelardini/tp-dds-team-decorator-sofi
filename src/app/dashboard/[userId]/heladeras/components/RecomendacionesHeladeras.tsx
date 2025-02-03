@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import MapaHeladeras from './MapaHeladeras';
+import MapaHeladeras from '../../../components/MapaHeladeras';
 
 const RecomendacionesHeladeras: React.FC = () => {
     const [latitud, setLatitud] = useState<string>('');

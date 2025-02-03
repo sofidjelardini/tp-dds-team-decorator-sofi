@@ -1,16 +1,22 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import heladerasData from '@/data/heladeras.json';
+import dataUsuarios from '@/data/usuarios.json';
 
 const FormularioVianda: React.FC = () => {
     const [comida, setComida] = useState<string>('');
     const [fechaCaducidad, setFechaCaducidad] = useState<string>('');
     const [fechaDonacion, setFechaDonacion] = useState<string>('');
-    const [colaborador, setColaborador] = useState<string>('');
+    const [colaborador, setColaborador] = useState<string | null>('');
     const [heladera, setHeladera] = useState<string>('');
     const [calorias, setCalorias] = useState<number | ''>('');
     const [peso, setPeso] = useState<number | ''>('');
-    const [estado, setEstado] = useState<string>('');
+    const [estado, setEstado] = useState<string>('No Entregada');
     const [mensaje, setMensaje] = useState<string>('');
+
+    useEffect(() => {
+        setColaborador(localStorage.getItem('userId'));
+    }, []);
 
     const isFormValid = () => {
         return (
@@ -29,11 +35,12 @@ const FormularioVianda: React.FC = () => {
         e.preventDefault();
 
         const viandaData = {
+            id: Math.floor(Math.random() * 999999),
             comida,
             fechaCaducidad,
             fechaDonacion,
             colaborador,
-            heladera,
+            heladera: Number(heladera),
             calorias,
             peso,
             estado
@@ -55,11 +62,11 @@ const FormularioVianda: React.FC = () => {
                 setComida('');
                 setFechaCaducidad('');
                 setFechaDonacion('');
-                setColaborador('');
                 setHeladera('');
                 setCalorias('');
                 setPeso('');
                 setEstado('');
+                await actualizarUsuario();
             } else {
                 setMensaje(result.mensaje || 'Error al enviar la vianda');
             }
@@ -67,6 +74,25 @@ const FormularioVianda: React.FC = () => {
             console.error('Error al enviar la vianda:', error);
             setMensaje('Error al enviar la vianda');
         }
+    };
+
+    const actualizarUsuario = async () => {
+        const usuario = dataUsuarios.find(
+            usuario => usuario.documento === `${colaborador}`
+        );
+        const userData = {
+            viandasDonadas: usuario.viandasDonadas + 1
+        };
+
+        console.log('userData: ', userData);
+
+        await fetch(`/api/editar-perfil`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ ...userData, userId: colaborador })
+        });
     };
 
     return (
@@ -120,32 +146,23 @@ const FormularioVianda: React.FC = () => {
             </div>
             <div>
                 <label
-                    htmlFor='colaborador'
+                    htmlFor='heladeraOrigen'
                     className='block text-sm font-medium'
                 >
-                    Colaborador:
-                </label>
-                <input
-                    type='text'
-                    id='colaborador'
-                    className='mt-1 p-2 border rounded-md w-full'
-                    value={colaborador}
-                    onChange={e => setColaborador(e.target.value)}
-                    required
-                />
-            </div>
-            <div>
-                <label htmlFor='heladera' className='block text-sm font-medium'>
                     Heladera:
                 </label>
-                <input
-                    type='text'
-                    id='heladera'
-                    className='mt-1 p-2 border rounded-md w-full'
+                <select
+                    id='heladeraOrigen'
                     value={heladera}
                     onChange={e => setHeladera(e.target.value)}
                     required
-                />
+                    className='mt-1 p-2 border rounded-md w-full'
+                >
+                    <option value=''>Seleccione una Heladera</option>
+                    {heladerasData.map(heladera => (
+                        <option value={heladera.id}>{heladera.nombre}</option>
+                    ))}
+                </select>
             </div>
             <div>
                 <label htmlFor='calorias' className='block text-sm font-medium'>

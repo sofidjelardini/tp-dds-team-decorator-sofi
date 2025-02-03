@@ -1,19 +1,13 @@
 'use client';
-
 import React, { useState } from 'react';
+import heladerasData from '@/data/heladeras.json';
 
 const BajaHeladera: React.FC = () => {
-    const [nombre, setNombre] = useState<string>('');
-    const [direccion, setDireccion] = useState<string>('');
     const [mensaje, setMensaje] = useState<string>('');
+    const [heladeraAEliminar, setHeladeraAEliminar] = useState<any>();
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-
-        const heladeraData = {
-            nombre,
-            direccion
-        };
 
         try {
             const response = await fetch('/api/heladeras', {
@@ -21,15 +15,13 @@ const BajaHeladera: React.FC = () => {
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(heladeraData)
+                body: JSON.stringify({ heladeraAEliminar })
             });
 
             const result = await response.json();
 
             if (response.ok) {
                 setMensaje(result.mensaje);
-                setNombre('');
-                setDireccion('');
             } else {
                 setMensaje(result.mensaje || 'Error al eliminar la heladera');
             }
@@ -47,38 +39,20 @@ const BajaHeladera: React.FC = () => {
                     {mensaje && (
                         <div className='text-red-600'>{mensaje}</div>
                     )}{' '}
-                    <div>
-                        <label
-                            htmlFor='nombre'
-                            className='block text-sm font-medium'
-                        >
-                            Nombre de la Heladera:
-                        </label>
-                        <input
-                            type='text'
-                            id='nombre'
-                            className='mt-1 p-2 border rounded-md w-full'
-                            value={nombre}
-                            onChange={e => setNombre(e.target.value)}
-                            required
-                        />
-                    </div>
-                    <div>
-                        <label
-                            htmlFor='direccion'
-                            className='block text-sm font-medium'
-                        >
-                            Dirección:
-                        </label>
-                        <input
-                            type='text'
-                            id='direccion'
-                            className='mt-1 p-2 border rounded-md w-full'
-                            value={direccion}
-                            onChange={e => setDireccion(e.target.value)}
-                            required
-                        />
-                    </div>
+                    <select
+                        id='heladeraAEliminar'
+                        value={heladeraAEliminar}
+                        onChange={e => setHeladeraAEliminar(e.target.value)}
+                        required
+                        className='mt-1 p-2 border rounded-md w-full'
+                    >
+                        <option value=''>Seleccione una Heladera</option>
+                        {heladerasData.map(heladera => (
+                            <option value={heladera.id}>
+                                {heladera.nombre}
+                            </option>
+                        ))}
+                    </select>
                     <button
                         className='mt-4 bg-red-600 text-white py-2 rounded-md hover:bg-red-500 transition'
                         type='submit'

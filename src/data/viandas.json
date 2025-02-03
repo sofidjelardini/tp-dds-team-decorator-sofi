@@ -1,12 +1,13 @@
 [
   {
-    "comida": "pollo con arroz",
-    "fechaCaducidad": "2024-12-30",
-    "fechaDonacion": "2024-12-26",
-    "colaborador": "11223344",
-    "heladera": "1",
-    "calorias": 500,
-    "peso": 450,
-    "estado": "Entregada"
+    "id": 919288,
+    "comida": "pastel de papa",
+    "fechaCaducidad": "2025-01-25",
+    "fechaDonacion": "2025-01-20",
+    "colaborador": "41917951",
+    "heladera": 7326496,
+    "calorias": 800,
+    "peso": 700,
+    "estado": "No Entregada"
   }
 ]

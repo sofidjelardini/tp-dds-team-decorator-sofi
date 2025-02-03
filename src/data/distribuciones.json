@@ -1,0 +1,20 @@
+[
+    {
+        "id": 633957,
+        "viandaId": 919288,
+        "heladeraOrigen": 7326496,
+        "heladeraDestino": 12031413,
+        "motivo": "desperfecto",
+        "fecha": "2025-01-20",
+        "colaborador": "41917951"
+    },
+    {
+        "id": 719975,
+        "viandaId": 919288,
+        "heladeraOrigen": 12031413,
+        "heladeraDestino": 7326496,
+        "motivo": "desperfecto",
+        "fecha": "2025-01-20",
+        "colaborador": "41917951"
+    }
+]

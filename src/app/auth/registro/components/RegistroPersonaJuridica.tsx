@@ -7,9 +7,8 @@ import { useDataForm } from '../../../context/DataFormContext';
 export default function RegistroPersonaJuridica() {
     const { dataForm } = useDataForm();
     const router = useRouter();
-
     const [razonSocial, setRazonSocial] = useState<string>('');
-    const [tipo, setTipo] = useState<string>(''); // Gubernamental, ONG, Empresa, Institución
+    const [tipo, setTipo] = useState<string>('');
     const [rubro, setRubro] = useState<string>('');
     const [email, setEmail] = useState<string>('');
     const [telefono, setTelefono] = useState<string>('');
@@ -18,8 +17,6 @@ export default function RegistroPersonaJuridica() {
     const [hacerseCargoHeladera, setHacerseCargoHeladera] =
         useState<boolean>(false);
 
-    console.log('Data del usuario:', dataForm);
-
     const handleSubmit = async (e: { preventDefault: () => void }) => {
         e.preventDefault();
 
@@ -27,9 +24,7 @@ export default function RegistroPersonaJuridica() {
             ...dataForm,
             personaJuridica: true,
             razonSocial,
-            // dataForm.documento,
-            // medioContacto,
-            // dataForm.password,
+            telefono,
             tipo,
             rubro,
             direccion
@@ -46,13 +41,11 @@ export default function RegistroPersonaJuridica() {
 
             const data = await response.json();
             if (response.ok) {
-                alert('Registro exitoso');
-            } else {
-                alert(`Error: ${data.error}`);
+                localStorage.setItem('userId', data.user.documento);
+                router.push('/');
             }
         } catch (error) {
             console.error('Error:', error);
-            alert('Error al registrar el usuario');
         }
     };
 

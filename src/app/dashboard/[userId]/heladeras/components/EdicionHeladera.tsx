@@ -1,27 +1,29 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import heladerasData from '@/data/heladeras.json';
 
 const EdicionHeladera: React.FC = () => {
-    const [direccion, setDireccion] = useState<string>('');
-    const [longitud, setLongitud] = useState<number | string>('');
-    const [latitud, setLatitud] = useState<number | string>('');
-    const [nombre, setNombre] = useState<string>('');
-    const [capacidad, setCapacidad] = useState<number | string>('');
-    const [fechaFuncionamiento, setFechaFuncionamiento] = useState<string>('');
     const [mensaje, setMensaje] = useState<string>('');
+    const [heladeraAEditar, setHeladeraAEditar] = useState<any>();
+    const [dataAEditar, setDataAEditar] = useState<any>({
+        direccion: '',
+        lng: '',
+        lat: '',
+        nombre: '',
+        capacidad: '',
+        fechaFuncionamiento: '',
+        id: 0
+    });
+
+    useEffect(() => {
+        setDataAEditar(
+            heladerasData.find(heladera => heladera.id == heladeraAEditar)
+        );
+    }, [heladeraAEditar]);
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-
-        const heladeraData = {
-            direccion,
-            lng: Number(longitud),
-            lat: Number(latitud),
-            nombre,
-            capacidad,
-            fechaFuncionamiento
-        };
 
         try {
             const response = await fetch('/api/heladeras', {
@@ -29,19 +31,14 @@ const EdicionHeladera: React.FC = () => {
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(heladeraData)
+                body: JSON.stringify(dataAEditar)
             });
 
             const result = await response.json();
 
             if (response.ok) {
                 setMensaje(result.mensaje);
-                setDireccion('');
-                setLongitud('');
-                setLatitud('');
-                setNombre('');
-                setCapacidad('');
-                setFechaFuncionamiento('');
+                setDataAEditar(undefined);
             } else {
                 setMensaje(result.mensaje || 'Error al editar la heladera');
             }
@@ -59,112 +56,158 @@ const EdicionHeladera: React.FC = () => {
                     {mensaje && (
                         <div className='text-green-600'>{mensaje}</div>
                     )}{' '}
-                    <div>
-                        <label
-                            htmlFor='nombre'
-                            className='block text-sm font-medium'
-                        >
-                            Nombre Significativo:
-                        </label>
-                        <input
-                            type='text'
-                            id='nombre'
-                            className='mt-1 p-2 border rounded-md w-full'
-                            value={nombre}
-                            onChange={e => setNombre(e.target.value)}
-                            required
-                        />
-                    </div>
-                    <div>
-                        <label
-                            htmlFor='direccion'
-                            className='block text-sm font-medium'
-                        >
-                            Dirección:
-                        </label>
-                        <input
-                            type='text'
-                            id='direccion'
-                            className='mt-1 p-2 border rounded-md w-full'
-                            value={direccion}
-                            onChange={e => setDireccion(e.target.value)}
-                            required
-                        />
-                    </div>
-                    <div>
-                        <label
-                            htmlFor='longitud'
-                            className='block text-sm font-medium'
-                        >
-                            Longitud:
-                        </label>
-                        <input
-                            type='number'
-                            id='longitud'
-                            className='mt-1 p-2 border rounded-md w-full'
-                            value={longitud}
-                            onChange={e => setLongitud(e.target.value)}
-                            step='any'
-                            required
-                        />
-                    </div>
-                    <div>
-                        <label
-                            htmlFor='latitud'
-                            className='block text-sm font-medium'
-                        >
-                            Latitud:
-                        </label>
-                        <input
-                            type='number'
-                            id='latitud'
-                            className='mt-1 p-2 border rounded-md w-full'
-                            value={latitud}
-                            onChange={e => setLatitud(e.target.value)}
-                            step='any'
-                            required
-                        />
-                    </div>
-                    <div>
-                        <label
-                            htmlFor='capacidad'
-                            className='block text-sm font-medium'
-                        >
-                            Capacidad (unidades de viandas):
-                        </label>
-                        <input
-                            type='number'
-                            id='capacidad'
-                            className='mt-1 p-2 border rounded-md w-full'
-                            value={capacidad}
-                            onChange={e => setCapacidad(e.target.value)}
-                            required
-                        />
-                    </div>
-                    <div>
-                        <label
-                            htmlFor='fechaFuncionamiento'
-                            className='block text-sm font-medium'
-                        >
-                            Fecha de Funcionamiento:
-                        </label>
-                        <input
-                            type='date'
-                            id='fechaFuncionamiento'
-                            className='mt-1 p-2 border rounded-md w-full'
-                            value={fechaFuncionamiento}
-                            onChange={e =>
-                                setFechaFuncionamiento(e.target.value)
-                            }
-                            required
-                        />
-                    </div>
-                    <button
-                        className='mt-4 bg-blue-600 text-white py-2 rounded-md hover:bg-blue-500 transition'
-                        type='submit'
+                    <select
+                        id='heladeraAEditar'
+                        value={heladeraAEditar}
+                        onChange={e => setHeladeraAEditar(e.target.value)}
+                        required
+                        className='mt-1 p-2 border rounded-md w-full'
                     >
-                        Confirmar Edición
-                    </button>
+                        <option value=''>Seleccione una Heladera</option>
+                        {heladerasData.map(heladera => (
+                            <option value={heladera.id}>
+                                {heladera.nombre}
+                            </option>
+                        ))}
+                    </select>
+                    {dataAEditar && (
+                        <>
+                            <div>
+                                <label
+                                    htmlFor='nombre'
+                                    className='block text-sm font-medium'
+                                >
+                                    Nombre Significativo:
+                                </label>
+                                <input
+                                    type='text'
+                                    id='nombre'
+                                    className='mt-1 p-2 border rounded-md w-full'
+                                    value={dataAEditar.nombre}
+                                    onChange={e =>
+                                        setDataAEditar({
+                                            ...dataAEditar,
+                                            nombre: e.target.value
+                                        })
+                                    }
+                                    required
+                                />
+                            </div>
+                            <div>
+                                <label
+                                    htmlFor='direccion'
+                                    className='block text-sm font-medium'
+                                >
+                                    Dirección:
+                                </label>
+                                <input
+                                    type='text'
+                                    id='direccion'
+                                    className='mt-1 p-2 border rounded-md w-full'
+                                    value={dataAEditar.direccion}
+                                    onChange={e =>
+                                        setDataAEditar({
+                                            ...dataAEditar,
+                                            direccion: e.target.value
+                                        })
+                                    }
+                                    required
+                                />
+                            </div>
+                            <div>
+                                <label
+                                    htmlFor='longitud'
+                                    className='block text-sm font-medium'
+                                >
+                                    Longitud:
+                                </label>
+                                <input
+                                    type='number'
+                                    id='longitud'
+                                    className='mt-1 p-2 border rounded-md w-full'
+                                    value={dataAEditar.lng}
+                                    onChange={e =>
+                                        setDataAEditar({
+                                            ...dataAEditar,
+                                            lng: e.target.value
+                                        })
+                                    }
+                                    step='any'
+                                    required
+                                />
+                            </div>
+                            <div>
+                                <label
+                                    htmlFor='latitud'
+                                    className='block text-sm font-medium'
+                                >
+                                    Latitud:
+                                </label>
+                                <input
+                                    type='number'
+                                    id='latitud'
+                                    className='mt-1 p-2 border rounded-md w-full'
+                                    value={dataAEditar.lat}
+                                    onChange={e =>
+                                        setDataAEditar({
+                                            ...dataAEditar,
+                                            lat: e.target.value
+                                        })
+                                    }
+                                    step='any'
+                                    required
+                                />
+                            </div>
+                            <div>
+                                <label
+                                    htmlFor='capacidad'
+                                    className='block text-sm font-medium'
+                                >
+                                    Capacidad (unidades de viandas):
+                                </label>
+                                <input
+                                    type='number'
+                                    id='capacidad'
+                                    className='mt-1 p-2 border rounded-md w-full'
+                                    value={dataAEditar.capacidad}
+                                    onChange={e =>
+                                        setDataAEditar({
+                                            ...dataAEditar,
+                                            capacidad: e.target.value
+                                        })
+                                    }
+                                    required
+                                />
+                            </div>
+                            <div>
+                                <label
+                                    htmlFor='fechaFuncionamiento'
+                                    className='block text-sm font-medium'
+                                >
+                                    Fecha de Funcionamiento:
+                                </label>
+                                <input
+                                    type='date'
+                                    id='fechaFuncionamiento'
+                                    className='mt-1 p-2 border rounded-md w-full'
+                                    value={dataAEditar.fechaFuncionamiento}
+                                    onChange={e =>
+                                        setDataAEditar({
+                                            ...dataAEditar,
+                                            fechaFuncionamiento: e.target.value
+                                        })
+                                    }
+                                    required
+                                />
+                            </div>
+                            <button
+                                className='mt-4 bg-blue-600 text-white py-2 rounded-md hover:bg-blue-500 transition'
+                                type='submit'
+                            >
+                                Confirmar Edición
+                            </button>
+                        </>
+                    )}
                 </form>
             </div>
         </div>

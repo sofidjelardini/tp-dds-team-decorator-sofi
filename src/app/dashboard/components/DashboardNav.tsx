@@ -10,6 +10,8 @@ import { cn } from '@/lib/utils';
 import { useDashboard } from '@/store/dashboardStore';
 import { LogOut } from 'lucide-react';
 import { useRouter } from 'next/navigation';
+import usuariosData from '@/data/usuarios.json';
+import { useEffect, useState } from 'react';
 
 interface DashboardNavProps {
     userId?: string;
@@ -19,59 +21,96 @@ interface DashboardNavProps {
 const DashboardNav = ({ userId, isMobileNav = false }: DashboardNavProps) => {
     const { isMinimized } = useDashboard();
     const router = useRouter();
+    const colaboradorData = usuariosData.find(
+        usuario => usuario.documento == userId
+    );
+    const [barraCompleta, setBarraCompleta] = useState<
+        {
+            title: string;
+            href: string;
+            icon: string;
+        }[]
+    >([]);
 
-    const items = [
-        {
-            title: 'Puntos y canjes',
-            href: `/dashboard/${userId}/puntos-y-canjes`,
-            icon: 'carrito'
-        },
-        {
-            title: 'Heladeras',
-            href: `/dashboard/${userId}/heladeras`,
-            icon: 'heladera'
-        },
-        {
-            title: 'Registro Personas en Situación Vulnerable',
-            href: `/dashboard/${userId}/registro-personas`,
-            icon: 'persona'
-        },
-        {
-            title: 'Carga de Viandas',
-            href: `/dashboard/${userId}/viandas`,
-            icon: 'vianda'
-        },
-        {
-            title: 'Donaciones',
-            href: `/dashboard/${userId}/donaciones`,
-            icon: 'donaciones'
-        },
-        {
-            title: 'Distribución Viandas',
-            href: `/dashboard/${userId}/distribucion`,
-            icon: 'camion'
-        },
-        {
-            title: 'Gestión Técnicos',
-            href: `/dashboard/${userId}/tecnicos`,
-            icon: 'tecnico'
-        },
-        {
-            title: 'Editar Perfil',
-            href: `/dashboard/${userId}/editar-perfil`,
-            icon: 'editarPerfil'
-        },
-        {
-            title: 'Administradores',
-            href: `/dashboard/${userId}/administradores`,
-            icon: 'administrador'
-        },
-        {
-            title: 'Carga de Colaboradores',
-            href: `/dashboard/${userId}/cargar-colaboraciones`,
-            icon: 'cargaColaboraciones'
+    useEffect(() => {
+        setBarraCompleta([
+            {
+                title: 'Inicio',
+                href: `/dashboard`,
+                icon: 'homepage'
+            },
+            {
+                title: 'Heladeras',
+                href: `/dashboard/${userId}/heladeras`,
+                icon: 'heladera'
+            },
+            {
+                title: 'Carga de Viandas',
+                href: `/dashboard/${userId}/viandas`,
+                icon: 'vianda'
+            },
+            {
+                title: 'Distribución Viandas',
+                href: `/dashboard/${userId}/distribucion`,
+                icon: 'camion'
+            },
+            {
+                title: 'Donaciones',
+                href: `/dashboard/${userId}/donaciones`,
+                icon: 'donaciones'
+            },
+            {
+                title: 'Gestión Técnicos',
+                href: `/dashboard/${userId}/tecnicos`,
+                icon: 'tecnico'
+            },
+            {
+                title: 'Carga de Colaboraciones',
+                href: `/dashboard/${userId}/cargar-colaboraciones`,
+                icon: 'cargaColaboraciones'
+            },
+            {
+                title: 'Incidentes',
+                href: `/dashboard/${userId}/incidentes`,
+                icon: 'incidentes'
+            },
+            {
+                title: 'Reportes',
+                href: `/dashboard/${userId}/reportes`,
+                icon: 'reportes'
+            },
+            {
+                title: 'Editar Perfil',
+                href: `/dashboard/${userId}/editar-perfil`,
+                icon: 'editarPerfil'
+            }
+        ]);
+    }, [userId]);
+
+    useEffect(() => {
+        if (colaboradorData?.ayudarPersonas) {
+            setBarraCompleta([
+                ...barraCompleta,
+                {
+                    title: 'Puntos y canjes',
+                    href: `/dashboard/${userId}/puntos-y-canjes`,
+                    icon: 'carrito'
+                },
+                {
+                    title: 'Registro Personas en Situación Vulnerable',
+                    href: `/dashboard/${userId}/registro-personas`,
+                    icon: 'persona'
+                },
+                {
+                    title: 'Gestión de Tarjetas',
+                    href: `/dashboard/${userId}/tarjetas`,
+                    icon: 'tarjetas'
+                }
+            ]);
         }
-    ];
+    }, [colaboradorData]);
+
+    console.log('userID: ', userId);
 
     async function handleLogout(evt: React.MouseEvent<HTMLButtonElement>) {
         evt.preventDefault();
@@ -81,19 +120,11 @@ const DashboardNav = ({ userId, isMobileNav = false }: DashboardNavProps) => {
             router.push('/auth');
         } catch (error) {
             console.error(
-                'Ocurrió un error. Contacte con el administrador',
+                'Ocurrió un error. Contáctese con el administrador',
                 error
             );
         }
     }
-
-    const handleNavClick = (href: string) => {
-        if (!isMinimized) {
-            router.push(href);
-        } else {
-            router.push(href);
-        }
-    };
 
     return (
         <nav className='flex flex-col h-full'>
@@ -105,7 +136,7 @@ const DashboardNav = ({ userId, isMobileNav = false }: DashboardNavProps) => {
                             : 'items-start justify-start'
                     }`}
                 >
-                    {items.map((item, index) => {
+                    {barraCompleta?.map((item, index) => {
                         const Icon = Icons[item.icon || 'arrowRight'];
                         return (
                             item.href && (
@@ -116,9 +147,9 @@ const DashboardNav = ({ userId, isMobileNav = false }: DashboardNavProps) => {
                                             onClick={e => {
                                                 if (isMinimized) {
                                                     e.preventDefault();
-                                                    handleNavClick(item.href);
+                                                    router.push(item.href);
                                                 } else {
-                                                    handleNavClick(item.href);
+                                                    router.push(item.href);
                                                 }
                                             }}
                                             className={cn(

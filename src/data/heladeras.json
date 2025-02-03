@@ -4,20 +4,45 @@
     "lng": -58.3839,
     "lat": -34.6157,
     "nombre": "Heladera 2",
-    "capacidad": "54",
-    "fechaFuncionamiento": "2024-12-26"
+    "capacidad": "16",
+    "fechaFuncionamiento": "2024-12-26",
+    "id": 12031413,
+    "estado": "Activa",
+    "colaboradoresSuscriptos": [
+      "41917951"
+    ]
   },
   {
-    "lat": -34.6295,
-    "lng": -58.4278,
-    "nombre": "Heladera 3"
+    "direccion": "av libertador 5340",
+    "lng": -58.3636,
+    "lat": -34.2394,
+    "nombre": "Heladera 1",
+    "capacidad": "12",
+    "fechaFuncionamiento": "2025-01-15",
+    "id": 7326496,
+    "estado": "Activa",
+    "colaboradoresSuscriptos": []
   },
   {
     "direccion": "bolivar 23",
-    "lng": -58.4025,
-    "lat": -34.6295,
+    "lng": -54.2929,
+    "lat": -34.6363,
+    "nombre": "Heladera 3",
+    "capacidad": "12",
+    "fechaFuncionamiento": "2025-01-15",
+    "id": 91270,
+    "estado": "Activa",
+    "colaboradoresSuscriptos": []
+  },
+  {
+    "direccion": "av directorio",
+    "lng": -58.3938,
+    "lat": -34.1675,
     "nombre": "Heladera 4",
-    "capacidad": "15",
-    "fechaFuncionamiento": "2024-12-26"
+    "capacidad": "10",
+    "fechaFuncionamiento": "2025-01-20",
+    "id": 852310,
+    "estado": "Activa",
+    "colaboradoresSuscriptos": []
   }
 ]

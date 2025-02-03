@@ -15,7 +15,6 @@ const RegistroPersonaHumana: React.FC = () => {
     const [codigoPostal, setCodigoPostal] = useState<string>('');
     const { dataForm } = useDataForm();
 
-    console.log('dataForm: ', dataForm);
     const handleSubmit = async (e: { preventDefault: () => void }) => {
         e.preventDefault();
 
@@ -27,7 +26,11 @@ const RegistroPersonaHumana: React.FC = () => {
             telefono,
             fechaNacimiento,
             direccion,
-            codigoPostal
+            codigoPostal,
+            pesosDonados: 0,
+            viandasDistribuidas: 0,
+            viandasDonadas: 0,
+            tarjetasRepartidas: 0
         };
 
         try {
@@ -41,17 +44,43 @@ const RegistroPersonaHumana: React.FC = () => {
 
             const data = await response.json();
             if (response.ok) {
-                alert('Registro exitoso');
                 localStorage.setItem('userId', data.user.documento);
-                router.push('/');
-            } else {
-                alert(`Error: ${data.error}`);
-                localStorage.setItem('userId', data.user.documento);
+                data.user.ayudarPersonas &&
+                    (await asignarTarjetasAColaborador(data.user.documento));
                 router.push('/');
             }
         } catch (error) {
             console.error('Error:', error);
-            alert('Error al registrar el usuario');
+        }
+    };
+
+    const asignarTarjetasAColaborador = async (colaboradorId: any) => {
+        try {
+            const response = await fetch('/api/tarjetas', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ colaboradorId })
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(
+                    errorData.mensaje || 'Error en la asignación de tarjetas.'
+                );
+            }
+
+            const data = await response.json();
+            return {
+                mensaje: data.mensaje,
+                tarjetas: data.tarjetas
+            };
+        } catch (error) {
+            console.error('Error en la asignación de tarjetas:', error);
+            return {
+                error: 'Error al asignar las tarjetas.'
+            };
         }
     };
 
@@ -60,9 +89,12 @@ const RegistroPersonaHumana: React.FC = () => {
             <div className='w-3/4 bg-white shadow-lg rounded-lg p-6'>
                 <form onSubmit={handleSubmit} className='flex flex-col gap-4'>
                     <h2 className='text-lg font-semibold'>
-                        Registro de Persona Humana
+                        Información de Colaborador
                     </h2>
-
+                    <h1>
+                        Por favor, proporcione su información para guardarla en
+                        el sistema.
+                    </h1>
                     <div>
                         <label
                             htmlFor='nombre'
@@ -183,7 +215,7 @@ const RegistroPersonaHumana: React.FC = () => {
                         className='mt-4 bg-blue-600 text-white py-2 rounded-md hover:bg-blue-500 transition'
                         type='submit'
                     >
-                        Registrar Persona Humana
+                        Guardar Información
                     </button>
                 </form>
             </div>

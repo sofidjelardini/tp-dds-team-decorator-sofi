@@ -1,0 +1,75 @@
+[
+  {
+    "id": 391313,
+    "numeroTarjeta": "K1L2M3N4O5P",
+    "fecha": "2025-01-23T20:43:00.031Z",
+    "cantidadViandas": 3
+  },
+  {
+    "id": 88404,
+    "numeroTarjeta": "D6E7F8G9H0I",
+    "fecha": "2025-01-23T20:43:00.033Z",
+    "cantidadViandas": 1
+  },
+  {
+    "id": 538732,
+    "numeroTarjeta": "G6H7I8J9K0L",
+    "fecha": "2025-01-23T20:43:00.035Z",
+    "cantidadViandas": 3
+  },
+  {
+    "id": 279017,
+    "numeroTarjeta": "G6H7I8J9K0L",
+    "fecha": "2025-01-23T20:43:00.037Z",
+    "cantidadViandas": 3
+  },
+  {
+    "id": 452555,
+    "numeroTarjeta": "S6T7U8V9W0X",
+    "fecha": "2025-01-23T20:43:00.029Z",
+    "cantidadViandas": 1
+  },
+  {
+    "id": 662875,
+    "numeroTarjeta": "M1N2O3P4Q5R",
+    "fecha": "2025-01-23T20:43:00.043Z",
+    "cantidadViandas": 1
+  },
+  {
+    "id": 689417,
+    "numeroTarjeta": "X1Y2Z3A4B5C",
+    "fecha": "2025-01-23T20:43:00.044Z",
+    "cantidadViandas": 2
+  },
+  {
+    "id": 526986,
+    "fecha": "2025-01-23T20:43:00.042Z",
+    "cantidadViandas": 2
+  },
+  {
+    "id": 254080,
+    "numeroTarjeta": "S6T7U8V9W0X",
+    "fecha": "2025-01-23T20:43:00.039Z",
+    "cantidadViandas": 2
+  },
+  {
+    "id": 415006,
+    "fecha": "2025-01-23T20:43:00.652Z",
+    "cantidadViandas": 3
+  },
+  {
+    "id": 361282,
+    "fecha": "2025-01-23T20:43:00.654Z",
+    "cantidadViandas": 4
+  },
+  {
+    "id": 578217,
+    "numeroTarjeta": "Q6R7S8T9U0V",
+    "fecha": "2025-01-23T20:43:00.935Z",
+    "cantidadViandas": 1
+  },
+  {
+    "id": 487608,
+    "fecha": "2025-01-24T18:00:00.668Z"
+  }
+]

@@ -3,6 +3,7 @@ import { useRouter } from 'next/navigation';
 import React from 'react';
 import MapaHeladeras from './MapaHeladeras';
 import styles from './styles/homePage.module.css';
+import heladerasData from '@/data/heladeras.json';
 
 interface HomePageProps {
     userId: string | null;
@@ -10,11 +11,7 @@ interface HomePageProps {
 
 const HomePage: React.FC<HomePageProps> = ({ userId }) => {
     const router = useRouter();
-    const ubicacionesHeladeras = [
-        { lat: -34.6037, lng: -58.3816, nombre: 'Heladera 1' },
-        { lat: -34.6157, lng: -58.3839, nombre: 'Heladera 2' },
-        { lat: -34.6295, lng: -58.4278, nombre: 'Heladera 3' }
-    ];
+    const ubicacionesHeladeras = heladerasData;
 
     return (
         <div className={styles.local}>
@@ -164,12 +161,6 @@ const HomePage: React.FC<HomePageProps> = ({ userId }) => {
                     ubicaciones={ubicacionesHeladeras}
                     mapId='heladeras'
                 />
-                <button
-                    className={styles.button}
-                    onClick={() => router.push(`dashboard/${userId}/mapa`)}
-                >
-                    Ver Mapa de Heladeras
-                </button>
             </section>
         </div>
     );
