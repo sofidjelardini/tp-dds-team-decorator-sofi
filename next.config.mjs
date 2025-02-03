@@ -16,7 +16,7 @@ const nextConfig = {
             }
         ];
     },
-    assetPrefix: '/tp-dds-decorator/',
+    assetPrefix: '/tp-dds-team-decorator-sofi/',
     output: 'export'
 };
 
