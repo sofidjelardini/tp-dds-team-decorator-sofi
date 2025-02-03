@@ -2,15 +2,11 @@
     "name": "tp-dds-decorator",
     "version": "0.1.0",
     "private": true,
-    "homepage": "https://sofidjelardini.github.io/tp-dds-team-decorator-sofi/",
     "scripts": {
         "dev": "next dev",
         "build": "next build",
         "start": "next start",
-        "lint": "next lint",
-        "predeploy": "npm run build",
-        "deploy": "gh-pages -d out",
-        "export": "next export"
+        "lint": "next lint"
     },
     "dependencies": {
         "@hookform/resolvers": "^3.9.1",
@@ -33,7 +29,6 @@
         "class-variance-authority": "^0.7.0",
         "clsx": "^2.1.1",
         "date-fns": "^3.6.0",
-        "gh-pages": "^6.3.0",
         "leaflet": "^1.9.4",
         "lucide-react": "^0.454.0",
         "next": "14.2.5",

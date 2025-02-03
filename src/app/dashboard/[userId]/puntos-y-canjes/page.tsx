@@ -14,7 +14,3 @@ export default function RegistroPersonasPage() {
         </PageContainer>
     );
 }
-
-export async function generateStaticParams() {
-    return [{ userId: 'default' }];
-}

@@ -14,7 +14,7 @@ import usuariosData from '@/data/usuarios.json';
 import { useEffect, useState } from 'react';
 
 interface DashboardNavProps {
-    userId: string | null;
+    userId?: string;
     isMobileNav?: boolean;
 }
 
@@ -109,6 +109,8 @@ const DashboardNav = ({ userId, isMobileNav = false }: DashboardNavProps) => {
             ]);
         }
     }, [colaboradorData]);
+
+    console.log('userID: ', userId);
 
     async function handleLogout(evt: React.MouseEvent<HTMLButtonElement>) {
         evt.preventDefault();

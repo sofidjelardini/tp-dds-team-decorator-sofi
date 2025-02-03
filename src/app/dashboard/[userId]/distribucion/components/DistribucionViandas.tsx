@@ -1,4 +1,3 @@
-'use client';
 import React, { useState, useEffect } from 'react';
 import viandasData from '@/data/viandas.json';
 import heladerasData from '@/data/heladeras.json';
@@ -29,10 +28,7 @@ const DistribucionViandasForm: React.FC = () => {
     );
 
     useEffect(() => {
-        const storedUserId = localStorage.getItem('userId');
-        if (storedUserId) {
-            setUserId(storedUserId);
-        }
+        setUserId(localStorage.getItem('userId'));
     }, []);
 
     useEffect(() => {
@@ -125,8 +121,10 @@ const DistribucionViandasForm: React.FC = () => {
             usuario => usuario.documento === userId
         );
         const userData = {
-            viandasDistribuidas: (usuario?.viandasDistribuidas || 0) + 1
+            viandasDistribuidas: usuario.viandasDistribuidas + 1
         };
+
+        console.log('userData: ', userData);
 
         await fetch(`/api/editar-perfil`, {
             method: 'PUT',

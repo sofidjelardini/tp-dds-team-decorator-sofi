@@ -1,4 +1,3 @@
-'use client';
 import React, { useState, useEffect } from 'react';
 import dataUsuarios from '@/data/usuarios.json';
 
@@ -52,8 +51,10 @@ const DonacionesForm: React.FC = () => {
             usuario => usuario.documento === `${colaborador}`
         );
         const userData = {
-            pesosDonados: (usuario?.pesosDonados || 0) + montoDonacion
+            pesosDonados: usuario.pesosDonados + montoDonacion
         };
+
+        console.log('userData: ', userData);
 
         await fetch(`/api/editar-perfil`, {
             method: 'PUT',

@@ -8,7 +8,3 @@ export default function EditarPerfilPage() {
         </PageContainer>
     );
 }
-
-export async function generateStaticParams() {
-    return [{ userId: 'default' }];
-}

@@ -11,7 +11,7 @@ export default function DashboardLayout({
     children: React.ReactNode;
     modal: React.ReactNode;
 }) {
-    const [userId, setUserId] = useState<string | null>(null);
+    const [userId, setUserId] = useState<string | undefined>(undefined);
 
     useEffect(() => {
         const storedUserId = localStorage.getItem('userId');

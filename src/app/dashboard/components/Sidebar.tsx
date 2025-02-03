@@ -7,7 +7,7 @@ import DashboardNav from './DashboardNav';
 import styles from './styles/sidebar.module.css';
 
 type SidebarProps = {
-    userId: string | null;
+    userId?: string;
 };
 
 export default function Sidebar({ userId }: SidebarProps) {

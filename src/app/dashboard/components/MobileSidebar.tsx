@@ -2,14 +2,10 @@
 
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { MenuIcon } from 'lucide-react';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import DashboardNav from './DashboardNav';
 
-const MobileSidebar = () => {
-    const [userId, serUserId] = useState<string | null>('');
-    useEffect(() => {
-        serUserId(localStorage.getItem('userId'));
-    }, []);
+const MobileSidebar = (userId: string) => {
     const [open, setOpen] = useState(false);
     return (
         <>

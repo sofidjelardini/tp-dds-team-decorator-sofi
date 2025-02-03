@@ -8,7 +8,3 @@ export default function ViandasPage() {
         </PageContainer>
     );
 }
-
-export async function generateStaticParams() {
-    return [{ userId: 'default' }];
-}
