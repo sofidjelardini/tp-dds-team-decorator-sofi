@@ -14,3 +14,7 @@ export default function ReportesPage() {
         </PageContainer>
     );
 }
+
+export async function generateStaticParams() {
+    return [{ userId: 'default' }];
+}

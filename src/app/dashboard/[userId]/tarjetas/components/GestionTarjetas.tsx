@@ -1,3 +1,4 @@
+'use client';
 import React, { useState, useEffect } from 'react';
 import tarjetasData from '@/data/tarjetas.json';
 import usosData from '@/data/usosTarjetas.json';
@@ -105,7 +106,7 @@ const GestionTarjetas: React.FC = () => {
                     tarjetaAsignadaAPersonaVulnerable: boolean;
                 }) => {
                     const usos: any = usosData.filter(
-                        (u: { numeroTarjeta: any }) =>
+                        (u: any) =>
                             u.numeroTarjeta === tarjeta.numeroTarjeta &&
                             tarjeta.tarjetaAsignadaAPersonaVulnerable === true
                     );

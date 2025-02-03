@@ -8,3 +8,7 @@ export default function AdministradorPage() {
         </PageContainer>
     );
 }
+
+export async function generateStaticParams() {
+    return [{ userId: 'default' }];
+}

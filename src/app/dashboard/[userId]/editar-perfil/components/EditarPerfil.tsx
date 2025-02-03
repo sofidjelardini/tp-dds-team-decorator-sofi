@@ -1,12 +1,11 @@
 'use client';
-
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 
 const EditarPerfil: React.FC = () => {
     const router = useRouter();
-    const userId = localStorage.getItem('userId');
+    const [userId, setUserId] = useState<string | null>();
     const [nombre, setNombre] = useState<string>('');
     const [apellido, setApellido] = useState<string>('');
     const [email, setEmail] = useState<string>('');
@@ -15,6 +14,13 @@ const EditarPerfil: React.FC = () => {
     const [resultado, setResultado] = useState<any>(null);
     const [error, setError] = useState<boolean>(false);
     const [modalVisible, setModalVisible] = useState<boolean>(false);
+
+    useEffect(() => {
+        const storedUserId = localStorage.getItem('userId');
+        if (storedUserId) {
+            setUserId(storedUserId);
+        }
+    }, []);
 
     const limpiarForm = () => {
         setNombre('');
@@ -73,7 +79,7 @@ const EditarPerfil: React.FC = () => {
 
             if (response.ok) {
                 setResultado('Cuenta eliminada con éxito.');
-                localStorage.clear();
+                typeof window !== 'undefined' && localStorage.clear();
                 router.push('/');
             } else {
                 setResultado(

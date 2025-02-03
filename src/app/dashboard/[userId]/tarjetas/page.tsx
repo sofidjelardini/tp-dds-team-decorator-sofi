@@ -1,4 +1,3 @@
-'use client';
 import { PageContainer } from '../../components/PageContainer';
 import GestionTarjetas from './components/GestionTarjetas';
 
@@ -8,4 +7,8 @@ export default function TarjetasPage() {
             <GestionTarjetas />
         </PageContainer>
     );
+}
+
+export async function generateStaticParams() {
+    return [{ userId: 'default' }];
 }

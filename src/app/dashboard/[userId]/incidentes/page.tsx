@@ -14,3 +14,7 @@ export default function FormularioIncidentesPage() {
         </PageContainer>
     );
 }
+
+export async function generateStaticParams() {
+    return [{ userId: 'default' }];
+}

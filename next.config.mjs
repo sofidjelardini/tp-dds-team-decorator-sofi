@@ -15,7 +15,9 @@ const nextConfig = {
                 destination: 'http://localhost:8086/api/:path*' // Usa la URL dinámica para redirigir a la API externa
             }
         ];
-    }
+    },
+    assetPrefix: '/tp-dds-decorator/',
+    output: 'export'
 };
 
 export default nextConfig;

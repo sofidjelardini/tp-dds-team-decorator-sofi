@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 
-export async function obtenerIncidentes() {
+async function obtenerIncidentes() {
     const filePath = path.join(process.cwd(), 'src', 'data', 'incidentes.json');
 
     if (!fs.existsSync(filePath)) {
@@ -18,7 +18,7 @@ export async function obtenerIncidentes() {
     }
 }
 
-export async function guardarIncidentes(incidentes) {
+async function guardarIncidentes(incidentes) {
     const existingData = await obtenerIncidentes();
 
     const nuevasIncidentes = incidentes.filter(

@@ -31,10 +31,10 @@ const PuntosCanjesSection = () => {
         );
 
         return (
-            colaborador?.pesosDonados * 0.5 +
-            colaborador?.viandasDistribuidas +
-            colaborador?.viandasDonadas * 1.5 +
-            colaborador?.tarjetasRepartidas * 2 -
+            (colaborador?.pesosDonados || 0) * 0.5 +
+            (colaborador?.viandasDistribuidas || 0) +
+            (colaborador?.viandasDonadas || 0) * 1.5 +
+            (colaborador?.tarjetasRepartidas || 0) * 2 -
             puntosUtilizados
         );
     };
