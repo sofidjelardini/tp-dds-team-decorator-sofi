@@ -11,7 +11,7 @@ const Mapa: React.FC<{
     ubicaciones: { lat: number; lng: number; nombre: string }[];
     mapId: string;
 }> = ({ ubicaciones, mapId }) => {
-    const mapRef = useRef<L.Map | null>(null);
+    const mapRef = useRef<L.Map | any>(null);
 
     useEffect(() => {
         const initializeMap = async () => {

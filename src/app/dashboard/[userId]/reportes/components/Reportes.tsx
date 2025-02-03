@@ -1,13 +1,11 @@
 'use client';
 import React, { useEffect, useState } from 'react';
 import { Bar } from 'react-chartjs-2';
-import { FileText } from 'lucide-react';
 import { Chart, registerables } from 'chart.js';
 import incidentesData from '@/data/incidentes.json';
-import distribucionesData from '@/data/distribuciones.json'; // Importar distribuciones
-import heladerasData from '@/data/heladeras.json'; // Importar heladeras
+import distribucionesData from '@/data/distribuciones.json';
+import heladerasData from '@/data/heladeras.json';
 
-// Registra todos los componentes de Chart.js
 Chart.register(...registerables);
 
 const Reportes: React.FC = () => {
@@ -18,11 +16,13 @@ const Reportes: React.FC = () => {
         viandasPorColaborador: {}
     });
 
-    // Crear un mapa de heladeras
-    const heladerasMap = heladerasData.reduce((acc, heladera) => {
-        acc[heladera.id] = heladera.nombre; // Cambia 'id' y 'nombre' según tu estructura de datos
-        return acc;
-    }, {});
+    const heladerasMap = heladerasData.reduce(
+        (acc: { [key: string]: string }, heladera) => {
+            acc[heladera.id] = heladera.nombre;
+            return acc;
+        },
+        {}
+    );
 
     useEffect(() => {
         obtenerReportes();

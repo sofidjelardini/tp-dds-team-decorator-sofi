@@ -140,7 +140,7 @@ const RegistroPersonasVulnerables: React.FC = () => {
             usuario => usuario.documento === userId
         );
         const userData = {
-            tarjetasRepartidas: usuario.tarjetasRepartidas + 1
+            tarjetasRepartidas: (usuario?.tarjetasRepartidas || 0) + 1
         };
 
         await fetch(`/api/editar-perfil`, {

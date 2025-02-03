@@ -81,10 +81,8 @@ const FormularioVianda: React.FC = () => {
             usuario => usuario.documento === `${colaborador}`
         );
         const userData = {
-            viandasDonadas: usuario.viandasDonadas + 1
+            viandasDonadas: (usuario?.viandasDonadas || 0) + 1
         };
-
-        console.log('userData: ', userData);
 
         await fetch(`/api/editar-perfil`, {
             method: 'PUT',

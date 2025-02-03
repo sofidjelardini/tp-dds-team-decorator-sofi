@@ -51,10 +51,8 @@ const DonacionesForm: React.FC = () => {
             usuario => usuario.documento === `${colaborador}`
         );
         const userData = {
-            pesosDonados: usuario.pesosDonados + montoDonacion
+            pesosDonados: (usuario?.pesosDonados || 0) + montoDonacion
         };
-
-        console.log('userData: ', userData);
 
         await fetch(`/api/editar-perfil`, {
             method: 'PUT',

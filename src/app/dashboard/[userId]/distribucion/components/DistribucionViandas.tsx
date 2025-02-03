@@ -121,10 +121,8 @@ const DistribucionViandasForm: React.FC = () => {
             usuario => usuario.documento === userId
         );
         const userData = {
-            viandasDistribuidas: usuario.viandasDistribuidas + 1
+            viandasDistribuidas: (usuario?.viandasDistribuidas || 0) + 1
         };
-
-        console.log('userData: ', userData);
 
         await fetch(`/api/editar-perfil`, {
             method: 'PUT',

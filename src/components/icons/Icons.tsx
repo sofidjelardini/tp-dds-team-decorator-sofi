@@ -15,8 +15,9 @@ import {
     AlertCircle,
     FileText
 } from 'lucide-react';
+import { ReactNode } from 'react';
 
-export type Icon = (props: LucideProps) => JSX.Element | null;
+export type Icon = (props: LucideProps) => JSX.Element | ReactNode | null;
 
 interface IconsType {
     [key: string]: Icon;

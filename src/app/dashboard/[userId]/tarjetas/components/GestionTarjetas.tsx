@@ -105,7 +105,7 @@ const GestionTarjetas: React.FC = () => {
                     tarjetaAsignadaAPersonaVulnerable: boolean;
                 }) => {
                     const usos: any = usosData.filter(
-                        (u: { numeroTarjeta: any }) =>
+                        (u: any) =>
                             u.numeroTarjeta === tarjeta.numeroTarjeta &&
                             tarjeta.tarjetaAsignadaAPersonaVulnerable === true
                     );
