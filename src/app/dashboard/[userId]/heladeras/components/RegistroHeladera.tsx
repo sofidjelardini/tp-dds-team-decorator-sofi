@@ -1,7 +1,7 @@
 'use client';
 import React, { useState } from 'react';
 
-const RegistroHeladeras: React.FC = () => {
+const RegistroHeladeras = ({ colaborador }: any) => {
     const [direccion, setDireccion] = useState<string>('');
     const [longitud, setLongitud] = useState<number | string>('');
     const [latitud, setLatitud] = useState<number | string>('');
@@ -22,7 +22,8 @@ const RegistroHeladeras: React.FC = () => {
             fechaFuncionamiento,
             id: Math.floor(Math.random() * 999999),
             estado: 'Activa',
-            colaboradoresSuscriptos: []
+            colaboradoresSuscriptos: [],
+            registradaPor: colaborador
         };
 
         try {

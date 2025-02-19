@@ -93,7 +93,6 @@ export async function PUT(req) {
             ...existingData[index],
             ...incidenteActualizado
         };
-        console.log('existingData: ', existingData);
         fs.writeFileSync(
             path.join(process.cwd(), 'src', 'data', 'incidentes.json'),
             JSON.stringify(existingData, null, 2),

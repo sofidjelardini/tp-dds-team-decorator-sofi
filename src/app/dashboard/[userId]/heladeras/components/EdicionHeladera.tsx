@@ -3,9 +3,12 @@
 import React, { useEffect, useState } from 'react';
 import heladerasData from '@/data/heladeras.json';
 
-const EdicionHeladera: React.FC = () => {
+const EdicionHeladera = (data: any) => {
     const [mensaje, setMensaje] = useState<string>('');
     const [heladeraAEditar, setHeladeraAEditar] = useState<any>();
+    const heladerasRegistradasPorUsuario = heladerasData.filter(
+        heladera => heladera.registradaPor === data.colaborador
+    );
     const [dataAEditar, setDataAEditar] = useState<any>({
         direccion: '',
         lng: '',

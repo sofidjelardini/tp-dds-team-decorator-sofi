@@ -49,5 +49,31 @@
     "colaborador": "41917951",
     "fechaRegistro": "2025-01-20T17:02:19.111Z",
     "tarjetaAsignada": "M1N2O3P4Q5R"
+  },
+  {
+    "nombre": "Juancito Gimenez",
+    "fechaNacimiento": "1986-02-12",
+    "situacion": "calle",
+    "direccion": "",
+    "tipoDoc": "DNI",
+    "numDoc": "23456789",
+    "tieneMenores": false,
+    "cantMenores": 0,
+    "colaborador": "41917951",
+    "fechaRegistro": "2025-02-19T13:57:51.083Z",
+    "tarjetaAsignada": "S6T7U8V9W0X"
+  },
+  {
+    "nombre": "Sofia",
+    "fechaNacimiento": "2002-02-11",
+    "situacion": "calle",
+    "direccion": "",
+    "tipoDoc": "DNI",
+    "numDoc": "1212121212",
+    "tieneMenores": false,
+    "cantMenores": 0,
+    "colaborador": "41917951",
+    "fechaRegistro": "2025-02-19T14:02:09.108Z",
+    "tarjetaAsignada": "Y1Z2A3B4C5D"
   }
 ]

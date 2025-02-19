@@ -38,8 +38,6 @@ function obtenerRecomendaciones(latitud, longitud, radio) {
         radio
     );
 
-    console.log('nuevaUbicacionDensidad: ', nuevaUbicacionDensidad);
-
     if (nuevaUbicacionDensidad) {
         recomendaciones.push({
             latitud: nuevaUbicacionDensidad.lat,

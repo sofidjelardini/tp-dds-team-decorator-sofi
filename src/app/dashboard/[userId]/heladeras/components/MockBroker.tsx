@@ -33,7 +33,6 @@ class MockBroker {
         };
 
         this.incidents.push(incident);
-        console.log('Nuevo incidente simulado:', incident);
 
         await this.saveIncidentsToFile(incident);
     }
@@ -66,7 +65,6 @@ class MockBroker {
             },
             body: JSON.stringify(incident)
         });
-        console.log('Incidentes guardados en el archivo.');
     }
 
     sendToQueue(queueName: 'temperatures', message: any) {

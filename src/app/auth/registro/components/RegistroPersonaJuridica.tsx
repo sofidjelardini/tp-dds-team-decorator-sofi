@@ -27,7 +27,8 @@ export default function RegistroPersonaJuridica() {
             telefono,
             tipo,
             rubro,
-            direccion
+            direccion,
+            esAdmin: false
         };
 
         try {
@@ -60,9 +61,12 @@ export default function RegistroPersonaJuridica() {
                     <div>
                         <label
                             htmlFor='razonSocial'
-                            className='block text-sm font-medium'
+                            className='flex flex-row block text-sm font-medium'
                         >
-                            Razón Social:
+                            Razón Social
+                            <div className={`font-semibold ml-1 text-red-600 `}>
+                                *
+                            </div>
                         </label>
                         <input
                             type='text'
@@ -77,9 +81,12 @@ export default function RegistroPersonaJuridica() {
                     <div>
                         <label
                             htmlFor='tipo'
-                            className='block text-sm font-medium'
+                            className='flex flex-row block text-sm font-medium'
                         >
-                            Tipo:
+                            Tipo
+                            <div className={`font-semibold ml-1 text-red-600 `}>
+                                *
+                            </div>
                         </label>
                         <select
                             id='tipo'
@@ -99,9 +106,12 @@ export default function RegistroPersonaJuridica() {
                     <div>
                         <label
                             htmlFor='rubro'
-                            className='block text-sm font-medium'
+                            className='flex flex-row block text-sm font-medium'
                         >
-                            Rubro:
+                            Rubro
+                            <div className={`font-semibold ml-1 text-red-600 `}>
+                                *
+                            </div>
                         </label>
                         <input
                             type='text'
@@ -116,9 +126,12 @@ export default function RegistroPersonaJuridica() {
                     <div>
                         <label
                             htmlFor='email'
-                            className='block text-sm font-medium'
+                            className='flex flex-row block text-sm font-medium'
                         >
-                            Correo Electrónico:
+                            Correo Electrónico
+                            <div className={`font-semibold ml-1 text-red-600 `}>
+                                *
+                            </div>
                         </label>
                         <input
                             type='email'
@@ -133,9 +146,12 @@ export default function RegistroPersonaJuridica() {
                     <div>
                         <label
                             htmlFor='telefono'
-                            className='block text-sm font-medium'
+                            className='flex flex-row block text-sm font-medium'
                         >
-                            Teléfono/WhatsApp:
+                            Teléfono/WhatsApp
+                            <div className={`font-semibold ml-1 text-red-600 `}>
+                                *
+                            </div>
                         </label>
                         <input
                             type='tel'
@@ -150,9 +166,16 @@ export default function RegistroPersonaJuridica() {
                     <div>
                         <label
                             htmlFor='direccion'
-                            className='block text-sm font-medium'
+                            className='flex flex-row block text-sm font-medium'
                         >
-                            Dirección{!hacerseCargoHeladera && ' (opcional)'}:
+                            Dirección
+                            {hacerseCargoHeladera && (
+                                <div
+                                    className={`font-semibold ml-1 text-red-600 `}
+                                >
+                                    *
+                                </div>
+                            )}
                         </label>
                         <input
                             type='text'
@@ -167,10 +190,16 @@ export default function RegistroPersonaJuridica() {
                     <div>
                         <label
                             htmlFor='codigo-postal'
-                            className='block text-sm font-medium'
+                            className='flex flex-row block text-sm font-medium'
                         >
                             Código Postal
-                            {!hacerseCargoHeladera && ' (opcional)'}:
+                            {hacerseCargoHeladera && (
+                                <div
+                                    className={`font-semibold ml-1 text-red-600 `}
+                                >
+                                    *
+                                </div>
+                            )}
                         </label>
                         <input
                             type='text'

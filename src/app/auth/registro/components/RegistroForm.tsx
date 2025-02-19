@@ -1,4 +1,3 @@
-// components/RegistroForm.jsx
 'use client';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -15,11 +14,36 @@ import {
     FormMessage
 } from '@/components/ui/form';
 import { Checkbox } from '@/components/ui/checkbox';
+import Papa from 'papaparse';
+import { useEffect, useState } from 'react';
 
 interface RegistroPageProps {
     onSubmit: any;
     setShowLogin: React.Dispatch<React.SetStateAction<boolean>>;
 }
+
+const obtenerContrasenasDesdeCSV = async (): Promise<any> => {
+    const response = await fetch('/common-passwords.csv');
+    const csvText = await response.text();
+
+    return new Promise((resolve, reject) => {
+        Papa.parse(csvText, {
+            header: true,
+            complete: (results: any) => {
+                const passwordsSet = new Set(
+                    results.data
+                        .map((row: any) => row.password.trim())
+                        .filter(Boolean)
+                );
+                resolve(passwordsSet);
+            },
+            error: (error: any) => {
+                console.error('Error al analizar el archivo CSV:', error);
+                reject(error);
+            }
+        });
+    });
+};
 
 const formSchema = z
     .object({
@@ -45,6 +69,18 @@ export default function RegistroForm({
     onSubmit,
     setShowLogin
 }: RegistroPageProps) {
+    const [commonPass, setCommonPass] = useState<Set<string>>(new Set());
+    const [passwordError, setPasswordError] = useState<string | null>(null);
+
+    useEffect(() => {
+        const fetchCommonPasswords = async () => {
+            const passwords = await obtenerContrasenasDesdeCSV();
+            setCommonPass(passwords);
+        };
+
+        fetchCommonPasswords();
+    }, []);
+
     const form = useForm({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -56,6 +92,15 @@ export default function RegistroForm({
         }
     });
 
+    const onSubmitHandler = async (data: any) => {
+        if (commonPass.has(data.password)) {
+            setPasswordError('La contraseña es débil');
+            return;
+        }
+        setPasswordError(null);
+        await onSubmit(data);
+    };
+
     return (
         <div className='mx-auto grid w-[400px] gap-6'>
             <div className='grid gap-2 text-left'>
@@ -66,7 +111,7 @@ export default function RegistroForm({
             </div>
             <div className='grid gap-y-3'>
                 <Form {...form}>
-                    <form onSubmit={form.handleSubmit(onSubmit)}>
+                    <form onSubmit={form.handleSubmit(onSubmitHandler)}>
                         <div className='grid gap-y-6'>
                             <div className='grid gap-2'>
                                 <FormField
@@ -100,12 +145,20 @@ export default function RegistroForm({
                                                 <Input
                                                     placeholder='Contraseña'
                                                     type='password'
+                                                    onClick={() =>
+                                                        setPasswordError(null)
+                                                    }
                                                     {...field}
                                                 />
                                             </FormControl>
                                             <FormMessage>
                                                 {fieldState.error?.message}
                                             </FormMessage>
+                                            {passwordError && (
+                                                <FormMessage className='text-red-500'>
+                                                    {passwordError}
+                                                </FormMessage>
+                                            )}
                                         </FormItem>
                                     )}
                                 />
@@ -124,12 +177,20 @@ export default function RegistroForm({
                                                 <Input
                                                     placeholder='Repetir contraseña'
                                                     {...field}
+                                                    onClick={() =>
+                                                        setPasswordError(null)
+                                                    }
                                                     type='password'
                                                 />
                                             </FormControl>
                                             <FormMessage>
                                                 {fieldState.error?.message}
                                             </FormMessage>
+                                            {passwordError && (
+                                                <FormMessage className='text-red-500'>
+                                                    {passwordError}
+                                                </FormMessage>
+                                            )}
                                         </FormItem>
                                     )}
                                 />

@@ -1,13 +1,46 @@
 [
   {
-    "id": 919288,
+    "id": 128916,
     "comida": "pastel de papa",
-    "fechaCaducidad": "2025-01-25",
-    "fechaDonacion": "2025-01-20",
+    "fechaCaducidad": "2025-02-23",
+    "fechaDonacion": "2025-02-19",
+    "colaborador": "41917951",
+    "heladera": 12031413,
+    "calorias": 300,
+    "peso": 250,
+    "estado": "Entregada"
+  },
+  {
+    "id": 209899,
+    "comida": "pechuga con arroz integral",
+    "fechaCaducidad": "2025-02-19",
+    "fechaDonacion": "2025-02-19",
+    "colaborador": "41917951",
+    "heladera": 91270,
+    "calorias": 2,
+    "peso": 2,
+    "estado": "Entregada"
+  },
+  {
+    "id": 943392,
+    "comida": "pastel de papa",
+    "fechaCaducidad": "2025-02-19",
+    "fechaDonacion": "2025-02-19",
     "colaborador": "41917951",
     "heladera": 7326496,
-    "calorias": 800,
-    "peso": 700,
-    "estado": "No Entregada"
+    "calorias": 2,
+    "peso": 2,
+    "estado": "Entregada"
+  },
+  {
+    "id": 450971,
+    "comida": "milanesa con puré",
+    "fechaCaducidad": "2025-02-19",
+    "fechaDonacion": "2025-02-19",
+    "colaborador": "41917951",
+    "heladera": 91270,
+    "calorias": 2,
+    "peso": 2,
+    "estado": "Entregada"
   }
 ]

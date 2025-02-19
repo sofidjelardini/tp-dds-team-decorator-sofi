@@ -1,75 +1,141 @@
 [
   {
-    "id": 391313,
-    "numeroTarjeta": "K1L2M3N4O5P",
-    "fecha": "2025-01-23T20:43:00.031Z",
-    "cantidadViandas": 3
-  },
-  {
-    "id": 88404,
-    "numeroTarjeta": "D6E7F8G9H0I",
-    "fecha": "2025-01-23T20:43:00.033Z",
-    "cantidadViandas": 1
-  },
-  {
-    "id": 538732,
-    "numeroTarjeta": "G6H7I8J9K0L",
-    "fecha": "2025-01-23T20:43:00.035Z",
-    "cantidadViandas": 3
-  },
-  {
-    "id": 279017,
-    "numeroTarjeta": "G6H7I8J9K0L",
-    "fecha": "2025-01-23T20:43:00.037Z",
-    "cantidadViandas": 3
-  },
-  {
-    "id": 452555,
-    "numeroTarjeta": "S6T7U8V9W0X",
-    "fecha": "2025-01-23T20:43:00.029Z",
-    "cantidadViandas": 1
-  },
-  {
-    "id": 662875,
-    "numeroTarjeta": "M1N2O3P4Q5R",
-    "fecha": "2025-01-23T20:43:00.043Z",
-    "cantidadViandas": 1
-  },
-  {
-    "id": 689417,
-    "numeroTarjeta": "X1Y2Z3A4B5C",
-    "fecha": "2025-01-23T20:43:00.044Z",
-    "cantidadViandas": 2
-  },
-  {
-    "id": 526986,
-    "fecha": "2025-01-23T20:43:00.042Z",
-    "cantidadViandas": 2
-  },
-  {
-    "id": 254080,
-    "numeroTarjeta": "S6T7U8V9W0X",
-    "fecha": "2025-01-23T20:43:00.039Z",
-    "cantidadViandas": 2
-  },
-  {
-    "id": 415006,
-    "fecha": "2025-01-23T20:43:00.652Z",
-    "cantidadViandas": 3
-  },
-  {
-    "id": 361282,
-    "fecha": "2025-01-23T20:43:00.654Z",
-    "cantidadViandas": 4
-  },
-  {
-    "id": 578217,
-    "numeroTarjeta": "Q6R7S8T9U0V",
-    "fecha": "2025-01-23T20:43:00.935Z",
-    "cantidadViandas": 1
-  },
-  {
     "id": 487608,
     "fecha": "2025-01-24T18:00:00.668Z"
+  },
+  {
+    "id": 341890,
+    "numeroTarjeta": "Y1Z2A3B4C5D",
+    "fecha": "2025-02-19T15:01:00.064Z"
+  },
+  {
+    "id": 592851,
+    "numeroTarjeta": "Y1Z2A3B4C5D",
+    "fecha": "2025-02-19T15:02:00.113Z"
+  },
+  {
+    "id": 485581,
+    "numeroTarjeta": "S6T7U8V9W0X",
+    "fecha": "2025-02-19T15:02:00.148Z"
+  },
+  {
+    "id": 995266,
+    "numeroTarjeta": "Y1Z2A3B4C5D",
+    "fecha": "2025-02-19T15:02:00.520Z"
+  },
+  {
+    "id": 515034,
+    "numeroTarjeta": "M1N2O3P4Q5R",
+    "fecha": "2025-02-19T15:04:00.409Z"
+  },
+  {
+    "id": 786462,
+    "numeroTarjeta": "S6T7U8V9W0X",
+    "fecha": "2025-02-19T15:04:00.873Z"
+  },
+  {
+    "id": 549570,
+    "numeroTarjeta": "G6H7I8J9K0L",
+    "fecha": "2025-02-19T15:04:00.875Z"
+  },
+  {
+    "id": 604505,
+    "numeroTarjeta": "M1N2O3P4Q5R",
+    "fecha": "2025-02-19T15:04:00.698Z"
+  },
+  {
+    "id": 517405,
+    "numeroTarjeta": "G6H7I8J9K0L",
+    "fecha": "2025-02-19T15:55:00.249Z"
+  },
+  {
+    "id": 924319,
+    "numeroTarjeta": "G6H7I8J9K0L",
+    "fecha": "2025-02-19T15:55:00.921Z"
+  },
+  {
+    "id": 233948,
+    "numeroTarjeta": "S6T7U8V9W0X",
+    "fecha": "2025-02-19T15:56:00.138Z"
+  },
+  {
+    "id": 505243,
+    "numeroTarjeta": "S6T7U8V9W0X",
+    "fecha": "2025-02-19T15:56:00.981Z"
+  },
+  {
+    "id": 291382,
+    "numeroTarjeta": "Y1Z2A3B4C5D",
+    "fecha": "2025-02-19T15:57:00.021Z"
+  },
+  {
+    "id": 290191,
+    "numeroTarjeta": "Y1Z2A3B4C5D",
+    "fecha": "2025-02-19T15:57:00.031Z"
+  },
+  {
+    "id": 131179,
+    "numeroTarjeta": "G6H7I8J9K0L",
+    "fecha": "2025-02-19T15:57:00.269Z"
+  },
+  {
+    "id": 306273,
+    "numeroTarjeta": "S6T7U8V9W0X",
+    "fecha": "2025-02-19T15:57:00.431Z"
+  },
+  {
+    "id": 636814,
+    "numeroTarjeta": "G6H7I8J9K0L",
+    "fecha": "2025-02-19T15:57:00.162Z"
+  },
+  {
+    "id": 301704,
+    "numeroTarjeta": "Y1Z2A3B4C5D",
+    "fecha": "2025-02-19T15:58:00.237Z"
+  },
+  {
+    "id": 816754,
+    "numeroTarjeta": "S6T7U8V9W0X",
+    "fecha": "2025-02-19T15:58:00.233Z"
+  },
+  {
+    "id": 706589,
+    "numeroTarjeta": "M1N2O3P4Q5R",
+    "fecha": "2025-02-19T15:58:00.276Z"
+  },
+  {
+    "id": 675383,
+    "numeroTarjeta": "M1N2O3P4Q5R",
+    "fecha": "2025-02-19T15:58:00.363Z"
+  },
+  {
+    "id": 679185,
+    "numeroTarjeta": "S6T7U8V9W0X",
+    "fecha": "2025-02-19T15:58:00.514Z"
+  },
+  {
+    "id": 390271,
+    "numeroTarjeta": "M1N2O3P4Q5R",
+    "fecha": "2025-02-19T15:59:00.311Z"
+  },
+  {
+    "id": 59478,
+    "numeroTarjeta": "Y1Z2A3B4C5D",
+    "fecha": "2025-02-19T15:59:00.420Z"
+  },
+  {
+    "id": 974038,
+    "numeroTarjeta": "S6T7U8V9W0X",
+    "fecha": "2025-02-19T15:59:00.423Z"
+  },
+  {
+    "id": 190106,
+    "numeroTarjeta": "Y1Z2A3B4C5D",
+    "fecha": "2025-02-19T16:00:00.404Z"
+  },
+  {
+    "id": 417352,
+    "numeroTarjeta": "M1N2O3P4Q5R",
+    "fecha": "2025-02-19T16:00:00.472Z"
   }
 ]

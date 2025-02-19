@@ -44,3 +44,37 @@ export async function POST(req) {
         );
     }
 }
+
+export async function GET(req) {
+    try {
+        const { searchParams } = new URL(req.url);
+        const userId = searchParams.get('userId');
+
+        if (!userId) {
+            return new Response(
+                JSON.stringify({ error: 'userId es requerido' }),
+                { status: 400 }
+            );
+        }
+
+        const filePath = path.join(process.cwd(), 'src', 'data', 'canjes.json');
+        let canjes = [];
+
+        if (fs.existsSync(filePath)) {
+            const canjesData = fs.readFileSync(filePath, 'utf-8');
+            if (canjesData) {
+                canjes = JSON.parse(canjesData);
+            }
+        }
+
+        const canjesUsuario = canjes.filter(canje => canje.userId === userId);
+
+        return new Response(JSON.stringify(canjesUsuario), { status: 200 });
+    } catch (error) {
+        console.error('Error al obtener los canjes:', error);
+        return new Response(
+            JSON.stringify({ error: 'Error al obtener los canjes' }),
+            { status: 500 }
+        );
+    }
+}

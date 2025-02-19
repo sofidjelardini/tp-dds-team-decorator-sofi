@@ -1,6 +1,5 @@
 'use client';
 import React, { useEffect, useState } from 'react';
-import personasVulnerablesData from '@/data/personas-vulnerables.json';
 import tarjetasData from '@/data/tarjetas.json';
 import { Button } from '@/components/ui/button';
 import dataUsuarios from '@/data/usuarios.json';
@@ -25,6 +24,14 @@ const RegistroPersonasVulnerables: React.FC = () => {
     const [personasRegistradasPorUserId, setPersonasRegistradasPorUserId] =
         useState<any>();
     const [tarjetasSinAsignar, setTarjetasSinAsignar] = useState<any>();
+    const [actualizar, setActualizar] = useState<boolean>(false);
+
+    useEffect(() => {
+        if (actualizar) {
+            buscarPersonasRegistradas();
+            setActualizar(false);
+        }
+    }, [actualizar]);
 
     useEffect(() => {
         setUserId(localStorage.getItem('userId'));
@@ -60,10 +67,18 @@ const RegistroPersonasVulnerables: React.FC = () => {
         }
     }, [modalVisible, modalEliminadoVisible]);
 
-    const buscarPersonasRegistradas = () => {
+    const buscarPersonasRegistradas = async () => {
+        const personasData = await fetch('/api/personas-vulnerables', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(response => response.json());
+
         setPersonasRegistradasPorUserId(
-            personasVulnerablesData.filter(
-                persona => persona.colaborador === userId
+            personasData.filter(
+                (persona: { colaborador: string | null | undefined }) =>
+                    persona.colaborador === userId
             )
         );
     };

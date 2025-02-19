@@ -27,6 +27,47 @@ async function obtenerViandas() {
     return existingData;
 }
 
+export async function GET(req) {
+    try {
+        const { searchParams } = new URL(req.url);
+        const userId = searchParams.get('userId');
+
+        if (!userId) {
+            return new Response(
+                JSON.stringify({ error: 'userId es requerido' }),
+                { status: 400 }
+            );
+        }
+
+        const filePath = path.join(
+            process.cwd(),
+            'src',
+            'data',
+            'viandas.json'
+        );
+        let viandas = [];
+
+        if (fs.existsSync(filePath)) {
+            const viandasData = fs.readFileSync(filePath, 'utf-8');
+            if (viandasData) {
+                viandas = JSON.parse(viandasData);
+            }
+        }
+
+        const viandasUsuario = viandas.filter(
+            vianda => vianda.colaborador === userId
+        );
+
+        return new Response(JSON.stringify(viandasUsuario), { status: 200 });
+    } catch (error) {
+        console.error('Error al obtener los canjes:', error);
+        return new Response(
+            JSON.stringify({ error: 'Error al obtener los canjes' }),
+            { status: 500 }
+        );
+    }
+}
+
 export async function POST(req) {
     try {
         const nuevaVianda = await req.json();

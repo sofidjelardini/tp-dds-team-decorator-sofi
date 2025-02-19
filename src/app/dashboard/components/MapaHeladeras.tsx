@@ -16,7 +16,6 @@ const Mapa: React.FC<{
     useEffect(() => {
         const initializeMap = async () => {
             const L = await loadLeaflet();
-            console.log('L: ', L);
 
             if (!mapRef.current) {
                 mapRef.current = L.map(mapId).setView(

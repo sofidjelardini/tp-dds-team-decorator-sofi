@@ -171,7 +171,7 @@ const Reportes: React.FC = () => {
 
     return (
         <div>
-            <div className='grid grid-cols-1 gap-4'>
+            <div className='grid grid-cols-1 gap-4 w-[80%] m-auto'>
                 <div>
                     <h3 className='font-semibold'>Fallas por Heladera</h3>
                     <Bar data={generarGraficoFallas()} />

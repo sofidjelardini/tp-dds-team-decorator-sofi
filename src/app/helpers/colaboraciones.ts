@@ -3,7 +3,7 @@ export function validarColaboraciones(colaboraciones: any[]) {
     const tiposDocPermitidos = ['LC', 'LE', 'DNI'];
     const formasColaboracionPermitidas = [
         'DINERO',
-        'DONACION_VIANDAS5',
+        'DONACION_VIANDAS',
         'REDISTRIBUCION_VIANDAS',
         'ENTREGA_TARJETAS'
     ];

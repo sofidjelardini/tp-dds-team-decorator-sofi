@@ -45,24 +45,9 @@ const DashboardNav = ({ userId, isMobileNav = false }: DashboardNavProps) => {
                 icon: 'heladera'
             },
             {
-                title: 'Carga de Viandas',
-                href: `/dashboard/${userId}/viandas`,
-                icon: 'vianda'
-            },
-            {
-                title: 'Distribución Viandas',
-                href: `/dashboard/${userId}/distribucion`,
-                icon: 'camion'
-            },
-            {
-                title: 'Donaciones',
+                title: 'Donaciones de Dinero',
                 href: `/dashboard/${userId}/donaciones`,
                 icon: 'donaciones'
-            },
-            {
-                title: 'Gestión Técnicos',
-                href: `/dashboard/${userId}/tecnicos`,
-                icon: 'tecnico'
             },
             {
                 title: 'Carga de Colaboraciones',
@@ -80,6 +65,11 @@ const DashboardNav = ({ userId, isMobileNav = false }: DashboardNavProps) => {
                 icon: 'reportes'
             },
             {
+                title: 'Puntos y canjes',
+                href: `/dashboard/${userId}/puntos-y-canjes`,
+                icon: 'carrito'
+            },
+            {
                 title: 'Editar Perfil',
                 href: `/dashboard/${userId}/editar-perfil`,
                 icon: 'editarPerfil'
@@ -88,26 +78,63 @@ const DashboardNav = ({ userId, isMobileNav = false }: DashboardNavProps) => {
     }, [userId]);
 
     useEffect(() => {
+        let itemsToAdd = colaboradorData?.esAdmin
+            ? [
+                  {
+                      title: 'Gestión Técnicos',
+                      href: `/dashboard/${userId}/tecnicos`,
+                      icon: 'tecnico'
+                  }
+              ]
+            : [];
         if (colaboradorData?.ayudarPersonas) {
-            setBarraCompleta([
-                ...barraCompleta,
-                {
-                    title: 'Puntos y canjes',
-                    href: `/dashboard/${userId}/puntos-y-canjes`,
-                    icon: 'carrito'
-                },
+            itemsToAdd = [
+                ...itemsToAdd,
                 {
                     title: 'Registro Personas en Situación Vulnerable',
                     href: `/dashboard/${userId}/registro-personas`,
                     icon: 'persona'
                 },
                 {
+                    title: 'Carga de Viandas',
+                    href: `/dashboard/${userId}/viandas`,
+                    icon: 'vianda'
+                },
+                {
+                    title: 'Distribución Viandas',
+                    href: `/dashboard/${userId}/distribucion`,
+                    icon: 'camion'
+                },
+                {
                     title: 'Gestión de Tarjetas',
                     href: `/dashboard/${userId}/tarjetas`,
                     icon: 'tarjetas'
                 }
-            ]);
+            ];
+        } else if (!colaboradorData?.personaJuridica) {
+            itemsToAdd = [
+                ...itemsToAdd,
+                {
+                    title: 'Carga de Viandas',
+                    href: `/dashboard/${userId}/viandas`,
+                    icon: 'vianda'
+                },
+                {
+                    title: 'Distribución Viandas',
+                    href: `/dashboard/${userId}/distribucion`,
+                    icon: 'camion'
+                }
+            ];
         }
+
+        itemsToAdd?.forEach(item => {
+            const exists = barraCompleta.some(
+                existingItem => existingItem.href === item.href
+            );
+            if (!exists) {
+                setBarraCompleta(prev => [...prev, item]);
+            }
+        });
     }, [colaboradorData]);
 
     async function handleLogout(evt: React.MouseEvent<HTMLButtonElement>) {

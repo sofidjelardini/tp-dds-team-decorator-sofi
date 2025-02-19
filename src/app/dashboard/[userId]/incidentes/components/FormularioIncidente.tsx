@@ -9,7 +9,7 @@ const FormularioIncidente: React.FC = () => {
         'alerta' | 'fallaTecnica'
     >('alerta');
     const [subtipoAlerta, setSubtipoAlerta] = useState<
-        'temperatura' | 'fraude' | 'falla en conexión' | ''
+        'Temperatura' | 'Fraude' | 'Falla en Conexión' | ''
     >('');
     const [heladera, setHeladera] = useState<string>('');
     const [colaborador, setColaborador] = useState<string | null>('');
@@ -17,13 +17,10 @@ const FormularioIncidente: React.FC = () => {
     const [fotoFalla, setFotoFalla] = useState<File | null>(null);
     const [mensaje, setMensaje] = useState<string>('');
     const [error, setError] = useState<boolean>(false);
-    const [visitas, setVisitas] = useState<any[]>([]);
 
     useEffect(() => {
         setColaborador(localStorage.getItem('userId'));
     }, []);
-
-    console.log('incidentesData: ', incidentesData);
 
     const isFormValid = () => {
         if (tipoIncidente === 'alerta') {
@@ -205,9 +202,9 @@ const FormularioIncidente: React.FC = () => {
                             onChange={e =>
                                 setSubtipoAlerta(
                                     e.target.value as
-                                        | 'temperatura'
-                                        | 'fraude'
-                                        | 'falla en conexión'
+                                        | 'Temperatura'
+                                        | 'Fraude'
+                                        | 'Falla en Conexión'
                                 )
                             }
                             required
@@ -282,7 +279,10 @@ const FormularioIncidente: React.FC = () => {
                             key={incidente.id}
                             className='flex justify-between items-center mb-2'
                         >
-                            {incidente.tipo} - Heladera:{' '}
+                            {incidente.tipo === 'alerta'
+                                ? incidente.subtipo
+                                : 'Falla Técnica'}
+                            -{' '}
                             {
                                 heladerasData.find(
                                     heladera =>
@@ -299,7 +299,7 @@ const FormularioIncidente: React.FC = () => {
                                     disabled={incidente.solucionado}
                                 >
                                     {incidente.solucionado
-                                        ? 'Incidente Solucionado'
+                                        ? 'Solucionado'
                                         : 'Marcar como Solucionado'}
                                 </Button>
                             </div>

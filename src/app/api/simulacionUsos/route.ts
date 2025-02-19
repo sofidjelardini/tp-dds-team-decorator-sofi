@@ -10,9 +10,15 @@ let fechaActual = new Date().toISOString().split('T')[0];
 export async function POST(req: Request) {
     const { userId } = await req.json();
 
-    if (!task) {
-        startCronJob(userId);
+    if (task) {
+        return NextResponse.json(
+            { message: 'La simulación de usos ya está en ejecución' },
+            { status: 200 }
+        );
     }
+
+    startCronJob(userId);
+
     return NextResponse.json(
         { message: 'Simulación de usos iniciada' },
         { status: 200 }
@@ -23,8 +29,7 @@ function startCronJob(userId: string) {
     if (!userId || task) {
         return;
     }
-
-    task = cron.schedule('0 */3 * * *', async () => {
+    task = cron.schedule('*/10 * * * *', async () => {
         const hoy = new Date().toISOString().split('T')[0];
 
         if (hoy !== fechaActual) {

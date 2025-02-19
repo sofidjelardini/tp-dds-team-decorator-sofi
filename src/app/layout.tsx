@@ -1,6 +1,6 @@
 'use client';
 import localFont from 'next/font/local';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import './globals.css';
 
 const geistSans = localFont({
@@ -19,9 +19,13 @@ export default function RootLayout({
 }: Readonly<{
     children: React.ReactNode;
 }>) {
-    useEffect(() => {
-        const userId = localStorage.getItem('userId');
+    const [colaborador, setColaborador] = useState<any>();
 
+    useEffect(() => {
+        setColaborador(localStorage.getItem('userId'));
+    }, []);
+
+    useEffect(() => {
         const startSimulation = async () => {
             try {
                 const response = await fetch('/api/simulacionUsos', {
@@ -29,7 +33,7 @@ export default function RootLayout({
                     headers: {
                         'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify(userId)
+                    body: JSON.stringify({ userId: colaborador })
                 });
 
                 if (!response.ok) {
@@ -43,9 +47,8 @@ export default function RootLayout({
                 console.error('Error al iniciar la simulación:', error);
             }
         };
-
-        startSimulation();
-    }, []);
+        !!colaborador && startSimulation();
+    }, [colaborador]);
 
     return (
         <html lang='en'>

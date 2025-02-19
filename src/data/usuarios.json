@@ -1,30 +1,20 @@
 [
-  {
-    "documento": "41917951",
-    "password": "$2b$10$UmNwDnUbv.uaoCZnEpvFq.j6Rpn8nK1IjNc48y.TsWMi6rEvYpvXK",
-    "personaJuridica": false,
-    "ayudarPersonas": true,
-    "nombre": "Sofia",
-    "apellido": "Djelardini",
-    "email": "sdjelardini@gmail.com",
-    "telefono": "01144051200",
-    "fechaNacimiento": "1999-06-22",
-    "direccion": "0 Barrio Septiembre",
-    "codigoPostal": "1625",
-    "pesosDonados": 1000,
-    "viandasDonadas": 2,
-    "viandasDistribuidas": 1,
-    "tarjetasRepartidas": 15
-  },
-  {
-    "documento": "12345678",
-    "password": "$2b$10$8SPVDWn2JFtHNrLnDyP7Q.0c.AaehogXLRIYTMRp.ylDTruWXAklG",
-    "personaJuridica": true,
-    "ayudarPersonas": false,
-    "razonSocial": "niidea123",
-    "telefono": "01144051200",
-    "tipo": "Empresa",
-    "rubro": "restaurant",
-    "direccion": "0 Barrio Septiembre"
-  }
+    {
+        "documento": "41917951",
+        "password": "$2b$10$UmNwDnUbv.uaoCZnEpvFq.j6Rpn8nK1IjNc48y.TsWMi6rEvYpvXK",
+        "personaJuridica": false,
+        "ayudarPersonas": true,
+        "nombre": "Sofia",
+        "apellido": "Djelardini",
+        "email": "sdjelardini@gmail.com",
+        "telefono": "01144051200",
+        "fechaNacimiento": "1999-06-22",
+        "direccion": "0 Barrio Septiembre",
+        "codigoPostal": "1625",
+        "pesosDonados": 1000,
+        "viandasDonadas": 6,
+        "viandasDistribuidas": 1,
+        "tarjetasRepartidas": 17,
+        "esAdmin": true
+    }
 ]

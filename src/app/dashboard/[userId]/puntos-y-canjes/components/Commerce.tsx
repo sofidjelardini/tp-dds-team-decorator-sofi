@@ -10,10 +10,26 @@ import {
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 
-const Commerce = ({ puntajeUsuario }: { puntajeUsuario: number }) => {
+const Commerce = ({
+    puntajeUsuario,
+    setActualizar
+}: {
+    puntajeUsuario: number;
+    setActualizar: React.Dispatch<React.SetStateAction<boolean>>;
+}) => {
     const [category, setCategory] = useState('electronics');
     const [products, setProducts] = useState<any>([]);
+    const [modalVisible, setModalVisible] = useState<boolean>(false);
 
+    useEffect(() => {
+        if (modalVisible) {
+            const timer = setTimeout(() => {
+                setModalVisible(false);
+            }, 3000);
+
+            return () => clearTimeout(timer);
+        }
+    }, [modalVisible]);
     useEffect(() => {
         const fetchProducts = async () => {
             const response = await fetch(
@@ -51,7 +67,8 @@ const Commerce = ({ puntajeUsuario }: { puntajeUsuario: number }) => {
             }
 
             const data = await response.json();
-            console.log('data_ ', data);
+            setModalVisible(true);
+            setActualizar(true);
         } catch (error) {
             console.error('Error al hacer el canje:', error);
         }
@@ -120,6 +137,18 @@ const Commerce = ({ puntajeUsuario }: { puntajeUsuario: number }) => {
                     )
                 )}
             </div>
+            {modalVisible && (
+                <div className='fixed top-0 left-0 right-0 bottom-0 flex items-center justify-center bg-black bg-opacity-50'>
+                    <div className='bg-white p-4 rounded-md shadow-md'>
+                        <h3 className='text-lg font-semibold m-auto'>
+                            ¡Puntos Canjeados!
+                        </h3>
+                        <p>
+                            Gracias! La transacción se ha guardado exitosamente.
+                        </p>
+                    </div>
+                </div>
+            )}
         </div>
     );
 };

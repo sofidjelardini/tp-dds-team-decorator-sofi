@@ -13,7 +13,6 @@ export default function RegistroPage() {
 
     async function submitRegistroUsuario(dataForm: any) {
         setDataForm(dataForm);
-        // localStorage.setItem('userId', dataForm.documento);
         setShowFormUsuario(true);
     }
 

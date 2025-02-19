@@ -183,5 +183,13 @@
     "heladeraId": 91270,
     "fechaHora": "2025-01-27T14:24:04.564Z",
     "solucionado": false
+  },
+  {
+    "id": 811691,
+    "tipo": "alerta",
+    "subtipo": "temperatura alta",
+    "heladeraId": 12031413,
+    "fechaHora": "2025-02-19T15:54:26.036Z",
+    "solucionado": false
   }
 ]

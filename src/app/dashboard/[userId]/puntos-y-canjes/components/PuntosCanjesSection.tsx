@@ -5,13 +5,12 @@ import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import Commerce from './Commerce';
 import { useState, useEffect } from 'react';
 import dataUsuarios from '@/data/usuarios.json';
-import dataCanjes from '@/data/canjes.json';
-import { Button } from '@/components/ui/button';
 
 const PuntosCanjesSection = () => {
     const [userId, setUserId] = useState<string | null | undefined>();
     const [canjes, setCanjes] = useState<any>();
     const [puntosUtilizados, setPuntosUtilizados] = useState<number>(0);
+    const [actualizar, setActualizar] = useState<boolean>(false);
 
     useEffect(() => {
         setUserId(localStorage.getItem('userId'));
@@ -22,8 +21,11 @@ const PuntosCanjesSection = () => {
     }, [userId]);
 
     useEffect(() => {
-        console.log('canjes: ', canjes);
-    }, [canjes]);
+        if (actualizar) {
+            canjesUsuario();
+            setActualizar(false);
+        }
+    }, [actualizar]);
 
     const calcularPuntajeUsuario = () => {
         const colaborador = dataUsuarios.find(
@@ -39,15 +41,20 @@ const PuntosCanjesSection = () => {
         );
     };
 
-    const canjesUsuario = () => {
-        const canjesRealizados = dataCanjes.filter(
-            canje => canje.userId === userId
+    const canjesUsuario = async () => {
+        const response = await fetch(`/api/canjes?userId=${userId}`);
+        const canjesRealizados = await response.json();
+
+        const precios = canjesRealizados.map(
+            (canje: { producto: { price: any } }) => canje.producto.price
         );
-        const precios = canjesRealizados.map(canje => canje.producto.price);
 
         setCanjes(canjesRealizados);
         setPuntosUtilizados(
-            precios.reduce((acumulador, precio) => acumulador + precio, 0)
+            precios.reduce(
+                (acumulador: any, precio: any) => acumulador + precio,
+                0
+            )
         );
     };
 
@@ -68,7 +75,10 @@ const PuntosCanjesSection = () => {
                     </CardContent>
                 </Card>
             </div>
-            <Commerce puntajeUsuario={calcularPuntajeUsuario()} />
+            <Commerce
+                puntajeUsuario={calcularPuntajeUsuario()}
+                setActualizar={setActualizar}
+            />
             {canjes && canjes.length > 0 ? (
                 <>
                     <h2 className='text-xl font-bold mb-4 mt-8'>
